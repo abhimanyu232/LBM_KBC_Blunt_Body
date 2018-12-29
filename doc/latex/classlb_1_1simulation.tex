@@ -1,0 +1,195 @@
+\hypertarget{classlb_1_1simulation}{\section{lb\-:\-:simulation \-Class \-Reference}
+\label{classlb_1_1simulation}\index{lb\-::simulation@{lb\-::simulation}}
+}
+
+
+\-Simulation class implementing \-L\-B.  
+
+
+
+
+{\ttfamily \#include $<$simulation.\-hpp$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classlb_1_1simulation_affd283b0c1c374a96999e41f0945c94b}{simulation} (unsigned int nx, unsigned int ny, \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \-\_\-\-Re, \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \-\_\-\-Vmax)
+\begin{DoxyCompactList}\small\item\em \-Construct from domain size and flow parameters. \end{DoxyCompactList}\item 
+void \hyperlink{classlb_1_1simulation_a4be270474feac82cb59a37d7bc050b9d}{initialize} ()
+\begin{DoxyCompactList}\small\item\em \-Initialize the flow field. \end{DoxyCompactList}\item 
+void \hyperlink{classlb_1_1simulation_aa9b4e728e592f75cc75f8b2b0cbf9029}{advect} ()
+\begin{DoxyCompactList}\small\item\em advect the populations \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1simulation_aa124a075107ffddce508b3e94f143c43}{void \hyperlink{classlb_1_1simulation_aa124a075107ffddce508b3e94f143c43}{wall\-\_\-bc} ()}\label{classlb_1_1simulation_aa124a075107ffddce508b3e94f143c43}
+
+\begin{DoxyCompactList}\small\item\em apply wall boundary conditions \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1simulation_a63daa38571618a165ba5ffc3b8c279d9}{void \hyperlink{classlb_1_1simulation_a63daa38571618a165ba5ffc3b8c279d9}{collide} ()}\label{classlb_1_1simulation_a63daa38571618a165ba5ffc3b8c279d9}
+
+\begin{DoxyCompactList}\small\item\em collide the populations \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1simulation_ab274ed5a92af2ed99c511fa7949f5c5b}{void \hyperlink{classlb_1_1simulation_ab274ed5a92af2ed99c511fa7949f5c5b}{step} ()}\label{classlb_1_1simulation_ab274ed5a92af2ed99c511fa7949f5c5b}
+
+\begin{DoxyCompactList}\small\item\em \-L\-B step. \end{DoxyCompactList}\item 
+void \hyperlink{classlb_1_1simulation_a19f8ea2ae899041bb26ed360597a4ace}{write\-\_\-fields} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classlb_1_1simulation_a194e64cb51273bf024b024725176c9a8}{\hyperlink{classlb_1_1lattice}{lattice} \hyperlink{classlb_1_1simulation_a194e64cb51273bf024b024725176c9a8}{l}}\label{classlb_1_1simulation_a194e64cb51273bf024b024725176c9a8}
+
+\begin{DoxyCompactList}\small\item\em lattice \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1simulation_a5e058ddd59cb1239568130b3d3e075ed}{std\-::vector$<$ int $>$ \hyperlink{classlb_1_1simulation_a5e058ddd59cb1239568130b3d3e075ed}{shift}}\label{classlb_1_1simulation_a5e058ddd59cb1239568130b3d3e075ed}
+
+\begin{DoxyCompactList}\small\item\em amount of nodes to shift each population in data structure during advection \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1simulation_a6a4498379a1d650e6853826388bd7d30}{const \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \hyperlink{classlb_1_1simulation_a6a4498379a1d650e6853826388bd7d30}{\-Re}}\label{classlb_1_1simulation_a6a4498379a1d650e6853826388bd7d30}
+
+\begin{DoxyCompactList}\small\item\em \-Reynolds number. \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1simulation_ae18bfd487d2408bc6c48688033e2ccaf}{const \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \hyperlink{classlb_1_1simulation_ae18bfd487d2408bc6c48688033e2ccaf}{\-Vmax}}\label{classlb_1_1simulation_ae18bfd487d2408bc6c48688033e2ccaf}
+
+\begin{DoxyCompactList}\small\item\em mean flow velocity \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1simulation_ac2b3c541adeb249d9c19b63269d2d89f}{const \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \hyperlink{classlb_1_1simulation_ac2b3c541adeb249d9c19b63269d2d89f}{visc}}\label{classlb_1_1simulation_ac2b3c541adeb249d9c19b63269d2d89f}
+
+\begin{DoxyCompactList}\small\item\em viscosity \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1simulation_a10c0d626ecfdb131ae8a850c2a139c49}{const \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \hyperlink{classlb_1_1simulation_a10c0d626ecfdb131ae8a850c2a139c49}{beta}}\label{classlb_1_1simulation_a10c0d626ecfdb131ae8a850c2a139c49}
+
+\begin{DoxyCompactList}\small\item\em \-L\-B parameter beta. \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1simulation_a55fc9cf8ab884819dae12fb01557ba6a}{unsigned int \hyperlink{classlb_1_1simulation_a55fc9cf8ab884819dae12fb01557ba6a}{time}}\label{classlb_1_1simulation_a55fc9cf8ab884819dae12fb01557ba6a}
+
+\begin{DoxyCompactList}\small\item\em simulation time \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1simulation_ab14202c5be6fdf4d4e0bd4c53aa7296d}{bool \hyperlink{classlb_1_1simulation_ab14202c5be6fdf4d4e0bd4c53aa7296d}{file\-\_\-output}}\label{classlb_1_1simulation_ab14202c5be6fdf4d4e0bd4c53aa7296d}
+
+\begin{DoxyCompactList}\small\item\em flag whether to write files \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1simulation_a598ed87b6d39530a8dabc19adf6a5361}{unsigned int \hyperlink{classlb_1_1simulation_a598ed87b6d39530a8dabc19adf6a5361}{output\-\_\-freq}}\label{classlb_1_1simulation_a598ed87b6d39530a8dabc19adf6a5361}
+
+\begin{DoxyCompactList}\small\item\em file output frequency \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1simulation_a475aa36daddc0879d65fba3ff92816e6}{unsigned int \hyperlink{classlb_1_1simulation_a475aa36daddc0879d65fba3ff92816e6}{output\-\_\-index}}\label{classlb_1_1simulation_a475aa36daddc0879d65fba3ff92816e6}
+
+\begin{DoxyCompactList}\small\item\em index for file naming \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\-::ostream \& \hyperlink{classlb_1_1simulation_a5cc6292573a936af4440e6bd7525bce9}{operator$<$$<$} (std\-::ostream \&os, const \hyperlink{classlb_1_1simulation}{simulation} \&sim)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Simulation class implementing \-L\-B. 
+
+\-This class holds a lattice as member (see \hyperlink{classlb_1_1simulation_a194e64cb51273bf024b024725176c9a8}{simulation\-::l}) and carries out the simulation steps on top of it. \-The main methods of this class are \hyperlink{classlb_1_1simulation_aa9b4e728e592f75cc75f8b2b0cbf9029}{simulation\-::advect()} and \hyperlink{classlb_1_1simulation_a63daa38571618a165ba5ffc3b8c279d9}{simulation\-::collide()}. 
+
+\-Definition at line 24 of file simulation.\-hpp.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classlb_1_1simulation_affd283b0c1c374a96999e41f0945c94b}{\index{lb\-::simulation@{lb\-::simulation}!simulation@{simulation}}
+\index{simulation@{simulation}!lb::simulation@{lb\-::simulation}}
+\subsubsection[{simulation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lb\-::simulation\-::simulation} (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{nx, }
+\item[{unsigned int}]{ny, }
+\item[{{\bf float\-\_\-type}}]{\-\_\-\-Re, }
+\item[{{\bf float\-\_\-type}}]{\-\_\-\-Vmax}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1simulation_affd283b0c1c374a96999e41f0945c94b}
+
+
+\-Construct from domain size and flow parameters. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em nx} & extent in x direction \\
+\hline
+\mbox{\tt in}  & {\em ny} & extent in y direction \\
+\hline
+\mbox{\tt in}  & {\em \-\_\-\-Re} & \-Reynolds number \\
+\hline
+\mbox{\tt in}  & {\em \-\_\-\-Vmax} & mean flow velocity \\
+\hline
+\end{DoxyParams}
+
+
+\-Definition at line 35 of file simulation.\-hpp.
+
+
+
+\-References shift, lb\-::v9\-::size, and lb\-::velocity\-\_\-set().
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classlb_1_1simulation_a4be270474feac82cb59a37d7bc050b9d}{\index{lb\-::simulation@{lb\-::simulation}!initialize@{initialize}}
+\index{initialize@{initialize}!lb::simulation@{lb\-::simulation}}
+\subsubsection[{initialize}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf lb\-::simulation\-::initialize} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1simulation_a4be270474feac82cb59a37d7bc050b9d}
+
+
+\-Initialize the flow field. 
+
+\-Initialization includes defining initial density, velocity and populations. \-You can use \-Taylor-\/\-Green vortex flow conditions. 
+
+\-Definition at line 63 of file simulation.\-hpp.
+
+
+
+\-References lb\-::lattice\-::get\-\_\-node(), l, lb\-::lattice\-::nx, lb\-::lattice\-::ny, lb\-::node\-::rho(), lb\-::node\-::u(), and lb\-::node\-::v().
+
+\hypertarget{classlb_1_1simulation_aa9b4e728e592f75cc75f8b2b0cbf9029}{\index{lb\-::simulation@{lb\-::simulation}!advect@{advect}}
+\index{advect@{advect}!lb::simulation@{lb\-::simulation}}
+\subsubsection[{advect}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf lb\-::simulation\-::advect} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1simulation_aa9b4e728e592f75cc75f8b2b0cbf9029}
+
+
+advect the populations 
+
+\-Include periodic boundary conditions here also 
+
+\-Definition at line 91 of file simulation.\-hpp.
+
+
+
+\-Referenced by step().
+
+\hypertarget{classlb_1_1simulation_a19f8ea2ae899041bb26ed360597a4ace}{\index{lb\-::simulation@{lb\-::simulation}!write\-\_\-fields@{write\-\_\-fields}}
+\index{write\-\_\-fields@{write\-\_\-fields}!lb::simulation@{lb\-::simulation}}
+\subsubsection[{write\-\_\-fields}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf lb\-::simulation\-::write\-\_\-fields} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1simulation_a19f8ea2ae899041bb26ed360597a4ace}
+write macroscopic variables to ascii file 
+
+\-Definition at line 140 of file simulation.\-hpp.
+
+
+
+\-References l, output\-\_\-index, and lb\-::lattice\-::write\-\_\-fields().
+
+
+
+\-Referenced by step().
+
+
+
+\subsection{\-Friends \-And \-Related \-Function \-Documentation}
+\hypertarget{classlb_1_1simulation_a5cc6292573a936af4440e6bd7525bce9}{\index{lb\-::simulation@{lb\-::simulation}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!lb::simulation@{lb\-::simulation}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{std\-::ostream \&}]{os, }
+\item[{const {\bf simulation} \&}]{sim}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}friend\mbox{]}}}}\label{classlb_1_1simulation_a5cc6292573a936af4440e6bd7525bce9}
+print to output stream 
+
+\-Definition at line 150 of file simulation.\-hpp.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{simulation_8hpp}{simulation.\-hpp}\end{DoxyCompactItemize}

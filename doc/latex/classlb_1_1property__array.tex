@@ -1,0 +1,1118 @@
+\hypertarget{classlb_1_1property__array}{\section{lb\-:\-:property\-\_\-array \-Class \-Reference}
+\label{classlb_1_1property__array}\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}}
+}
+
+
+\-This class allows you to store properties in an array.  
+
+
+
+
+{\ttfamily \#include $<$property\-\_\-array.\-hpp$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{typedef unsigned long int \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type}}\label{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}
+
+\begin{DoxyCompactList}\small\item\em enumeration and size type \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classlb_1_1property__array_a28d12e06a6b58f36bf22f33a1c56c798}{property\-\_\-array} (\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{size})
+\begin{DoxyCompactList}\small\item\em \-Construct with array size. \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1property__array_a6c874c145a02e549fa1c65f95da8cb75}{\hyperlink{classlb_1_1property__array_a6c874c145a02e549fa1c65f95da8cb75}{property\-\_\-array} (const \hyperlink{classlb_1_1property__array}{property\-\_\-array} \&other)}\label{classlb_1_1property__array_a6c874c145a02e549fa1c65f95da8cb75}
+
+\begin{DoxyCompactList}\small\item\em \-Copy construct. \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1property__array_a37b9c38fd7a48aa3f8588863e3acaca7}{void \hyperlink{classlb_1_1property__array_a37b9c38fd7a48aa3f8588863e3acaca7}{swap} (\hyperlink{classlb_1_1property__array}{property\-\_\-array} \&other)}\label{classlb_1_1property__array_a37b9c38fd7a48aa3f8588863e3acaca7}
+
+\begin{DoxyCompactList}\small\item\em \-Swap internal state. \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1property__array_ac3262e1a44177d79edab91f7ce37b787}{\hyperlink{classlb_1_1property__array}{property\-\_\-array} \& \hyperlink{classlb_1_1property__array_ac3262e1a44177d79edab91f7ce37b787}{operator=} (\hyperlink{classlb_1_1property__array}{property\-\_\-array} other)}\label{classlb_1_1property__array_ac3262e1a44177d79edab91f7ce37b787}
+
+\begin{DoxyCompactList}\small\item\em \-Assignement. \end{DoxyCompactList}\item 
+\hyperlink{classlb_1_1property__array_ae090553ebe3d1b393089a3606a69e5f1}{$\sim$property\-\_\-array} ()
+\item 
+bool \hyperlink{classlb_1_1property__array_a25cf1fb45de2be0a8a34c29ebfb9a943}{register\-\_\-flag\-\_\-property} (std\-::string name, bool set=false)
+\begin{DoxyCompactList}\small\item\em register a new flag property \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \hyperlink{classlb_1_1property__array_a52ef100619136729c5ed5871fe128612}{register\-\_\-data\-\_\-property} (std\-::string name, bool set=false, const \-T \&value=\-T())
+\begin{DoxyCompactList}\small\item\em register a new data property \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_ae8128b50f33097f3a9a81fb9c8036ece}{set\-\_\-flag\-\_\-property} (std\-::string name, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index)
+\begin{DoxyCompactList}\small\item\em set flag property \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \hyperlink{classlb_1_1property__array_a9dd2543e041fb3b6869544d9a4096823}{set\-\_\-data\-\_\-property} (std\-::string name, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index, const \-T \&property)
+\begin{DoxyCompactList}\small\item\em set data property \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_a7506bd327ec5db0640d8518bfc4eba9b}{set\-\_\-flag\-\_\-property} (\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} property\-\_\-index, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index)
+\begin{DoxyCompactList}\small\item\em set flag property \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \hyperlink{classlb_1_1property__array_a06dc407d2cd6d1b42a9e7906501e5c08}{set\-\_\-data\-\_\-property} (\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} property\-\_\-index, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index, const \-T \&property)
+\begin{DoxyCompactList}\small\item\em set data property \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_a53a211f3ecf74d917ae98cea5004dd6c}{unset\-\_\-flag\-\_\-property} (std\-::string name, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index)
+\begin{DoxyCompactList}\small\item\em unset flag property \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_ad205c8531dcc73d945b1f8129aefea1c}{unset\-\_\-data\-\_\-property} (std\-::string name, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index)
+\begin{DoxyCompactList}\small\item\em unset data property \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_a0a6834b52b254c3253162b13df4fa15b}{unset\-\_\-flag\-\_\-property} (\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} property\-\_\-index, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index)
+\begin{DoxyCompactList}\small\item\em unset flag property \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_adc794a474d469ad1202b13cf14150721}{unset\-\_\-data\-\_\-property} (\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} property\-\_\-index, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index)
+\begin{DoxyCompactList}\small\item\em unset data property \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\-T \& \hyperlink{classlb_1_1property__array_ab25f1a5a52a03b6490baf04c2fa69244}{get\-\_\-data\-\_\-property} (std\-::string name, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index)
+\begin{DoxyCompactList}\small\item\em access data property object \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\const \-T \& \hyperlink{classlb_1_1property__array_a5f4452f16fbb5be6d9bc676e6048b361}{get\-\_\-data\-\_\-property} (std\-::string name, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index) const 
+\begin{DoxyCompactList}\small\item\em access data property object \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\-T \& \hyperlink{classlb_1_1property__array_a8e3b88e699b568f88c147ce11e9cd95a}{get\-\_\-data\-\_\-property} (\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} property\-\_\-index, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index)
+\begin{DoxyCompactList}\small\item\em access data property object \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\const \-T \& \hyperlink{classlb_1_1property__array_aa703f2d13757714c2309f80a6526dbc7}{get\-\_\-data\-\_\-property} (\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} property\-\_\-index, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index) const 
+\begin{DoxyCompactList}\small\item\em access data property object \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_ac2bab68313208cdb489d8f1d19cf1188}{flag\-\_\-property\-\_\-index} (std\-::string name, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} \&property\-\_\-index) const 
+\begin{DoxyCompactList}\small\item\em get flag property index from flag property name \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_a10325b2c56a1163a847d5edec38a2523}{data\-\_\-property\-\_\-index} (std\-::string name, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} \&property\-\_\-index) const 
+\begin{DoxyCompactList}\small\item\em get data property index from data property name \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_ac5a1f96f4f8d8972ddddd13e64568b60}{flag\-\_\-property\-\_\-name} (\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} property\-\_\-index, std\-::string \&name) const 
+\begin{DoxyCompactList}\small\item\em get flag property name from flag property index \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_a2190f7d3a8d06c1899a8b898d7c9addd}{data\-\_\-property\-\_\-name} (\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} property\-\_\-index, std\-::string \&name) const 
+\begin{DoxyCompactList}\small\item\em get data property name from data property index \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{size} () const }\label{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}
+
+\begin{DoxyCompactList}\small\item\em property array size \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1property__array_a960838eb37f5459899f3da3fd645a214}{\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} \hyperlink{classlb_1_1property__array_a960838eb37f5459899f3da3fd645a214}{num\-\_\-flag\-\_\-properties} () const }\label{classlb_1_1property__array_a960838eb37f5459899f3da3fd645a214}
+
+\begin{DoxyCompactList}\small\item\em number of registered flag properties \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1property__array_abdbc2483a59aa46db0b0c167448af37a}{\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} \hyperlink{classlb_1_1property__array_abdbc2483a59aa46db0b0c167448af37a}{num\-\_\-data\-\_\-properties} () const }\label{classlb_1_1property__array_abdbc2483a59aa46db0b0c167448af37a}
+
+\begin{DoxyCompactList}\small\item\em number of registered data properties \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1property__array_a7808450d71a501ff36daa6c9b2186457}{\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} \hyperlink{classlb_1_1property__array_a7808450d71a501ff36daa6c9b2186457}{num\-\_\-properties} () const }\label{classlb_1_1property__array_a7808450d71a501ff36daa6c9b2186457}
+
+\begin{DoxyCompactList}\small\item\em number of registered flag and data properties \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_a6ba915621b1d2c1ab8cda6b5059800e8}{has\-\_\-flag\-\_\-property} (std\-::string name, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index) const 
+\begin{DoxyCompactList}\small\item\em \-Check whether flag property is set. \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_a6c00c9179d623124517a452356fbeb5a}{has\-\_\-data\-\_\-property} (std\-::string name, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index) const 
+\begin{DoxyCompactList}\small\item\em \-Check whether data property is set. \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_a36f15bca0d62eb4165904502c1191e5e}{has\-\_\-flag\-\_\-property} (\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} property\-\_\-index, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index) const 
+\begin{DoxyCompactList}\small\item\em \-Check whether flag property is set. \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_aa3fce8bb2448e47b56146386992eed6f}{has\-\_\-data\-\_\-property} (\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} property\-\_\-index, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} array\-\_\-index) const 
+\begin{DoxyCompactList}\small\item\em \-Check whether data property is set. \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_aca962cbb1a19356c95607b980268b670}{count\-\_\-set\-\_\-flag\-\_\-properties} (std\-::string name, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} \&count) const 
+\begin{DoxyCompactList}\small\item\em count flag properties which are set \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_a784771d2cc3308fdc6e6a6803f3840af}{count\-\_\-set\-\_\-data\-\_\-properties} (std\-::string name, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} \&count) const 
+\begin{DoxyCompactList}\small\item\em count data properties which are set \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_a3a6cc1f290f44e4d0ce469d81622a1e1}{count\-\_\-set\-\_\-flag\-\_\-properties} (\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} property\-\_\-index, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} \&count) const 
+\begin{DoxyCompactList}\small\item\em count flag properties which are set \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_af6c625c15ee584a55c241f8c41640796}{count\-\_\-set\-\_\-data\-\_\-properties} (\hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} property\-\_\-index, \hyperlink{classlb_1_1property__array_a76d861a6fb4b99128f627ad951918429}{size\-\_\-type} \&count) const 
+\begin{DoxyCompactList}\small\item\em count data properties which are set \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_aee2356dcde19da93636676544422ab7b}{exist\-\_\-data\-\_\-property} (std\-::string name) const 
+\begin{DoxyCompactList}\small\item\em check whether data property exists \end{DoxyCompactList}\item 
+bool \hyperlink{classlb_1_1property__array_aa38854a0e43bf935dc1653fd489fa9f3}{exist\-\_\-flag\-\_\-property} (std\-::string name) const 
+\begin{DoxyCompactList}\small\item\em check whether flag property exists \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classlb_1_1property__array_acd459005d8abb7cd3d8dacac9f88f449}{std\-::ostream \& \hyperlink{classlb_1_1property__array_acd459005d8abb7cd3d8dacac9f88f449}{operator$<$$<$} (std\-::ostream \&os, const \hyperlink{classlb_1_1property__array}{property\-\_\-array} \&pa)}\label{classlb_1_1property__array_acd459005d8abb7cd3d8dacac9f88f449}
+
+\begin{DoxyCompactList}\small\item\em print to output stream \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-This class allows you to store properties in an array. 
+
+\-For every index in the property array you can register several flag properties (boolean values) and several custom objects of any type. \-As long as you do not store a data property for a given index no space will be used.
+
+\-Example usage for flag property\-: 
+\begin{DoxyCode}
+        property_array pa(5);                                            //
+       property array of size 5
+        pa.register_register_flag_property("test_flag",false);           //
+       register a flag with name "test_flag", default value false
+ 
+        pa.set_flag_property("test_flag",2);                             // set
+       the flag at position 2 to true
+        // alternatively you can use the property index
+        property_array::size_type idx;
+        pa.flag_property_index("test_flag", idx);
+        pa.set_flag_property(idx,2);                                     // set
+       the flag at position 2 to true
+ 
+        bool value = pa.has_flag_property("test_flag",2);                // get
+       the value at position 2 for your flag
+        // using the index
+        value = pa.has_flag_property(idx,2);                             // get
+       the value at position 2 for your flag
+ 
+        pa.unset_flag_property("test_flag",2);                           // set
+       flag at position 2 to false
+        // using the index
+        pa.unset_flag_property(idx,2);                                   // set
+       flag at position 2 to false
+\end{DoxyCode}
+
+
+\-Example usage for data property\-: 
+\begin{DoxyCode}
+        property_array pa(5);                                                  
+               // property array of size 5
+        // assume you want to store a std::vector<float>
+        pa.register_register_data_property<std::vector<float> >("some_data",
+      false);     // register a data property with name "some_data", default value: null
+ 
+        std::vector<float> test_property(9,1.0);
+        pa.set_data_property("some_data", 3, test_property);                   
+               // store data property "some_data" at position 3 to be equal to
+       variable test_property
+        // again you could use an index instead of a string to access the
+       property
+        property_array::size_type idx;
+        pa.data_property_index("some_data", idx);
+        pa.set_data_property("some_data", 3, test_property);
+        
+        
+        if (pa.has_data_property("some_data", 3))                              
+               // check whether there is a data property stored at index 3
+        {
+                std::vector<float> return_value;
+                return_value=pa.get_data_property<std::vector<float> >("
+      some_data",3);  // retrieve the data property
+        }
+        
+        pa.unset_data_property("some_data", 3);                                
+               // delete the data property at index 3
+\end{DoxyCode}
+ 
+
+\-Definition at line 158 of file property\-\_\-array.\-hpp.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classlb_1_1property__array_a28d12e06a6b58f36bf22f33a1c56c798}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!property\-\_\-array@{property\-\_\-array}}
+\index{property\-\_\-array@{property\-\_\-array}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{property\-\_\-array}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lb\-::property\-\_\-array\-::property\-\_\-array} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a28d12e06a6b58f36bf22f33a1c56c798}
+
+
+\-Construct with array size. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em size} & array size \\
+\hline
+\end{DoxyParams}
+
+
+\-Definition at line 191 of file property\-\_\-array.\-hpp.
+
+\hypertarget{classlb_1_1property__array_ae090553ebe3d1b393089a3606a69e5f1}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!$\sim$property\-\_\-array@{$\sim$property\-\_\-array}}
+\index{$\sim$property\-\_\-array@{$\sim$property\-\_\-array}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{$\sim$property\-\_\-array}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lb\-::property\-\_\-array\-::$\sim$property\-\_\-array} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_ae090553ebe3d1b393089a3606a69e5f1}
+\-Destruct 
+
+\-Definition at line 231 of file property\-\_\-array.\-hpp.
+
+
+
+\-References num\-\_\-data\-\_\-properties().
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classlb_1_1property__array_a25cf1fb45de2be0a8a34c29ebfb9a943}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!register\-\_\-flag\-\_\-property@{register\-\_\-flag\-\_\-property}}
+\index{register\-\_\-flag\-\_\-property@{register\-\_\-flag\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{register\-\_\-flag\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::register\-\_\-flag\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{bool}]{set = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a25cf1fb45de2be0a8a34c29ebfb9a943}
+
+
+register a new flag property 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & flag property name \\
+\hline
+\mbox{\tt in}  & {\em set} & default state \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if property does not exist yet 
+\end{DoxyReturn}
+
+
+\-Definition at line 251 of file property\-\_\-array.\-hpp.
+
+
+
+\-Referenced by lb\-::lattice\-::lattice().
+
+\hypertarget{classlb_1_1property__array_a52ef100619136729c5ed5871fe128612}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!register\-\_\-data\-\_\-property@{register\-\_\-data\-\_\-property}}
+\index{register\-\_\-data\-\_\-property@{register\-\_\-data\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{register\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool {\bf lb\-::property\-\_\-array\-::register\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{bool}]{set = {\ttfamily false}, }
+\item[{const \-T \&}]{value = {\ttfamily \-T()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a52ef100619136729c5ed5871fe128612}
+
+
+register a new data property 
+
+
+\begin{DoxyTemplParams}{\-Template Parameters}
+{\em \-T} & type for data property \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & data property name \\
+\hline
+\mbox{\tt in}  & {\em set} & default behaviour\-: initialized or null \\
+\hline
+\mbox{\tt in}  & {\em value} & value for default initialization \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if property does not exist yet 
+\end{DoxyReturn}
+
+
+\-Definition at line 269 of file property\-\_\-array.\-hpp.
+
+\hypertarget{classlb_1_1property__array_ae8128b50f33097f3a9a81fb9c8036ece}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!set\-\_\-flag\-\_\-property@{set\-\_\-flag\-\_\-property}}
+\index{set\-\_\-flag\-\_\-property@{set\-\_\-flag\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{set\-\_\-flag\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::set\-\_\-flag\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_ae8128b50f33097f3a9a81fb9c8036ece}
+
+
+set flag property 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & flag property name \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if flag property exists 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 288 of file property\-\_\-array.\-hpp.
+
+
+
+\-Referenced by lb\-::lattice\-::lattice(), and lb\-::node\-::set\-\_\-flag\-\_\-property().
+
+\hypertarget{classlb_1_1property__array_a9dd2543e041fb3b6869544d9a4096823}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!set\-\_\-data\-\_\-property@{set\-\_\-data\-\_\-property}}
+\index{set\-\_\-data\-\_\-property@{set\-\_\-data\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{set\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool {\bf lb\-::property\-\_\-array\-::set\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index, }
+\item[{const \-T \&}]{property}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a9dd2543e041fb3b6869544d9a4096823}
+
+
+set data property 
+
+
+\begin{DoxyTemplParams}{\-Template Parameters}
+{\em \-T} & type for data property \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & data property name \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\mbox{\tt in}  & {\em property} & data to store \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if data property exists 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 305 of file property\-\_\-array.\-hpp.
+
+
+
+\-Referenced by lb\-::node\-::set\-\_\-data\-\_\-property().
+
+\hypertarget{classlb_1_1property__array_a7506bd327ec5db0640d8518bfc4eba9b}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!set\-\_\-flag\-\_\-property@{set\-\_\-flag\-\_\-property}}
+\index{set\-\_\-flag\-\_\-property@{set\-\_\-flag\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{set\-\_\-flag\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::set\-\_\-flag\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{property\-\_\-index, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a7506bd327ec5db0640d8518bfc4eba9b}
+
+
+set flag property 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em property\-\_\-index} & flag property index \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if flag property exists 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 327 of file property\-\_\-array.\-hpp.
+
+
+
+\-References num\-\_\-flag\-\_\-properties().
+
+\hypertarget{classlb_1_1property__array_a06dc407d2cd6d1b42a9e7906501e5c08}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!set\-\_\-data\-\_\-property@{set\-\_\-data\-\_\-property}}
+\index{set\-\_\-data\-\_\-property@{set\-\_\-data\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{set\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool {\bf lb\-::property\-\_\-array\-::set\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{property\-\_\-index, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index, }
+\item[{const \-T \&}]{property}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a06dc407d2cd6d1b42a9e7906501e5c08}
+
+
+set data property 
+
+
+\begin{DoxyTemplParams}{\-Template Parameters}
+{\em \-T} & type for data property \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em property\-\_\-index} & data property index \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\mbox{\tt in}  & {\em property} & data to store \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if data property exists 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 343 of file property\-\_\-array.\-hpp.
+
+
+
+\-References num\-\_\-data\-\_\-properties().
+
+\hypertarget{classlb_1_1property__array_a53a211f3ecf74d917ae98cea5004dd6c}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!unset\-\_\-flag\-\_\-property@{unset\-\_\-flag\-\_\-property}}
+\index{unset\-\_\-flag\-\_\-property@{unset\-\_\-flag\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{unset\-\_\-flag\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::unset\-\_\-flag\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a53a211f3ecf74d917ae98cea5004dd6c}
+
+
+unset flag property 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & flag property name \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if flag property exists 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 364 of file property\-\_\-array.\-hpp.
+
+
+
+\-Referenced by lb\-::node\-::unset\-\_\-flag\-\_\-property().
+
+\hypertarget{classlb_1_1property__array_ad205c8531dcc73d945b1f8129aefea1c}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!unset\-\_\-data\-\_\-property@{unset\-\_\-data\-\_\-property}}
+\index{unset\-\_\-data\-\_\-property@{unset\-\_\-data\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{unset\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::unset\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_ad205c8531dcc73d945b1f8129aefea1c}
+
+
+unset data property 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & data property name \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if data property exists 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 378 of file property\-\_\-array.\-hpp.
+
+
+
+\-Referenced by lb\-::node\-::unset\-\_\-data\-\_\-property().
+
+\hypertarget{classlb_1_1property__array_a0a6834b52b254c3253162b13df4fa15b}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!unset\-\_\-flag\-\_\-property@{unset\-\_\-flag\-\_\-property}}
+\index{unset\-\_\-flag\-\_\-property@{unset\-\_\-flag\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{unset\-\_\-flag\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::unset\-\_\-flag\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{property\-\_\-index, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a0a6834b52b254c3253162b13df4fa15b}
+
+
+unset flag property 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em property\-\_\-index} & flag property index \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if flag property exists 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 400 of file property\-\_\-array.\-hpp.
+
+
+
+\-References num\-\_\-flag\-\_\-properties().
+
+\hypertarget{classlb_1_1property__array_adc794a474d469ad1202b13cf14150721}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!unset\-\_\-data\-\_\-property@{unset\-\_\-data\-\_\-property}}
+\index{unset\-\_\-data\-\_\-property@{unset\-\_\-data\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{unset\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::unset\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{property\-\_\-index, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_adc794a474d469ad1202b13cf14150721}
+
+
+unset data property 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em property\-\_\-index} & data property index \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if data property exists 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 413 of file property\-\_\-array.\-hpp.
+
+
+
+\-References num\-\_\-data\-\_\-properties().
+
+\hypertarget{classlb_1_1property__array_ab25f1a5a52a03b6490baf04c2fa69244}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!get\-\_\-data\-\_\-property@{get\-\_\-data\-\_\-property}}
+\index{get\-\_\-data\-\_\-property@{get\-\_\-data\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{get\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ \-T\& {\bf lb\-::property\-\_\-array\-::get\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_ab25f1a5a52a03b6490baf04c2fa69244}
+
+
+access data property object 
+
+
+\begin{DoxyTemplParams}{\-Template Parameters}
+{\em \-T} & data property type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & data property name \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+reference to data property object 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 438 of file property\-\_\-array.\-hpp.
+
+
+
+\-Referenced by lb\-::node\-::get\-\_\-data\-\_\-property().
+
+\hypertarget{classlb_1_1property__array_a5f4452f16fbb5be6d9bc676e6048b361}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!get\-\_\-data\-\_\-property@{get\-\_\-data\-\_\-property}}
+\index{get\-\_\-data\-\_\-property@{get\-\_\-data\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{get\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ const \-T\& {\bf lb\-::property\-\_\-array\-::get\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a5f4452f16fbb5be6d9bc676e6048b361}
+
+
+access data property object 
+
+
+\begin{DoxyTemplParams}{\-Template Parameters}
+{\em \-T} & data property type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & data property name \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+const reference to data property object 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 459 of file property\-\_\-array.\-hpp.
+
+\hypertarget{classlb_1_1property__array_a8e3b88e699b568f88c147ce11e9cd95a}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!get\-\_\-data\-\_\-property@{get\-\_\-data\-\_\-property}}
+\index{get\-\_\-data\-\_\-property@{get\-\_\-data\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{get\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ \-T\& {\bf lb\-::property\-\_\-array\-::get\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{property\-\_\-index, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a8e3b88e699b568f88c147ce11e9cd95a}
+
+
+access data property object 
+
+
+\begin{DoxyTemplParams}{\-Template Parameters}
+{\em \-T} & data property type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em property\-\_\-index} & data property index \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+reference to data property object 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 480 of file property\-\_\-array.\-hpp.
+
+
+
+\-References num\-\_\-data\-\_\-properties().
+
+\hypertarget{classlb_1_1property__array_aa703f2d13757714c2309f80a6526dbc7}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!get\-\_\-data\-\_\-property@{get\-\_\-data\-\_\-property}}
+\index{get\-\_\-data\-\_\-property@{get\-\_\-data\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{get\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ const \-T\& {\bf lb\-::property\-\_\-array\-::get\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{property\-\_\-index, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_aa703f2d13757714c2309f80a6526dbc7}
+
+
+access data property object 
+
+
+\begin{DoxyTemplParams}{\-Template Parameters}
+{\em \-T} & data property type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em property\-\_\-index} & data property index \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+const reference to data property object 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 501 of file property\-\_\-array.\-hpp.
+
+
+
+\-References num\-\_\-data\-\_\-properties().
+
+\hypertarget{classlb_1_1property__array_ac2bab68313208cdb489d8f1d19cf1188}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!flag\-\_\-property\-\_\-index@{flag\-\_\-property\-\_\-index}}
+\index{flag\-\_\-property\-\_\-index@{flag\-\_\-property\-\_\-index}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{flag\-\_\-property\-\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::flag\-\_\-property\-\_\-index} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{{\bf size\-\_\-type} \&}]{property\-\_\-index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_ac2bab68313208cdb489d8f1d19cf1188}
+
+
+get flag property index from flag property name 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & flag property name \\
+\hline
+\mbox{\tt out}  & {\em property\-\_\-index} & flag property index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if property exists 
+\end{DoxyReturn}
+
+
+\-Definition at line 521 of file property\-\_\-array.\-hpp.
+
+\hypertarget{classlb_1_1property__array_a10325b2c56a1163a847d5edec38a2523}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!data\-\_\-property\-\_\-index@{data\-\_\-property\-\_\-index}}
+\index{data\-\_\-property\-\_\-index@{data\-\_\-property\-\_\-index}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{data\-\_\-property\-\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::data\-\_\-property\-\_\-index} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{{\bf size\-\_\-type} \&}]{property\-\_\-index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a10325b2c56a1163a847d5edec38a2523}
+
+
+get data property index from data property name 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & data property name \\
+\hline
+\mbox{\tt out}  & {\em property\-\_\-index} & data property index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if property exists 
+\end{DoxyReturn}
+
+
+\-Definition at line 534 of file property\-\_\-array.\-hpp.
+
+\hypertarget{classlb_1_1property__array_ac5a1f96f4f8d8972ddddd13e64568b60}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!flag\-\_\-property\-\_\-name@{flag\-\_\-property\-\_\-name}}
+\index{flag\-\_\-property\-\_\-name@{flag\-\_\-property\-\_\-name}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{flag\-\_\-property\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::flag\-\_\-property\-\_\-name} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{property\-\_\-index, }
+\item[{std\-::string \&}]{name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_ac5a1f96f4f8d8972ddddd13e64568b60}
+
+
+get flag property name from flag property index 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em property\-\_\-index} & flag property index \\
+\hline
+\mbox{\tt out}  & {\em name} & flag property name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if property exists 
+\end{DoxyReturn}
+
+
+\-Definition at line 547 of file property\-\_\-array.\-hpp.
+
+
+
+\-References num\-\_\-flag\-\_\-properties().
+
+\hypertarget{classlb_1_1property__array_a2190f7d3a8d06c1899a8b898d7c9addd}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!data\-\_\-property\-\_\-name@{data\-\_\-property\-\_\-name}}
+\index{data\-\_\-property\-\_\-name@{data\-\_\-property\-\_\-name}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{data\-\_\-property\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::data\-\_\-property\-\_\-name} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{property\-\_\-index, }
+\item[{std\-::string \&}]{name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a2190f7d3a8d06c1899a8b898d7c9addd}
+
+
+get data property name from data property index 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em property\-\_\-index} & data property index \\
+\hline
+\mbox{\tt out}  & {\em name} & data property name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if property exists 
+\end{DoxyReturn}
+
+
+\-Definition at line 559 of file property\-\_\-array.\-hpp.
+
+
+
+\-References num\-\_\-data\-\_\-properties().
+
+\hypertarget{classlb_1_1property__array_a6ba915621b1d2c1ab8cda6b5059800e8}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!has\-\_\-flag\-\_\-property@{has\-\_\-flag\-\_\-property}}
+\index{has\-\_\-flag\-\_\-property@{has\-\_\-flag\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{has\-\_\-flag\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::has\-\_\-flag\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a6ba915621b1d2c1ab8cda6b5059800e8}
+
+
+\-Check whether flag property is set. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & flag property name \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if property is set 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 586 of file property\-\_\-array.\-hpp.
+
+
+
+\-Referenced by lb\-::node\-::has\-\_\-flag\-\_\-property().
+
+\hypertarget{classlb_1_1property__array_a6c00c9179d623124517a452356fbeb5a}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!has\-\_\-data\-\_\-property@{has\-\_\-data\-\_\-property}}
+\index{has\-\_\-data\-\_\-property@{has\-\_\-data\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{has\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::has\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a6c00c9179d623124517a452356fbeb5a}
+
+
+\-Check whether data property is set. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & data property name \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if property is set 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 600 of file property\-\_\-array.\-hpp.
+
+
+
+\-Referenced by lb\-::node\-::has\-\_\-data\-\_\-property().
+
+\hypertarget{classlb_1_1property__array_a36f15bca0d62eb4165904502c1191e5e}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!has\-\_\-flag\-\_\-property@{has\-\_\-flag\-\_\-property}}
+\index{has\-\_\-flag\-\_\-property@{has\-\_\-flag\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{has\-\_\-flag\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::has\-\_\-flag\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{property\-\_\-index, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a36f15bca0d62eb4165904502c1191e5e}
+
+
+\-Check whether flag property is set. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em property\-\_\-index} & flag property index \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if property is set 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 614 of file property\-\_\-array.\-hpp.
+
+
+
+\-References num\-\_\-flag\-\_\-properties().
+
+\hypertarget{classlb_1_1property__array_aa3fce8bb2448e47b56146386992eed6f}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!has\-\_\-data\-\_\-property@{has\-\_\-data\-\_\-property}}
+\index{has\-\_\-data\-\_\-property@{has\-\_\-data\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{has\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::has\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{property\-\_\-index, }
+\item[{{\bf size\-\_\-type}}]{array\-\_\-index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_aa3fce8bb2448e47b56146386992eed6f}
+
+
+\-Check whether data property is set. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em property\-\_\-index} & data property index \\
+\hline
+\mbox{\tt in}  & {\em array\-\_\-index} & position in array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if property is set 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+array\-\_\-index is in range \mbox{[} 0, \hyperlink{classlb_1_1property__array_aef6d4478adf6211fde06520d0802c5c2}{property\-\_\-array\-::size()} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 627 of file property\-\_\-array.\-hpp.
+
+
+
+\-References num\-\_\-data\-\_\-properties().
+
+\hypertarget{classlb_1_1property__array_aca962cbb1a19356c95607b980268b670}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!count\-\_\-set\-\_\-flag\-\_\-properties@{count\-\_\-set\-\_\-flag\-\_\-properties}}
+\index{count\-\_\-set\-\_\-flag\-\_\-properties@{count\-\_\-set\-\_\-flag\-\_\-properties}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{count\-\_\-set\-\_\-flag\-\_\-properties}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::count\-\_\-set\-\_\-flag\-\_\-properties} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{{\bf size\-\_\-type} \&}]{count}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_aca962cbb1a19356c95607b980268b670}
+
+
+count flag properties which are set 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & flag property index \\
+\hline
+\mbox{\tt out}  & {\em count} & number of flag properties set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if flag property exists 
+\end{DoxyReturn}
+
+
+\-Definition at line 639 of file property\-\_\-array.\-hpp.
+
+\hypertarget{classlb_1_1property__array_a784771d2cc3308fdc6e6a6803f3840af}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!count\-\_\-set\-\_\-data\-\_\-properties@{count\-\_\-set\-\_\-data\-\_\-properties}}
+\index{count\-\_\-set\-\_\-data\-\_\-properties@{count\-\_\-set\-\_\-data\-\_\-properties}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{count\-\_\-set\-\_\-data\-\_\-properties}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::count\-\_\-set\-\_\-data\-\_\-properties} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{{\bf size\-\_\-type} \&}]{count}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a784771d2cc3308fdc6e6a6803f3840af}
+
+
+count data properties which are set 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & data property name \\
+\hline
+\mbox{\tt out}  & {\em count} & number of data properties set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if data property exists 
+\end{DoxyReturn}
+
+
+\-Definition at line 657 of file property\-\_\-array.\-hpp.
+
+\hypertarget{classlb_1_1property__array_a3a6cc1f290f44e4d0ce469d81622a1e1}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!count\-\_\-set\-\_\-flag\-\_\-properties@{count\-\_\-set\-\_\-flag\-\_\-properties}}
+\index{count\-\_\-set\-\_\-flag\-\_\-properties@{count\-\_\-set\-\_\-flag\-\_\-properties}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{count\-\_\-set\-\_\-flag\-\_\-properties}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::count\-\_\-set\-\_\-flag\-\_\-properties} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{property\-\_\-index, }
+\item[{{\bf size\-\_\-type} \&}]{count}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_a3a6cc1f290f44e4d0ce469d81622a1e1}
+
+
+count flag properties which are set 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em property\-\_\-index} & flag property index \\
+\hline
+\mbox{\tt out}  & {\em count} & number of flag properties set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if flag property exists 
+\end{DoxyReturn}
+
+
+\-Definition at line 675 of file property\-\_\-array.\-hpp.
+
+
+
+\-References num\-\_\-flag\-\_\-properties().
+
+\hypertarget{classlb_1_1property__array_af6c625c15ee584a55c241f8c41640796}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!count\-\_\-set\-\_\-data\-\_\-properties@{count\-\_\-set\-\_\-data\-\_\-properties}}
+\index{count\-\_\-set\-\_\-data\-\_\-properties@{count\-\_\-set\-\_\-data\-\_\-properties}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{count\-\_\-set\-\_\-data\-\_\-properties}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::count\-\_\-set\-\_\-data\-\_\-properties} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{property\-\_\-index, }
+\item[{{\bf size\-\_\-type} \&}]{count}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_af6c625c15ee584a55c241f8c41640796}
+
+
+count data properties which are set 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em property\-\_\-index} & data property index \\
+\hline
+\mbox{\tt out}  & {\em count} & number of data properties set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if data property exists 
+\end{DoxyReturn}
+
+
+\-Definition at line 692 of file property\-\_\-array.\-hpp.
+
+
+
+\-References num\-\_\-data\-\_\-properties().
+
+\hypertarget{classlb_1_1property__array_aee2356dcde19da93636676544422ab7b}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!exist\-\_\-data\-\_\-property@{exist\-\_\-data\-\_\-property}}
+\index{exist\-\_\-data\-\_\-property@{exist\-\_\-data\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{exist\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::exist\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_aee2356dcde19da93636676544422ab7b}
+
+
+check whether data property exists 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & data property name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if exists 
+\end{DoxyReturn}
+
+
+\-Definition at line 708 of file property\-\_\-array.\-hpp.
+
+\hypertarget{classlb_1_1property__array_aa38854a0e43bf935dc1653fd489fa9f3}{\index{lb\-::property\-\_\-array@{lb\-::property\-\_\-array}!exist\-\_\-flag\-\_\-property@{exist\-\_\-flag\-\_\-property}}
+\index{exist\-\_\-flag\-\_\-property@{exist\-\_\-flag\-\_\-property}!lb::property_array@{lb\-::property\-\_\-array}}
+\subsubsection[{exist\-\_\-flag\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::property\-\_\-array\-::exist\-\_\-flag\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1property__array_aa38854a0e43bf935dc1653fd489fa9f3}
+
+
+check whether flag property exists 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & flag property name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+true if exists 
+\end{DoxyReturn}
+
+
+\-Definition at line 719 of file property\-\_\-array.\-hpp.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{property__array_8hpp}{property\-\_\-array.\-hpp}\end{DoxyCompactItemize}

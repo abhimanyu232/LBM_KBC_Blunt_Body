@@ -1,0 +1,592 @@
+\hypertarget{classlb_1_1lattice}{\section{lb\-:\-:lattice \-Class \-Reference}
+\label{classlb_1_1lattice}\index{lb\-::lattice@{lb\-::lattice}}
+}
+
+
+\-Lattice containing the populations.  
+
+
+
+
+{\ttfamily \#include $<$lattice.\-hpp$>$}
+
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classlb_1_1lattice_ac99739da5030b2f0c3d28618d2db83b8}{typedef std\-::vector$<$ \hyperlink{structlb_1_1node}{node} $>$\*
+\-::iterator \hyperlink{classlb_1_1lattice_ac99739da5030b2f0c3d28618d2db83b8}{node\-\_\-iterator}}\label{classlb_1_1lattice_ac99739da5030b2f0c3d28618d2db83b8}
+
+\begin{DoxyCompactList}\small\item\em \-Iterator type. \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_aa19f16e07ac70d4eddb4c3bdca1a314a}{typedef std\-::vector$<$ \hyperlink{structlb_1_1node}{node} $>$\*
+\-::const\-\_\-iterator \hyperlink{classlb_1_1lattice_aa19f16e07ac70d4eddb4c3bdca1a314a}{const\-\_\-node\-\_\-iterator}}\label{classlb_1_1lattice_aa19f16e07ac70d4eddb4c3bdca1a314a}
+
+\begin{DoxyCompactList}\small\item\em \-Const iterator type. \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_a8f14fa67ef5e16926d41569949aaf419}{typedef std\-::vector$<$ \hyperlink{structlb_1_1node}{node} $>$\*
+\-::reverse\-\_\-iterator \hyperlink{classlb_1_1lattice_a8f14fa67ef5e16926d41569949aaf419}{reverse\-\_\-node\-\_\-iterator}}\label{classlb_1_1lattice_a8f14fa67ef5e16926d41569949aaf419}
+
+\begin{DoxyCompactList}\small\item\em \-Reverse iterator type. \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_abe55fc29d14a9a380106ea7a138e1931}{typedef std\-::vector$<$ \hyperlink{structlb_1_1node}{node} $>$\*
+\-::const\-\_\-reverse\-\_\-iterator \hyperlink{classlb_1_1lattice_abe55fc29d14a9a380106ea7a138e1931}{const\-\_\-reverse\-\_\-node\-\_\-iterator}}\label{classlb_1_1lattice_abe55fc29d14a9a380106ea7a138e1931}
+
+\begin{DoxyCompactList}\small\item\em \-Const reverse iterator type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classlb_1_1lattice_a0769d0e72beae9e888156cf385f90660}{lattice} (unsigned int \-\_\-nx, unsigned int \-\_\-ny)
+\begin{DoxyCompactList}\small\item\em \-Construct the lattice with given extent. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{classlb_1_1lattice_adaf6217dfdbc90f4df1aeedf51322412}{index} (int i, int j) const 
+\begin{DoxyCompactList}\small\item\em \-Convert a coordinate to a unique index. \end{DoxyCompactList}\item 
+\hyperlink{classlb_1_1lattice_ac99739da5030b2f0c3d28618d2db83b8}{node\-\_\-iterator} \hyperlink{classlb_1_1lattice_a792ad76d690ddcf96bfdccbdc041e633}{begin} ()
+\begin{DoxyCompactList}\small\item\em \-Iterator pointing to the beginning. \end{DoxyCompactList}\item 
+\hyperlink{classlb_1_1lattice_aa19f16e07ac70d4eddb4c3bdca1a314a}{const\-\_\-node\-\_\-iterator} \hyperlink{classlb_1_1lattice_ae1e6e7bdba8f9298d5965290933bb75e}{begin} () const 
+\begin{DoxyCompactList}\small\item\em \-Const iterator pointing to the beginning. \end{DoxyCompactList}\item 
+\hyperlink{classlb_1_1lattice_ac99739da5030b2f0c3d28618d2db83b8}{node\-\_\-iterator} \hyperlink{classlb_1_1lattice_a384d328bae76fc784dacde1478270897}{end} ()
+\begin{DoxyCompactList}\small\item\em \-Iterator pointing to the end. \end{DoxyCompactList}\item 
+\hyperlink{classlb_1_1lattice_aa19f16e07ac70d4eddb4c3bdca1a314a}{const\-\_\-node\-\_\-iterator} \hyperlink{classlb_1_1lattice_a6c9a2012a4ea7221834631c89f585bd0}{end} () const 
+\begin{DoxyCompactList}\small\item\em \-Const iterator pointing to the end. \end{DoxyCompactList}\item 
+\hyperlink{classlb_1_1lattice_a8f14fa67ef5e16926d41569949aaf419}{reverse\-\_\-node\-\_\-iterator} \hyperlink{classlb_1_1lattice_a641c8633f07e24dec22b5abf7740ccd0}{rbegin} ()
+\begin{DoxyCompactList}\small\item\em \-Reverse iterator pointing to the end. \end{DoxyCompactList}\item 
+\hyperlink{classlb_1_1lattice_abe55fc29d14a9a380106ea7a138e1931}{const\-\_\-reverse\-\_\-node\-\_\-iterator} \hyperlink{classlb_1_1lattice_afb5223f2e802a147640c2431791352bb}{rbegin} () const 
+\begin{DoxyCompactList}\small\item\em \-Const reverse iterator pointing to the end. \end{DoxyCompactList}\item 
+\hyperlink{classlb_1_1lattice_a8f14fa67ef5e16926d41569949aaf419}{reverse\-\_\-node\-\_\-iterator} \hyperlink{classlb_1_1lattice_aa00f0a64dd19f426ee69f5446d59a21d}{rend} ()
+\begin{DoxyCompactList}\small\item\em \-Reverse iterator pointing to the beginning. \end{DoxyCompactList}\item 
+\hyperlink{classlb_1_1lattice_abe55fc29d14a9a380106ea7a138e1931}{const\-\_\-reverse\-\_\-node\-\_\-iterator} \hyperlink{classlb_1_1lattice_aa42e54be3a4ac0b93a7699cdfa23a5da}{rend} () const 
+\begin{DoxyCompactList}\small\item\em \-Const reverse iterator pointing to the beginning. \end{DoxyCompactList}\item 
+\hyperlink{structlb_1_1node}{node} \& \hyperlink{classlb_1_1lattice_a6aefdc7f46963a340fff621c085f6f2c}{get\-\_\-node} (int i, int j)
+\begin{DoxyCompactList}\small\item\em \-Get node at coordinate (i,j) \end{DoxyCompactList}\item 
+const \hyperlink{structlb_1_1node}{node} \& \hyperlink{classlb_1_1lattice_afdc542f324d410cf29508cd221a3944f}{get\-\_\-node} (int i, int j) const 
+\begin{DoxyCompactList}\small\item\em \-Get node at coordinate (i,j) \end{DoxyCompactList}\item 
+\hyperlink{structlb_1_1node}{node} \& \hyperlink{classlb_1_1lattice_acbc4a30a7be4b9166fbceb8e49cc7b83}{get\-\_\-node} (unsigned int idx)
+\begin{DoxyCompactList}\small\item\em \-Get node at coordinate (i,j) \end{DoxyCompactList}\item 
+const \hyperlink{structlb_1_1node}{node} \& \hyperlink{classlb_1_1lattice_acbbd8fb970bc660338e16cdebfd04148}{get\-\_\-node} (unsigned int idx) const 
+\begin{DoxyCompactList}\small\item\em \-Get node at coordinate (i,j) \end{DoxyCompactList}\item 
+void \hyperlink{classlb_1_1lattice_aac41b17e5a623e6bdb7a72eadd5e7395}{add\-\_\-wall} (\hyperlink{structlb_1_1coordinate}{coordinate}$<$ int $>$ min\-\_\-coord, \hyperlink{structlb_1_1coordinate}{coordinate}$<$ int $>$ max\-\_\-coord)
+\begin{DoxyCompactList}\small\item\em \-Add a solid wall. \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_ab29487073b5dac24b0376265ef897a9f}{void \hyperlink{classlb_1_1lattice_ab29487073b5dac24b0376265ef897a9f}{delete\-\_\-walls} ()}\label{classlb_1_1lattice_ab29487073b5dac24b0376265ef897a9f}
+
+\begin{DoxyCompactList}\small\item\em \-Delete all existing walls. \end{DoxyCompactList}\item 
+void \hyperlink{classlb_1_1lattice_aa172ccb356a08e0c6980e1cb592a2505}{write\-\_\-fields} (std\-::string file\-\_\-name)
+\begin{DoxyCompactList}\small\item\em \-Write fields to file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classlb_1_1lattice_af99fea0978f135489d3f79a09b9e80f4}{const unsigned int \hyperlink{classlb_1_1lattice_af99fea0978f135489d3f79a09b9e80f4}{nx}}\label{classlb_1_1lattice_af99fea0978f135489d3f79a09b9e80f4}
+
+\begin{DoxyCompactList}\small\item\em extent in x direction (excluding buffers) \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_aef391575796aae0d0e01adc1062ebe0b}{const unsigned int \hyperlink{classlb_1_1lattice_aef391575796aae0d0e01adc1062ebe0b}{ny}}\label{classlb_1_1lattice_aef391575796aae0d0e01adc1062ebe0b}
+
+\begin{DoxyCompactList}\small\item\em extent in y direction (excluding buffers) \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_a137ba8e4a67de2e08e9e1f8d52c8a1d0}{const unsigned int \hyperlink{classlb_1_1lattice_a137ba8e4a67de2e08e9e1f8d52c8a1d0}{size}}\label{classlb_1_1lattice_a137ba8e4a67de2e08e9e1f8d52c8a1d0}
+
+\begin{DoxyCompactList}\small\item\em total number of nodes (excluding buffers) \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_a0c300ff43f838dc9d528ceb5019df418}{const unsigned int \hyperlink{classlb_1_1lattice_a0c300ff43f838dc9d528ceb5019df418}{buffer\-\_\-size}}\label{classlb_1_1lattice_a0c300ff43f838dc9d528ceb5019df418}
+
+\begin{DoxyCompactList}\small\item\em buffer width (equal to one) \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_a72671995cc057ad34dc32010fa77efe0}{const unsigned int \hyperlink{classlb_1_1lattice_a72671995cc057ad34dc32010fa77efe0}{real\-\_\-nx}}\label{classlb_1_1lattice_a72671995cc057ad34dc32010fa77efe0}
+
+\begin{DoxyCompactList}\small\item\em extent in x direction including buffers \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_a14f6a89fbc2091ff648b63eec07e94df}{const unsigned int \hyperlink{classlb_1_1lattice_a14f6a89fbc2091ff648b63eec07e94df}{real\-\_\-ny}}\label{classlb_1_1lattice_a14f6a89fbc2091ff648b63eec07e94df}
+
+\begin{DoxyCompactList}\small\item\em extent in y direction including buffers \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_abd941986f68b36d63cc496c4a5ab0031}{const unsigned int \hyperlink{classlb_1_1lattice_abd941986f68b36d63cc496c4a5ab0031}{real\-\_\-size}}\label{classlb_1_1lattice_abd941986f68b36d63cc496c4a5ab0031}
+
+\begin{DoxyCompactList}\small\item\em total number of nodes including buffers \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_a8aa6f2484aa56a9629bb6332f1f5bb66}{const unsigned int \hyperlink{classlb_1_1lattice_a8aa6f2484aa56a9629bb6332f1f5bb66}{n\-\_\-populations}}\label{classlb_1_1lattice_a8aa6f2484aa56a9629bb6332f1f5bb66}
+
+\begin{DoxyCompactList}\small\item\em number of populations \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_aceb8c63dd715a674b6053a40eabf5a0e}{std\-::vector$<$ std\-::vector\*
+$<$ \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} $>$ $>$ \hyperlink{classlb_1_1lattice_aceb8c63dd715a674b6053a40eabf5a0e}{f}}\label{classlb_1_1lattice_aceb8c63dd715a674b6053a40eabf5a0e}
+
+\begin{DoxyCompactList}\small\item\em population data \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_af3c98b27e7932c6106c2895a21d8de6e}{std\-::vector$<$ \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} $>$ \hyperlink{classlb_1_1lattice_af3c98b27e7932c6106c2895a21d8de6e}{rho}}\label{classlb_1_1lattice_af3c98b27e7932c6106c2895a21d8de6e}
+
+\begin{DoxyCompactList}\small\item\em density data \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_ae181b7bc2afe7198e1a2f0a07f6934d7}{std\-::vector$<$ \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} $>$ \hyperlink{classlb_1_1lattice_ae181b7bc2afe7198e1a2f0a07f6934d7}{u}}\label{classlb_1_1lattice_ae181b7bc2afe7198e1a2f0a07f6934d7}
+
+\begin{DoxyCompactList}\small\item\em flow x-\/velocity data \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_a12b9b5aebaab0ded9aae1f7db3089082}{std\-::vector$<$ \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} $>$ \hyperlink{classlb_1_1lattice_a12b9b5aebaab0ded9aae1f7db3089082}{v}}\label{classlb_1_1lattice_a12b9b5aebaab0ded9aae1f7db3089082}
+
+\begin{DoxyCompactList}\small\item\em flow y-\/velocity data \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_a405a32d6566f9e429fec40627bfc1734}{std\-::vector$<$ \hyperlink{structlb_1_1node}{node} $>$ \hyperlink{classlb_1_1lattice_a405a32d6566f9e429fec40627bfc1734}{nodes}}\label{classlb_1_1lattice_a405a32d6566f9e429fec40627bfc1734}
+
+\begin{DoxyCompactList}\small\item\em array holding all node objects \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_acbb44921be1a76a1ecd38942859b57b3}{std\-::vector$<$ \hyperlink{structlb_1_1node}{node} $>$ \hyperlink{classlb_1_1lattice_acbb44921be1a76a1ecd38942859b57b3}{wall\-\_\-nodes}}\label{classlb_1_1lattice_acbb44921be1a76a1ecd38942859b57b3}
+
+\begin{DoxyCompactList}\small\item\em array holding node objects belonging to a solid wall \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_a2c1ad8828442666cbf331ae877815ed2}{\hyperlink{classlb_1_1property__array}{property\-\_\-array} \hyperlink{classlb_1_1lattice_a2c1ad8828442666cbf331ae877815ed2}{properties}}\label{classlb_1_1lattice_a2c1ad8828442666cbf331ae877815ed2}
+
+\begin{DoxyCompactList}\small\item\em properties datastructure (can hold many different properties per node) \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_a880c4494108f972a0ef603c8309460d8}{const bool \hyperlink{classlb_1_1lattice_a880c4494108f972a0ef603c8309460d8}{periodic\-\_\-x}}\label{classlb_1_1lattice_a880c4494108f972a0ef603c8309460d8}
+
+\begin{DoxyCompactList}\small\item\em flag whether to use periodicity in x direction \end{DoxyCompactList}\item 
+\hypertarget{classlb_1_1lattice_a761296d72fa4712bd0b4252158987972}{const bool \hyperlink{classlb_1_1lattice_a761296d72fa4712bd0b4252158987972}{periodic\-\_\-y}}\label{classlb_1_1lattice_a761296d72fa4712bd0b4252158987972}
+
+\begin{DoxyCompactList}\small\item\em flag whether to use periodicity in y direction \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classlb_1_1lattice_af1be297b99671a6a95f561ff91d34657}{std\-::ostream \& \hyperlink{classlb_1_1lattice_af1be297b99671a6a95f561ff91d34657}{operator$<$$<$} (std\-::ostream \&os, const \hyperlink{classlb_1_1lattice}{lattice} \&l)}\label{classlb_1_1lattice_af1be297b99671a6a95f561ff91d34657}
+
+\begin{DoxyCompactList}\small\item\em print to output stream, useful for debugging only \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Lattice containing the populations. 
+
+\-The lattice is constructed using the function \hyperlink{namespacelb_a28c9e82e6454a4c6c8a33b06695a7881}{velocity\-\_\-set()} which returns a velocity set object. \-Hence, the number of populations is defined through that function. \-Data structures are set up accordingly.
+
+\-The basic data structure for the population and the macroscopic qunatities are one dimensional arrays (vectors) interpreted as two dimensional planes. \-The x (i) dimension varies first and the y (j) dimension last.
+
+\-This class does provide access to the data through node iterators or through direct access of the public members. \-The node iterators return a \hyperlink{structlb_1_1node}{node} object that provides easy access to all local quantities according to the 2d lattice coordinate.
+
+\-There are buffer regions (extent is one in all directions) around the data to make the advection procedure easier.
+
+\-The data is indexed in the range \mbox{[}0, nx-\/1\mbox{]}\mbox{[}0, ny-\/1\mbox{]}; including buffers indices span the range \mbox{[}-\/1, nx\mbox{]}\mbox{[}-\/1, ny\mbox{]}, repectively. 
+
+\-Definition at line 209 of file lattice.\-hpp.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classlb_1_1lattice_a0769d0e72beae9e888156cf385f90660}{\index{lb\-::lattice@{lb\-::lattice}!lattice@{lattice}}
+\index{lattice@{lattice}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{lattice}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lb\-::lattice\-::lattice} (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{\-\_\-nx, }
+\item[{unsigned int}]{\-\_\-ny}
+\end{DoxyParamCaption}
+)}}\label{classlb_1_1lattice_a0769d0e72beae9e888156cf385f90660}
+
+
+\-Construct the lattice with given extent. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em \-\_\-nx} & \-Number of nodes in x direction \\
+\hline
+\mbox{\tt in}  & {\em \-\_\-ny} & \-Number of nodes in y direction \\
+\hline
+\end{DoxyParams}
+
+
+\-Definition at line 396 of file lattice.\-hpp.
+
+
+
+\-References buffer\-\_\-size, index(), nodes, properties, real\-\_\-nx, real\-\_\-ny, lb\-::property\-\_\-array\-::register\-\_\-flag\-\_\-property(), and lb\-::property\-\_\-array\-::set\-\_\-flag\-\_\-property().
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classlb_1_1lattice_adaf6217dfdbc90f4df1aeedf51322412}{\index{lb\-::lattice@{lb\-::lattice}!index@{index}}
+\index{index@{index}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{index}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int {\bf lb\-::lattice\-::index} (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{int}]{j}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1lattice_adaf6217dfdbc90f4df1aeedf51322412}
+
+
+\-Convert a coordinate to a unique index. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em i} & x coordinate \\
+\hline
+\mbox{\tt in}  & {\em j} & y coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+unique index 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+\-Coordinates are in the domain 
+\end{DoxyPrecond}
+
+
+\-Definition at line 432 of file lattice.\-hpp.
+
+
+
+\-References buffer\-\_\-size, and real\-\_\-nx.
+
+
+
+\-Referenced by lattice().
+
+\hypertarget{classlb_1_1lattice_a792ad76d690ddcf96bfdccbdc041e633}{\index{lb\-::lattice@{lb\-::lattice}!begin@{begin}}
+\index{begin@{begin}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lattice\-::node\-\_\-iterator} {\bf lb\-::lattice\-::begin} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classlb_1_1lattice_a792ad76d690ddcf96bfdccbdc041e633}
+
+
+\-Iterator pointing to the beginning. 
+
+\begin{DoxyReturn}{\-Returns}
+iterator 
+\end{DoxyReturn}
+
+
+\-Definition at line 423 of file lattice.\-hpp.
+
+
+
+\-References nodes.
+
+\hypertarget{classlb_1_1lattice_ae1e6e7bdba8f9298d5965290933bb75e}{\index{lb\-::lattice@{lb\-::lattice}!begin@{begin}}
+\index{begin@{begin}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lattice\-::const\-\_\-node\-\_\-iterator} {\bf lb\-::lattice\-::begin} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classlb_1_1lattice_ae1e6e7bdba8f9298d5965290933bb75e}
+
+
+\-Const iterator pointing to the beginning. 
+
+\begin{DoxyReturn}{\-Returns}
+const iterator 
+\end{DoxyReturn}
+
+
+\-Definition at line 424 of file lattice.\-hpp.
+
+
+
+\-References nodes.
+
+\hypertarget{classlb_1_1lattice_a384d328bae76fc784dacde1478270897}{\index{lb\-::lattice@{lb\-::lattice}!end@{end}}
+\index{end@{end}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lattice\-::node\-\_\-iterator} {\bf lb\-::lattice\-::end} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classlb_1_1lattice_a384d328bae76fc784dacde1478270897}
+
+
+\-Iterator pointing to the end. 
+
+\begin{DoxyReturn}{\-Returns}
+iterator 
+\end{DoxyReturn}
+
+
+\-Definition at line 425 of file lattice.\-hpp.
+
+
+
+\-References nodes.
+
+\hypertarget{classlb_1_1lattice_a6c9a2012a4ea7221834631c89f585bd0}{\index{lb\-::lattice@{lb\-::lattice}!end@{end}}
+\index{end@{end}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lattice\-::const\-\_\-node\-\_\-iterator} {\bf lb\-::lattice\-::end} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classlb_1_1lattice_a6c9a2012a4ea7221834631c89f585bd0}
+
+
+\-Const iterator pointing to the end. 
+
+\begin{DoxyReturn}{\-Returns}
+const iterator 
+\end{DoxyReturn}
+
+
+\-Definition at line 426 of file lattice.\-hpp.
+
+
+
+\-References nodes.
+
+\hypertarget{classlb_1_1lattice_a641c8633f07e24dec22b5abf7740ccd0}{\index{lb\-::lattice@{lb\-::lattice}!rbegin@{rbegin}}
+\index{rbegin@{rbegin}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{rbegin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lattice\-::reverse\-\_\-node\-\_\-iterator} {\bf lb\-::lattice\-::rbegin} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classlb_1_1lattice_a641c8633f07e24dec22b5abf7740ccd0}
+
+
+\-Reverse iterator pointing to the end. 
+
+\begin{DoxyReturn}{\-Returns}
+reverse iterator 
+\end{DoxyReturn}
+
+
+\-Definition at line 427 of file lattice.\-hpp.
+
+
+
+\-References nodes.
+
+\hypertarget{classlb_1_1lattice_afb5223f2e802a147640c2431791352bb}{\index{lb\-::lattice@{lb\-::lattice}!rbegin@{rbegin}}
+\index{rbegin@{rbegin}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{rbegin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lattice\-::const\-\_\-reverse\-\_\-node\-\_\-iterator} {\bf lb\-::lattice\-::rbegin} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classlb_1_1lattice_afb5223f2e802a147640c2431791352bb}
+
+
+\-Const reverse iterator pointing to the end. 
+
+\begin{DoxyReturn}{\-Returns}
+const reverse iterator 
+\end{DoxyReturn}
+
+
+\-Definition at line 428 of file lattice.\-hpp.
+
+
+
+\-References nodes.
+
+\hypertarget{classlb_1_1lattice_aa00f0a64dd19f426ee69f5446d59a21d}{\index{lb\-::lattice@{lb\-::lattice}!rend@{rend}}
+\index{rend@{rend}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{rend}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lattice\-::reverse\-\_\-node\-\_\-iterator} {\bf lb\-::lattice\-::rend} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classlb_1_1lattice_aa00f0a64dd19f426ee69f5446d59a21d}
+
+
+\-Reverse iterator pointing to the beginning. 
+
+\begin{DoxyReturn}{\-Returns}
+reverse iterator 
+\end{DoxyReturn}
+
+
+\-Definition at line 429 of file lattice.\-hpp.
+
+
+
+\-References nodes.
+
+\hypertarget{classlb_1_1lattice_aa42e54be3a4ac0b93a7699cdfa23a5da}{\index{lb\-::lattice@{lb\-::lattice}!rend@{rend}}
+\index{rend@{rend}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{rend}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lattice\-::const\-\_\-reverse\-\_\-node\-\_\-iterator} {\bf lb\-::lattice\-::rend} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classlb_1_1lattice_aa42e54be3a4ac0b93a7699cdfa23a5da}
+
+
+\-Const reverse iterator pointing to the beginning. 
+
+\begin{DoxyReturn}{\-Returns}
+const reverse iterator 
+\end{DoxyReturn}
+
+
+\-Definition at line 430 of file lattice.\-hpp.
+
+
+
+\-References nodes.
+
+\hypertarget{classlb_1_1lattice_a6aefdc7f46963a340fff621c085f6f2c}{\index{lb\-::lattice@{lb\-::lattice}!get\-\_\-node@{get\-\_\-node}}
+\index{get\-\_\-node@{get\-\_\-node}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{get\-\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}{\bf node} \& {\bf lb\-::lattice\-::get\-\_\-node} (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{int}]{j}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1lattice_a6aefdc7f46963a340fff621c085f6f2c}
+
+
+\-Get node at coordinate (i,j) 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em i} & x coordinate \\
+\hline
+\mbox{\tt in}  & {\em j} & y coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+reference to node at coordinate (i,j) 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+coordinates are in domain 
+\end{DoxyPrecond}
+
+
+\-Definition at line 434 of file lattice.\-hpp.
+
+
+
+\-References buffer\-\_\-size, nodes, and real\-\_\-nx.
+
+
+
+\-Referenced by add\-\_\-wall(), and lb\-::simulation\-::initialize().
+
+\hypertarget{classlb_1_1lattice_afdc542f324d410cf29508cd221a3944f}{\index{lb\-::lattice@{lb\-::lattice}!get\-\_\-node@{get\-\_\-node}}
+\index{get\-\_\-node@{get\-\_\-node}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{get\-\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf node} \& {\bf lb\-::lattice\-::get\-\_\-node} (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{int}]{j}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1lattice_afdc542f324d410cf29508cd221a3944f}
+
+
+\-Get node at coordinate (i,j) 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em i} & x coordinate \\
+\hline
+\mbox{\tt in}  & {\em j} & y coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+const reference to node at coordinate (i,j) 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+coordinates are in domain 
+\end{DoxyPrecond}
+
+
+\-Definition at line 436 of file lattice.\-hpp.
+
+
+
+\-References buffer\-\_\-size, nodes, and real\-\_\-nx.
+
+\hypertarget{classlb_1_1lattice_acbc4a30a7be4b9166fbceb8e49cc7b83}{\index{lb\-::lattice@{lb\-::lattice}!get\-\_\-node@{get\-\_\-node}}
+\index{get\-\_\-node@{get\-\_\-node}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{get\-\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}{\bf node} \& {\bf lb\-::lattice\-::get\-\_\-node} (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{idx}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1lattice_acbc4a30a7be4b9166fbceb8e49cc7b83}
+
+
+\-Get node at coordinate (i,j) 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em idx} & unique node index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+reference to node at coordinate (i,j) 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+idx is between \mbox{[}0, \hyperlink{classlb_1_1lattice_abd941986f68b36d63cc496c4a5ab0031}{lattice\-::real\-\_\-size} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 438 of file lattice.\-hpp.
+
+
+
+\-References nodes.
+
+\hypertarget{classlb_1_1lattice_acbbd8fb970bc660338e16cdebfd04148}{\index{lb\-::lattice@{lb\-::lattice}!get\-\_\-node@{get\-\_\-node}}
+\index{get\-\_\-node@{get\-\_\-node}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{get\-\_\-node}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf node} \& {\bf lb\-::lattice\-::get\-\_\-node} (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{idx}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classlb_1_1lattice_acbbd8fb970bc660338e16cdebfd04148}
+
+
+\-Get node at coordinate (i,j) 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em idx} & unique node index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+const reference to node at coordinate (i,j) 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+idx is between \mbox{[}0, \hyperlink{classlb_1_1lattice_abd941986f68b36d63cc496c4a5ab0031}{lattice\-::real\-\_\-size} ) 
+\end{DoxyPrecond}
+
+
+\-Definition at line 440 of file lattice.\-hpp.
+
+
+
+\-References nodes.
+
+\hypertarget{classlb_1_1lattice_aac41b17e5a623e6bdb7a72eadd5e7395}{\index{lb\-::lattice@{lb\-::lattice}!add\-\_\-wall@{add\-\_\-wall}}
+\index{add\-\_\-wall@{add\-\_\-wall}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{add\-\_\-wall}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf lb\-::lattice\-::add\-\_\-wall} (
+\begin{DoxyParamCaption}
+\item[{{\bf coordinate}$<$ int $>$}]{min\-\_\-coord, }
+\item[{{\bf coordinate}$<$ int $>$}]{max\-\_\-coord}
+\end{DoxyParamCaption}
+)}}\label{classlb_1_1lattice_aac41b17e5a623e6bdb7a72eadd5e7395}
+
+
+\-Add a solid wall. 
+
+\-Creates wall flags in the coordinate rectangle defined by min\-\_\-coord and max\-\_\-coord. \-The corresponding nodes get the flag \char`\"{}wall\char`\"{} and they are also stored in the vector lattice\-:wall\-\_\-nodes for convienience.
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em min\-\_\-coord} & minimum bounding rectangle corner \\
+\hline
+\mbox{\tt in}  & {\em max\-\_\-coord} & maximum bounding rectangle corner \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{\-Precondition}
+(min\-\_\-coord, max\-\_\-coord) define a rectangle 
+
+\-Both min\-\_\-coord and max\-\_\-coord are in the domain 
+\end{DoxyPrecond}
+
+
+\-Definition at line 470 of file lattice.\-hpp.
+
+
+
+\-References get\-\_\-node(), lb\-::coordinate$<$ T $>$\-::i, lb\-::coordinate$<$ T $>$\-::j, lb\-::node\-::set\-\_\-flag\-\_\-property(), and wall\-\_\-nodes.
+
+\hypertarget{classlb_1_1lattice_aa172ccb356a08e0c6980e1cb592a2505}{\index{lb\-::lattice@{lb\-::lattice}!write\-\_\-fields@{write\-\_\-fields}}
+\index{write\-\_\-fields@{write\-\_\-fields}!lb::lattice@{lb\-::lattice}}
+\subsubsection[{write\-\_\-fields}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf lb\-::lattice\-::write\-\_\-fields} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{file\-\_\-name}
+\end{DoxyParamCaption}
+)}}\label{classlb_1_1lattice_aa172ccb356a08e0c6980e1cb592a2505}
+
+
+\-Write fields to file. 
+
+\-Write macroscopic variables to simple ascii file.
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em file\-\_\-name} & file name \\
+\hline
+\end{DoxyParams}
+
+
+\-Definition at line 496 of file lattice.\-hpp.
+
+
+
+\-References buffer\-\_\-size, nodes, nx, ny, real\-\_\-nx, rho, u, and v.
+
+
+
+\-Referenced by lb\-::simulation\-::write\-\_\-fields().
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{lattice_8hpp}{lattice.\-hpp}\end{DoxyCompactItemize}

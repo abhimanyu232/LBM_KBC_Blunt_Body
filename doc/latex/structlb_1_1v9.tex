@@ -1,0 +1,166 @@
+\hypertarget{structlb_1_1v9}{\section{lb\-:\-:v9 \-Struct \-Reference}
+\label{structlb_1_1v9}\index{lb\-::v9@{lb\-::v9}}
+}
+
+
+\-Lattice parameters for 9 velocity model.  
+
+
+
+
+{\ttfamily \#include $<$velocity\-\_\-set.\-hpp$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{structlb_1_1v9_a28ff85fbeac34d9b9ed43e26217e298c}{f\-\_\-eq} (\hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} $\ast$\hyperlink{structlb_1_1v9_a28ff85fbeac34d9b9ed43e26217e298c}{f\-\_\-eq}, \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} rho, \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} u, \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} v) const 
+\begin{DoxyCompactList}\small\item\em \-Compute equilibrium. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Node $>$ }\\void \hyperlink{structlb_1_1v9_a6f56ccd9fcee711ac276745059f3e0b1}{equilibrate} (\-Node \&n, \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} rho, \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} u, \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} v) const 
+\begin{DoxyCompactList}\small\item\em \-Equilibrate a node. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Node $>$ }\\void \hyperlink{structlb_1_1v9_a22c525ed337cbe11c8e0e2d1bb069b95}{equilibrate} (\-Node \&n) const 
+\begin{DoxyCompactList}\small\item\em \-Equilibrate a node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structlb_1_1v9_a26ca4b8909c0a302433d41786b31014c}{const std\-::array$<$ \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type}, 9 $>$ \hyperlink{structlb_1_1v9_a26ca4b8909c0a302433d41786b31014c}{\-W} = \{\{ 16.\-0/36, 4.\-0/36, 4.\-0/36, 4.\-0/36, 4.\-0/36, 1.\-0/36, 1.\-0/36, 1.\-0/36, 1.\-0/36\}\}}\label{structlb_1_1v9_a26ca4b8909c0a302433d41786b31014c}
+
+\begin{DoxyCompactList}\small\item\em \-Lattice weights. \end{DoxyCompactList}\item 
+\hypertarget{structlb_1_1v9_acbc98101e1585c592a91a7cce187baad}{const std\-::array$<$ std\-::array\*
+$<$ int, 9 $>$, 2 $>$ \hyperlink{structlb_1_1v9_acbc98101e1585c592a91a7cce187baad}{c}}\label{structlb_1_1v9_acbc98101e1585c592a91a7cce187baad}
+
+\begin{DoxyCompactList}\small\item\em \-Molecular velocities. \end{DoxyCompactList}\item 
+\hypertarget{structlb_1_1v9_a521ae53eef5cbdbcdf3764e3a9f0fee8}{const \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \hyperlink{structlb_1_1v9_a521ae53eef5cbdbcdf3764e3a9f0fee8}{cs} = 1.\-0/std\-::sqrt(3.\-0)}\label{structlb_1_1v9_a521ae53eef5cbdbcdf3764e3a9f0fee8}
+
+\begin{DoxyCompactList}\small\item\em \-Speed of sound. \end{DoxyCompactList}\item 
+\hypertarget{structlb_1_1v9_a8d722e88d7180dd4868a126bf78e8155}{const unsigned int \hyperlink{structlb_1_1v9_a8d722e88d7180dd4868a126bf78e8155}{size} = 9}\label{structlb_1_1v9_a8d722e88d7180dd4868a126bf78e8155}
+
+\begin{DoxyCompactList}\small\item\em \-Number of velocities. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structlb_1_1v9_a23b829fd23f1a9c409053f667417a05e}{const \hyperlink{structlb_1_1v9}{v9} \& \hyperlink{structlb_1_1v9_a23b829fd23f1a9c409053f667417a05e}{lb\-::velocity\-\_\-set} ()}\label{structlb_1_1v9_a23b829fd23f1a9c409053f667417a05e}
+
+\begin{DoxyCompactList}\small\item\em \-Function for instantiating the singleton is a friend. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Lattice parameters for 9 velocity model. 
+
+\-This class models a the singleton design pattern. \-That means there exists only one single instance throughout the lifetime of the program. \-To instantiate and access this object use the free function \hyperlink{namespacelb_a28c9e82e6454a4c6c8a33b06695a7881}{velocity\-\_\-set}.
+
+\-This class holds parameters like lattice weights, molecular velocities and speed of sound. \-It also exposes member functions to compute the equilibrium populations. 
+
+\-Definition at line 31 of file velocity\-\_\-set.\-hpp.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{structlb_1_1v9_a28ff85fbeac34d9b9ed43e26217e298c}{\index{lb\-::v9@{lb\-::v9}!f\-\_\-eq@{f\-\_\-eq}}
+\index{f\-\_\-eq@{f\-\_\-eq}!lb::v9@{lb\-::v9}}
+\subsubsection[{f\-\_\-eq}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf lb\-::v9\-::f\-\_\-eq} (
+\begin{DoxyParamCaption}
+\item[{{\bf float\-\_\-type} $\ast$}]{f\-\_\-eq, }
+\item[{{\bf float\-\_\-type}}]{rho, }
+\item[{{\bf float\-\_\-type}}]{u, }
+\item[{{\bf float\-\_\-type}}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1v9_a28ff85fbeac34d9b9ed43e26217e298c}
+
+
+\-Compute equilibrium. 
+
+\-Compute f\-\_\-eq from the locally conserved quantities rho, u and v (see also \hyperlink{structlb_1_1v9_a6f56ccd9fcee711ac276745059f3e0b1}{v9\-::equilibrate}). 
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in,out}  & {\em f\-\_\-eq} & \-Pointer to an array of size 9 to store the computed values \\
+\hline
+\mbox{\tt in}  & {\em rho} & \-Local density \\
+\hline
+\mbox{\tt in}  & {\em u} & \-Local flow velocity in x-\/direction \\
+\hline
+\mbox{\tt in}  & {\em v} & \-Local flow velocity in y-\/direction \\
+\hline
+\end{DoxyParams}
+
+
+\-Definition at line 66 of file velocity\-\_\-set.\-hpp.
+
+
+
+\-References \-W.
+
+\hypertarget{structlb_1_1v9_a6f56ccd9fcee711ac276745059f3e0b1}{\index{lb\-::v9@{lb\-::v9}!equilibrate@{equilibrate}}
+\index{equilibrate@{equilibrate}!lb::v9@{lb\-::v9}}
+\subsubsection[{equilibrate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Node $>$ void {\bf lb\-::v9\-::equilibrate} (
+\begin{DoxyParamCaption}
+\item[{\-Node \&}]{n, }
+\item[{{\bf float\-\_\-type}}]{rho, }
+\item[{{\bf float\-\_\-type}}]{u, }
+\item[{{\bf float\-\_\-type}}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1v9_a6f56ccd9fcee711ac276745059f3e0b1}
+
+
+\-Equilibrate a node. 
+
+\-Compute f\-\_\-eq from the locally conserved quantities rho, u and v and set the node's population to that equilibrium ( see also \hyperlink{structlb_1_1v9_a28ff85fbeac34d9b9ed43e26217e298c}{v9\-::f\-\_\-eq}). 
+\begin{DoxyTemplParams}{\-Template Parameters}
+{\em \-Node} & \-A node type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in,out}  & {\em n} & \-Reference to a \-Node object \\
+\hline
+\mbox{\tt in}  & {\em rho} & \-Local density \\
+\hline
+\mbox{\tt in}  & {\em u} & \-Local flow velocity in x-\/direction \\
+\hline
+\mbox{\tt in}  & {\em v} & \-Local flow velocity in y-\/direction \\
+\hline
+\end{DoxyParams}
+
+
+\-Definition at line 95 of file velocity\-\_\-set.\-hpp.
+
+
+
+\-References \-W.
+
+
+
+\-Referenced by equilibrate().
+
+\hypertarget{structlb_1_1v9_a22c525ed337cbe11c8e0e2d1bb069b95}{\index{lb\-::v9@{lb\-::v9}!equilibrate@{equilibrate}}
+\index{equilibrate@{equilibrate}!lb::v9@{lb\-::v9}}
+\subsubsection[{equilibrate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Node $>$ void {\bf lb\-::v9\-::equilibrate} (
+\begin{DoxyParamCaption}
+\item[{\-Node \&}]{n}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1v9_a22c525ed337cbe11c8e0e2d1bb069b95}
+
+
+\-Equilibrate a node. 
+
+\-Compute f\-\_\-eq from the locally conserved quantities rho, u and v and set the node's population to that equilibrium ( see also \hyperlink{structlb_1_1v9_a28ff85fbeac34d9b9ed43e26217e298c}{v9\-::f\-\_\-eq} and \hyperlink{structlb_1_1v9_a6f56ccd9fcee711ac276745059f3e0b1}{v9\-::equilibrate}). \-The locally conserved quantities are taken form the node object itself. 
+\begin{DoxyTemplParams}{\-Template Parameters}
+{\em \-Node} & \-A node type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in,out}  & {\em n} & \-Reference to a \-Node object \\
+\hline
+\end{DoxyParams}
+
+
+\-Definition at line 122 of file velocity\-\_\-set.\-hpp.
+
+
+
+\-References equilibrate().
+
+
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{velocity__set_8hpp}{velocity\-\_\-set.\-hpp}\end{DoxyCompactItemize}

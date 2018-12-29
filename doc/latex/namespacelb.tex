@@ -1,0 +1,142 @@
+\hypertarget{namespacelb}{\section{lb \-Namespace \-Reference}
+\label{namespacelb}\index{lb@{lb}}
+}
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structlb_1_1coordinate}{coordinate}
+\begin{DoxyCompactList}\small\item\em \-Coordinate in 2\-D. \end{DoxyCompactList}\item 
+struct \hyperlink{structlb_1_1node}{node}
+\begin{DoxyCompactList}\small\item\em \-Node representing one lattice site. \end{DoxyCompactList}\item 
+class \hyperlink{classlb_1_1lattice}{lattice}
+\begin{DoxyCompactList}\small\item\em \-Lattice containing the populations. \end{DoxyCompactList}\item 
+class \hyperlink{classlb_1_1property__array}{property\-\_\-array}
+\begin{DoxyCompactList}\small\item\em \-This class allows you to store properties in an array. \end{DoxyCompactList}\item 
+class \hyperlink{classlb_1_1simulation}{simulation}
+\begin{DoxyCompactList}\small\item\em \-Simulation class implementing \-L\-B. \end{DoxyCompactList}\item 
+struct \hyperlink{structlb_1_1v9}{v9}
+\begin{DoxyCompactList}\small\item\em \-Lattice parameters for 9 velocity model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef float \hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type}
+\item 
+typedef \*
+std\-::chrono\-::high\-\_\-resolution\-\_\-clock \hyperlink{namespacelb_a1acb659edeec66aceb5403fd0b90942c}{timer\-\_\-type}
+\item 
+typedef std\-::chrono\-::duration\*
+$<$ float, std\-::milli $>$ \hyperlink{namespacelb_a91eab8920da42c1c74728a490c58ec76}{milliseconds}
+\item 
+typedef timer\-\_\-type\-::time\-\_\-point \hyperlink{namespacelb_a664b98bd4013970d2005405e23ef78d9}{time\-\_\-point}
+\item 
+typedef timer\-\_\-type\-::duration \hyperlink{namespacelb_ac6197d62b7eeafa021fdcf0a45fa3bfe}{duration}
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Node $>$ }\\\hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \hyperlink{namespacelb_a949695fd91aad40af46e42af8c7e0a6c}{\-H\-\_\-root} (const \-Node \&n)
+\begin{DoxyCompactList}\small\item\em \-Find over-\/relaxation parameter alpha. \end{DoxyCompactList}\item 
+const \hyperlink{structlb_1_1v9}{v9} \& \hyperlink{namespacelb_a28c9e82e6454a4c6c8a33b06695a7881}{velocity\-\_\-set} ()
+\begin{DoxyCompactList}\small\item\em \-Get a reference single instance of the velocity set. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Top level namespace 
+
+\subsection{\-Typedef \-Documentation}
+\hypertarget{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{\index{lb@{lb}!float\-\_\-type@{float\-\_\-type}}
+\index{float\-\_\-type@{float\-\_\-type}!lb@{lb}}
+\subsubsection[{float\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}typedef float {\bf lb\-::float\-\_\-type}}}\label{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}
+\-Floating point type (single or double precision) 
+
+\-Definition at line 19 of file global.\-hpp.
+
+\hypertarget{namespacelb_a1acb659edeec66aceb5403fd0b90942c}{\index{lb@{lb}!timer\-\_\-type@{timer\-\_\-type}}
+\index{timer\-\_\-type@{timer\-\_\-type}!lb@{lb}}
+\subsubsection[{timer\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::chrono\-::high\-\_\-resolution\-\_\-clock {\bf lb\-::timer\-\_\-type}}}\label{namespacelb_a1acb659edeec66aceb5403fd0b90942c}
+\-High resolution clock type 
+
+\-Definition at line 50 of file global.\-hpp.
+
+\hypertarget{namespacelb_a91eab8920da42c1c74728a490c58ec76}{\index{lb@{lb}!milliseconds@{milliseconds}}
+\index{milliseconds@{milliseconds}!lb@{lb}}
+\subsubsection[{milliseconds}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::chrono\-::duration$<$float, std\-::milli$>$ {\bf lb\-::milliseconds}}}\label{namespacelb_a91eab8920da42c1c74728a490c58ec76}
+\-High resolution clock units type 
+
+\-Definition at line 52 of file global.\-hpp.
+
+\hypertarget{namespacelb_a664b98bd4013970d2005405e23ef78d9}{\index{lb@{lb}!time\-\_\-point@{time\-\_\-point}}
+\index{time\-\_\-point@{time\-\_\-point}!lb@{lb}}
+\subsubsection[{time\-\_\-point}]{\setlength{\rightskip}{0pt plus 5cm}typedef timer\-\_\-type\-::time\-\_\-point {\bf lb\-::time\-\_\-point}}}\label{namespacelb_a664b98bd4013970d2005405e23ef78d9}
+\-High resolution clock time point type 
+
+\-Definition at line 54 of file global.\-hpp.
+
+\hypertarget{namespacelb_ac6197d62b7eeafa021fdcf0a45fa3bfe}{\index{lb@{lb}!duration@{duration}}
+\index{duration@{duration}!lb@{lb}}
+\subsubsection[{duration}]{\setlength{\rightskip}{0pt plus 5cm}typedef timer\-\_\-type\-::duration {\bf lb\-::duration}}}\label{namespacelb_ac6197d62b7eeafa021fdcf0a45fa3bfe}
+\-High resolution clock time duration type 
+
+\-Definition at line 56 of file global.\-hpp.
+
+
+
+\subsection{\-Function \-Documentation}
+\hypertarget{namespacelb_a949695fd91aad40af46e42af8c7e0a6c}{\index{lb@{lb}!\-H\-\_\-root@{\-H\-\_\-root}}
+\index{\-H\-\_\-root@{\-H\-\_\-root}!lb@{lb}}
+\subsubsection[{\-H\-\_\-root}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Node $>$ {\bf float\-\_\-type} {\bf lb\-::\-H\-\_\-root} (
+\begin{DoxyParamCaption}
+\item[{const \-Node \&}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{namespacelb_a949695fd91aad40af46e42af8c7e0a6c}
+
+
+\-Find over-\/relaxation parameter alpha. 
+
+\-This function looks for a state with the same entropy/\-H-\/function value as the current state in the hyperplane connecting the current f with the f\-\_\-eq.
+
+\-This procedure involves finding the root of the entropy function\-: \-H(f + alpha$\ast$(f\-\_\-eq -\/ f)) -\/ \-H(f) = 0
+
+\-You should also account for preventing the populations from becoming negative and for performance reasons not computing alpha for states close to the equilibrium.
+
+\-For the root finding of the nonlinear equation use \-Newton-\/\-Raphson.
+
+
+\begin{DoxyTemplParams}{\-Template Parameters}
+{\em \-Node} & node type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em n} & node object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+alpha 
+\end{DoxyReturn}
+
+
+\-Definition at line 36 of file \-H\-\_\-root.\-hpp.
+
+\hypertarget{namespacelb_a28c9e82e6454a4c6c8a33b06695a7881}{\index{lb@{lb}!velocity\-\_\-set@{velocity\-\_\-set}}
+\index{velocity\-\_\-set@{velocity\-\_\-set}!lb@{lb}}
+\subsubsection[{velocity\-\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf v9} \& {\bf lb\-::velocity\-\_\-set} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{namespacelb_a28c9e82e6454a4c6c8a33b06695a7881}
+
+
+\-Get a reference single instance of the velocity set. 
+
+\begin{DoxyReturn}{\-Returns}
+9-\/velocity set 
+\end{DoxyReturn}
+
+
+\-Definition at line 132 of file velocity\-\_\-set.\-hpp.
+
+
+
+\-Referenced by lb\-::simulation\-::simulation().
+

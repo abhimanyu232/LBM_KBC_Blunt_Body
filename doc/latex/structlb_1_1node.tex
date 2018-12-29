@@ -1,0 +1,590 @@
+\hypertarget{structlb_1_1node}{\section{lb\-:\-:node \-Struct \-Reference}
+\label{structlb_1_1node}\index{lb\-::node@{lb\-::node}}
+}
+
+
+\-Node representing one lattice site.  
+
+
+
+
+{\ttfamily \#include $<$lattice.\-hpp$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structlb_1_1node_a6a968a5591778a16a8e513166ec5bebf}{\hyperlink{structlb_1_1node_a6a968a5591778a16a8e513166ec5bebf}{node} ()}\label{structlb_1_1node_a6a968a5591778a16a8e513166ec5bebf}
+
+\begin{DoxyCompactList}\small\item\em \-Default constructor. \end{DoxyCompactList}\item 
+\hyperlink{structlb_1_1node_ad0a28414f7071eaeec65ed336c2c3954}{node} (\hyperlink{classlb_1_1lattice}{lattice} $\ast$lat, int i, int j)
+\begin{DoxyCompactList}\small\item\em \-Construct from lattice and position. \end{DoxyCompactList}\item 
+void \hyperlink{structlb_1_1node_a4076d4eccd4b9a71d96368f9a3097d04}{set} (\hyperlink{classlb_1_1lattice}{lattice} $\ast$lat, int i, int j)
+\begin{DoxyCompactList}\small\item\em \-Set lattice and position. \end{DoxyCompactList}\item 
+\hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \hyperlink{structlb_1_1node_abb4c3fa64735598f6a1534cc75b6bfe7}{f} (unsigned int i) const 
+\begin{DoxyCompactList}\small\item\em \-Get population. \end{DoxyCompactList}\item 
+\hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \& \hyperlink{structlb_1_1node_a0f7a235525b0b200e1ab8a31d27d8c25}{f} (unsigned int i)
+\begin{DoxyCompactList}\small\item\em \-Get/set population. \end{DoxyCompactList}\item 
+\hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \hyperlink{structlb_1_1node_ad71907419dde436ab210283460332edf}{rho} () const 
+\begin{DoxyCompactList}\small\item\em \-Get density. \end{DoxyCompactList}\item 
+\hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \& \hyperlink{structlb_1_1node_af0b982ae810b56c36b2ff91ba8e0c9c3}{rho} ()
+\begin{DoxyCompactList}\small\item\em \-Get/set density. \end{DoxyCompactList}\item 
+\hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \hyperlink{structlb_1_1node_a4399cc71d3bc660d10e74f2f0d91f963}{u} () const 
+\begin{DoxyCompactList}\small\item\em \-Get x-\/velocity. \end{DoxyCompactList}\item 
+\hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \& \hyperlink{structlb_1_1node_ac59af9128abb3a758bc79198cf02676d}{u} ()
+\begin{DoxyCompactList}\small\item\em \-Get/set x-\/velocity. \end{DoxyCompactList}\item 
+\hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \hyperlink{structlb_1_1node_ac3fd5388ecdddf266dc138bb3d9afa9c}{v} () const 
+\begin{DoxyCompactList}\small\item\em \-Get y-\/velocity. \end{DoxyCompactList}\item 
+\hyperlink{namespacelb_a2b37d1585aef2d3da421ad0aedc6b11b}{float\-\_\-type} \& \hyperlink{structlb_1_1node_a07f47a22567a8fb6f53d3c4940077690}{v} ()
+\begin{DoxyCompactList}\small\item\em \-Get/set y-\/velocity. \end{DoxyCompactList}\item 
+bool \hyperlink{structlb_1_1node_a21d1d2710d5b100a29129045f4372b89}{has\-\_\-flag\-\_\-property} (std\-::string name) const 
+\begin{DoxyCompactList}\small\item\em \-Query for flag property. \-Query whether a flag is set for the node. \end{DoxyCompactList}\item 
+bool \hyperlink{structlb_1_1node_a4fff022fed988c74344a97fd1000cbd2}{set\-\_\-flag\-\_\-property} (std\-::string name)
+\begin{DoxyCompactList}\small\item\em \-Set a flag \-Set the flag \char`\"{}name\char`\"{} to true. \end{DoxyCompactList}\item 
+bool \hyperlink{structlb_1_1node_a3d4b4fc0742f73f420b53a21265f6ca9}{unset\-\_\-flag\-\_\-property} (std\-::string name)
+\begin{DoxyCompactList}\small\item\em \-Unset a flag \-Set the flag \char`\"{}name\char`\"{} to false. \end{DoxyCompactList}\item 
+bool \hyperlink{structlb_1_1node_a2f4a2e22c21a7b59781d33e889ad1697}{has\-\_\-data\-\_\-property} (std\-::string name) const 
+\begin{DoxyCompactList}\small\item\em \-Query for data property. \-Query whether data property (object) is stored for the node. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \hyperlink{structlb_1_1node_a7627949c2689b5b622f864377eb6cff6}{set\-\_\-data\-\_\-property} (std\-::string name, const \-T \&property)
+\begin{DoxyCompactList}\small\item\em \-Store a data property. \end{DoxyCompactList}\item 
+bool \hyperlink{structlb_1_1node_a953c03516f6cd48a485b2950e2214f3a}{unset\-\_\-data\-\_\-property} (std\-::string name)
+\begin{DoxyCompactList}\small\item\em \-Delete a data property. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\-T \& \hyperlink{structlb_1_1node_a397d8ce70841942ca893d3c568cc2ab5}{get\-\_\-data\-\_\-property} (std\-::string name)
+\begin{DoxyCompactList}\small\item\em \-Get data property. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\const \-T \& \hyperlink{structlb_1_1node_ac09b3656e36e2605848b4d3c702db19e}{get\-\_\-data\-\_\-property} (std\-::string name) const 
+\begin{DoxyCompactList}\small\item\em \-Get data property. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{structlb_1_1node_ac4d5398ef3f3d6abd30924ecf0db3ec9}{\hyperlink{classlb_1_1lattice}{lattice} $\ast$ \hyperlink{structlb_1_1node_ac4d5398ef3f3d6abd30924ecf0db3ec9}{l}}\label{structlb_1_1node_ac4d5398ef3f3d6abd30924ecf0db3ec9}
+
+\begin{DoxyCompactList}\small\item\em \-Pointer to a lattice object. \end{DoxyCompactList}\item 
+\hypertarget{structlb_1_1node_aa5a698b4a9fe2b3f97bc80374c1153d0}{unsigned int \hyperlink{structlb_1_1node_aa5a698b4a9fe2b3f97bc80374c1153d0}{index}}\label{structlb_1_1node_aa5a698b4a9fe2b3f97bc80374c1153d0}
+
+\begin{DoxyCompactList}\small\item\em \-Index for looking up data in the lattice. \end{DoxyCompactList}\item 
+\hypertarget{structlb_1_1node_ad82c20f8bb6a9f650018a87b92866d72}{\hyperlink{structlb_1_1coordinate}{coordinate}$<$ int $>$ \hyperlink{structlb_1_1node_ad82c20f8bb6a9f650018a87b92866d72}{coord}}\label{structlb_1_1node_ad82c20f8bb6a9f650018a87b92866d72}
+
+\begin{DoxyCompactList}\small\item\em \-Coordinate of node's position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Node representing one lattice site. 
+
+\-Easy access to bundled quantities and properties (works as proxy to the lattice class). 
+
+\-Definition at line 26 of file lattice.\-hpp.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{structlb_1_1node_ad0a28414f7071eaeec65ed336c2c3954}{\index{lb\-::node@{lb\-::node}!node@{node}}
+\index{node@{node}!lb::node@{lb\-::node}}
+\subsubsection[{node}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lb\-::node\-::node} (
+\begin{DoxyParamCaption}
+\item[{{\bf lattice} $\ast$}]{lat, }
+\item[{int}]{i, }
+\item[{int}]{j}
+\end{DoxyParamCaption}
+)}}\label{structlb_1_1node_ad0a28414f7071eaeec65ed336c2c3954}
+
+
+\-Construct from lattice and position. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em lat} & \-Pointer to the lattice \\
+\hline
+\mbox{\tt in}  & {\em i} & x coordinate \\
+\hline
+\mbox{\tt in}  & {\em j} & y coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{\-Precondition}
+coordinates are in domain 
+\end{DoxyPrecond}
+
+
+\-Definition at line 360 of file lattice.\-hpp.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{structlb_1_1node_a4076d4eccd4b9a71d96368f9a3097d04}{\index{lb\-::node@{lb\-::node}!set@{set}}
+\index{set@{set}!lb::node@{lb\-::node}}
+\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf lb\-::node\-::set} (
+\begin{DoxyParamCaption}
+\item[{{\bf lattice} $\ast$}]{lat, }
+\item[{int}]{i, }
+\item[{int}]{j}
+\end{DoxyParamCaption}
+)}}\label{structlb_1_1node_a4076d4eccd4b9a71d96368f9a3097d04}
+
+
+\-Set lattice and position. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em lat} & \-Pointer to lattice \\
+\hline
+\mbox{\tt in}  & {\em i} & x coordinate \\
+\hline
+\mbox{\tt in}  & {\em j} & y coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{\-Precondition}
+coordinates are in domain 
+\end{DoxyPrecond}
+
+
+\-Definition at line 363 of file lattice.\-hpp.
+
+
+
+\-References lb\-::lattice\-::buffer\-\_\-size, coord, lb\-::coordinate$<$ T $>$\-::i, index, lb\-::coordinate$<$ T $>$\-::j, l, and lb\-::lattice\-::real\-\_\-nx.
+
+\hypertarget{structlb_1_1node_abb4c3fa64735598f6a1534cc75b6bfe7}{\index{lb\-::node@{lb\-::node}!f@{f}}
+\index{f@{f}!lb::node@{lb\-::node}}
+\subsubsection[{f}]{\setlength{\rightskip}{0pt plus 5cm}{\bf float\-\_\-type} {\bf lb\-::node\-::f} (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1node_abb4c3fa64735598f6a1534cc75b6bfe7}
+
+
+\-Get population. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em i} & \-Population index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Value of distribution function 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+population index exists 
+\end{DoxyPrecond}
+
+
+\-Definition at line 371 of file lattice.\-hpp.
+
+
+
+\-References lb\-::lattice\-::f, index, and l.
+
+\hypertarget{structlb_1_1node_a0f7a235525b0b200e1ab8a31d27d8c25}{\index{lb\-::node@{lb\-::node}!f@{f}}
+\index{f@{f}!lb::node@{lb\-::node}}
+\subsubsection[{f}]{\setlength{\rightskip}{0pt plus 5cm}{\bf float\-\_\-type} \& {\bf lb\-::node\-::f} (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1node_a0f7a235525b0b200e1ab8a31d27d8c25}
+
+
+\-Get/set population. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em i} & \-Population index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Reference to value of distribution function 
+\end{DoxyReturn}
+\begin{DoxyPrecond}{\-Precondition}
+population index exists 
+\end{DoxyPrecond}
+
+
+\-Definition at line 372 of file lattice.\-hpp.
+
+
+
+\-References lb\-::lattice\-::f, index, and l.
+
+\hypertarget{structlb_1_1node_ad71907419dde436ab210283460332edf}{\index{lb\-::node@{lb\-::node}!rho@{rho}}
+\index{rho@{rho}!lb::node@{lb\-::node}}
+\subsubsection[{rho}]{\setlength{\rightskip}{0pt plus 5cm}{\bf float\-\_\-type} {\bf lb\-::node\-::rho} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1node_ad71907419dde436ab210283460332edf}
+
+
+\-Get density. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Local density 
+\end{DoxyReturn}
+
+
+\-Definition at line 373 of file lattice.\-hpp.
+
+
+
+\-References index, l, and lb\-::lattice\-::rho.
+
+
+
+\-Referenced by lb\-::simulation\-::initialize().
+
+\hypertarget{structlb_1_1node_af0b982ae810b56c36b2ff91ba8e0c9c3}{\index{lb\-::node@{lb\-::node}!rho@{rho}}
+\index{rho@{rho}!lb::node@{lb\-::node}}
+\subsubsection[{rho}]{\setlength{\rightskip}{0pt plus 5cm}{\bf float\-\_\-type} \& {\bf lb\-::node\-::rho} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1node_af0b982ae810b56c36b2ff91ba8e0c9c3}
+
+
+\-Get/set density. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Reference to local density 
+\end{DoxyReturn}
+
+
+\-Definition at line 374 of file lattice.\-hpp.
+
+
+
+\-References index, l, and lb\-::lattice\-::rho.
+
+\hypertarget{structlb_1_1node_a4399cc71d3bc660d10e74f2f0d91f963}{\index{lb\-::node@{lb\-::node}!u@{u}}
+\index{u@{u}!lb::node@{lb\-::node}}
+\subsubsection[{u}]{\setlength{\rightskip}{0pt plus 5cm}{\bf float\-\_\-type} {\bf lb\-::node\-::u} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1node_a4399cc71d3bc660d10e74f2f0d91f963}
+
+
+\-Get x-\/velocity. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Local flow velocity in x direction 
+\end{DoxyReturn}
+
+
+\-Definition at line 375 of file lattice.\-hpp.
+
+
+
+\-References index, l, and lb\-::lattice\-::u.
+
+
+
+\-Referenced by lb\-::simulation\-::initialize().
+
+\hypertarget{structlb_1_1node_ac59af9128abb3a758bc79198cf02676d}{\index{lb\-::node@{lb\-::node}!u@{u}}
+\index{u@{u}!lb::node@{lb\-::node}}
+\subsubsection[{u}]{\setlength{\rightskip}{0pt plus 5cm}{\bf float\-\_\-type} \& {\bf lb\-::node\-::u} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1node_ac59af9128abb3a758bc79198cf02676d}
+
+
+\-Get/set x-\/velocity. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Reference to local flow velocity in x direction 
+\end{DoxyReturn}
+
+
+\-Definition at line 376 of file lattice.\-hpp.
+
+
+
+\-References index, l, and lb\-::lattice\-::u.
+
+\hypertarget{structlb_1_1node_ac3fd5388ecdddf266dc138bb3d9afa9c}{\index{lb\-::node@{lb\-::node}!v@{v}}
+\index{v@{v}!lb::node@{lb\-::node}}
+\subsubsection[{v}]{\setlength{\rightskip}{0pt plus 5cm}{\bf float\-\_\-type} {\bf lb\-::node\-::v} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1node_ac3fd5388ecdddf266dc138bb3d9afa9c}
+
+
+\-Get y-\/velocity. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Local flow velocity in y direction 
+\end{DoxyReturn}
+
+
+\-Definition at line 377 of file lattice.\-hpp.
+
+
+
+\-References index, l, and lb\-::lattice\-::v.
+
+
+
+\-Referenced by lb\-::simulation\-::initialize().
+
+\hypertarget{structlb_1_1node_a07f47a22567a8fb6f53d3c4940077690}{\index{lb\-::node@{lb\-::node}!v@{v}}
+\index{v@{v}!lb::node@{lb\-::node}}
+\subsubsection[{v}]{\setlength{\rightskip}{0pt plus 5cm}{\bf float\-\_\-type} \& {\bf lb\-::node\-::v} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1node_a07f47a22567a8fb6f53d3c4940077690}
+
+
+\-Get/set y-\/velocity. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Reference to local flow velocity in y direction 
+\end{DoxyReturn}
+
+
+\-Definition at line 378 of file lattice.\-hpp.
+
+
+
+\-References index, l, and lb\-::lattice\-::v.
+
+\hypertarget{structlb_1_1node_a21d1d2710d5b100a29129045f4372b89}{\index{lb\-::node@{lb\-::node}!has\-\_\-flag\-\_\-property@{has\-\_\-flag\-\_\-property}}
+\index{has\-\_\-flag\-\_\-property@{has\-\_\-flag\-\_\-property}!lb::node@{lb\-::node}}
+\subsubsection[{has\-\_\-flag\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::node\-::has\-\_\-flag\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1node_a21d1d2710d5b100a29129045f4372b89}
+
+
+\-Query for flag property. \-Query whether a flag is set for the node. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & \-Flag name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-True if flag is set, otherwise false 
+\end{DoxyReturn}
+
+
+\-Definition at line 380 of file lattice.\-hpp.
+
+
+
+\-References lb\-::property\-\_\-array\-::has\-\_\-flag\-\_\-property(), index, l, and lb\-::lattice\-::properties.
+
+\hypertarget{structlb_1_1node_a4fff022fed988c74344a97fd1000cbd2}{\index{lb\-::node@{lb\-::node}!set\-\_\-flag\-\_\-property@{set\-\_\-flag\-\_\-property}}
+\index{set\-\_\-flag\-\_\-property@{set\-\_\-flag\-\_\-property}!lb::node@{lb\-::node}}
+\subsubsection[{set\-\_\-flag\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::node\-::set\-\_\-flag\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1node_a4fff022fed988c74344a97fd1000cbd2}
+
+
+\-Set a flag \-Set the flag \char`\"{}name\char`\"{} to true. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & \-Flag name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-True if flag exists, otherwise false 
+\end{DoxyReturn}
+
+
+\-Definition at line 381 of file lattice.\-hpp.
+
+
+
+\-References index, l, lb\-::lattice\-::properties, and lb\-::property\-\_\-array\-::set\-\_\-flag\-\_\-property().
+
+
+
+\-Referenced by lb\-::lattice\-::add\-\_\-wall().
+
+\hypertarget{structlb_1_1node_a3d4b4fc0742f73f420b53a21265f6ca9}{\index{lb\-::node@{lb\-::node}!unset\-\_\-flag\-\_\-property@{unset\-\_\-flag\-\_\-property}}
+\index{unset\-\_\-flag\-\_\-property@{unset\-\_\-flag\-\_\-property}!lb::node@{lb\-::node}}
+\subsubsection[{unset\-\_\-flag\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::node\-::unset\-\_\-flag\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1node_a3d4b4fc0742f73f420b53a21265f6ca9}
+
+
+\-Unset a flag \-Set the flag \char`\"{}name\char`\"{} to false. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & \-Flag name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-True if flag exists, otherwise false 
+\end{DoxyReturn}
+
+
+\-Definition at line 382 of file lattice.\-hpp.
+
+
+
+\-References index, l, lb\-::lattice\-::properties, and lb\-::property\-\_\-array\-::unset\-\_\-flag\-\_\-property().
+
+\hypertarget{structlb_1_1node_a2f4a2e22c21a7b59781d33e889ad1697}{\index{lb\-::node@{lb\-::node}!has\-\_\-data\-\_\-property@{has\-\_\-data\-\_\-property}}
+\index{has\-\_\-data\-\_\-property@{has\-\_\-data\-\_\-property}!lb::node@{lb\-::node}}
+\subsubsection[{has\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::node\-::has\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1node_a2f4a2e22c21a7b59781d33e889ad1697}
+
+
+\-Query for data property. \-Query whether data property (object) is stored for the node. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & \-Data property name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-True if thre is such a data property, otherwise false 
+\end{DoxyReturn}
+
+
+\-Definition at line 383 of file lattice.\-hpp.
+
+
+
+\-References lb\-::property\-\_\-array\-::has\-\_\-data\-\_\-property(), index, l, and lb\-::lattice\-::properties.
+
+\hypertarget{structlb_1_1node_a7627949c2689b5b622f864377eb6cff6}{\index{lb\-::node@{lb\-::node}!set\-\_\-data\-\_\-property@{set\-\_\-data\-\_\-property}}
+\index{set\-\_\-data\-\_\-property@{set\-\_\-data\-\_\-property}!lb::node@{lb\-::node}}
+\subsubsection[{set\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool {\bf lb\-::node\-::set\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name, }
+\item[{const \-T \&}]{property}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{structlb_1_1node_a7627949c2689b5b622f864377eb6cff6}
+
+
+\-Store a data property. 
+
+
+\begin{DoxyTemplParams}{\-Template Parameters}
+{\em \-T} & \-Type of the data property \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & \-Data property name \\
+\hline
+\mbox{\tt in}  & {\em property} & \-Data property object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-True if data property exists, otherwise false 
+\end{DoxyReturn}
+
+
+\-Definition at line 385 of file lattice.\-hpp.
+
+
+
+\-References index, l, lb\-::lattice\-::properties, and lb\-::property\-\_\-array\-::set\-\_\-data\-\_\-property().
+
+\hypertarget{structlb_1_1node_a953c03516f6cd48a485b2950e2214f3a}{\index{lb\-::node@{lb\-::node}!unset\-\_\-data\-\_\-property@{unset\-\_\-data\-\_\-property}}
+\index{unset\-\_\-data\-\_\-property@{unset\-\_\-data\-\_\-property}!lb::node@{lb\-::node}}
+\subsubsection[{unset\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf lb\-::node\-::unset\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name}
+\end{DoxyParamCaption}
+)}}\label{structlb_1_1node_a953c03516f6cd48a485b2950e2214f3a}
+
+
+\-Delete a data property. 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & \-Data property name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-True if data property exists, otherwise false 
+\end{DoxyReturn}
+
+
+\-Definition at line 386 of file lattice.\-hpp.
+
+
+
+\-References index, l, lb\-::lattice\-::properties, and lb\-::property\-\_\-array\-::unset\-\_\-data\-\_\-property().
+
+\hypertarget{structlb_1_1node_a397d8ce70841942ca893d3c568cc2ab5}{\index{lb\-::node@{lb\-::node}!get\-\_\-data\-\_\-property@{get\-\_\-data\-\_\-property}}
+\index{get\-\_\-data\-\_\-property@{get\-\_\-data\-\_\-property}!lb::node@{lb\-::node}}
+\subsubsection[{get\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ \-T \& {\bf lb\-::node\-::get\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name}
+\end{DoxyParamCaption}
+)}}\label{structlb_1_1node_a397d8ce70841942ca893d3c568cc2ab5}
+
+
+\-Get data property. 
+
+
+\begin{DoxyTemplParams}{\-Template Parameters}
+{\em \-T} & \-Type of the data property \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & \-Data property name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Reference to data property object 
+\end{DoxyReturn}
+
+
+\-Definition at line 388 of file lattice.\-hpp.
+
+
+
+\-References lb\-::property\-\_\-array\-::get\-\_\-data\-\_\-property(), index, l, and lb\-::lattice\-::properties.
+
+\hypertarget{structlb_1_1node_ac09b3656e36e2605848b4d3c702db19e}{\index{lb\-::node@{lb\-::node}!get\-\_\-data\-\_\-property@{get\-\_\-data\-\_\-property}}
+\index{get\-\_\-data\-\_\-property@{get\-\_\-data\-\_\-property}!lb::node@{lb\-::node}}
+\subsubsection[{get\-\_\-data\-\_\-property}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ const \-T \& {\bf lb\-::node\-::get\-\_\-data\-\_\-property} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{name}
+\end{DoxyParamCaption}
+) const}}\label{structlb_1_1node_ac09b3656e36e2605848b4d3c702db19e}
+
+
+\-Get data property. 
+
+
+\begin{DoxyTemplParams}{\-Template Parameters}
+{\em \-T} & \-Type of the data property \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em name} & \-Data property name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Reference to data property object 
+\end{DoxyReturn}
+
+
+\-Definition at line 390 of file lattice.\-hpp.
+
+
+
+\-References lb\-::property\-\_\-array\-::get\-\_\-data\-\_\-property(), index, l, and lb\-::lattice\-::properties.
+
+
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{lattice_8hpp}{lattice.\-hpp}\end{DoxyCompactItemize}

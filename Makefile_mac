@@ -1,0 +1,73 @@
+# Makefile
+#
+# Rules:
+# all		-> build
+# build		build the program
+# clean		clean built files
+
+
+##############################################################################################
+# Installation on mac
+#For the visualization on mac here is what I did
+#
+#1. If not already installed, install Quartz:
+#	http://xquartz.macosforge.org/landing/
+#
+#2. Get glew:
+#- download:
+#: 	http://sourceforge.net/projects/glew/files/glew/snapshots/
+#- Install with :
+#	make
+#	sudo make install
+#
+#4. Adjust INCLUDE_PATHS & LIBRARY_PATH if libs are installed other than /opt/X11/:
+# 	
+#
+##############################################################################################
+
+
+
+# Project name
+NAME=LB2D
+SOURCES = main.cpp third_party/EasyBMP/EasyBMP.cpp
+
+# Dependency directory
+DEPDIR = .deps
+df = $(DEPDIR)/$(*F)
+
+# Compiler flags settings
+CC = g++
+CFLAGS = -O3 -std=c++11  -Wall 
+VISFLAG = -DUSE_OPENGL_VISUALIZATION
+LDFLAGS = -framework OpenGL -lglut -lGLU -lGL -lGLEW -lX11 
+OBJFILES = $(SOURCES:.cpp=.o)
+INCLUDE_PATHS =  -I/opt/X11/include 
+LIBRARY_PATHS =  -L/opt/X11/lib -L/opt/X11/include
+all: build
+
+novis: $(OBJFILES) 
+	@echo -e "\033[1mLinking $(OBJFILES) to $(NAME)...\033[0m"
+	@$(CC) $(CFLAGS) $(OBJFILES) $(INCLUDE_PATHS)  $(LIBRARY_PATHS) -o $(NAME) $(LDFLAGS)
+
+build: CFLAGS += $(VISFLAG)
+
+build: $(OBJFILES) 
+	@echo -e "\033[1mLinking $(OBJFILES) to $(NAME)...\033[0m"
+	@$(CC) $(CFLAGS) $(OBJFILES) $(INCLUDE_PATHS)  $(LIBRARY_PATHS) $(TARGET_PLATFORM)   -o $(NAME) $(LDFLAGS) 
+
+%.o: %.cpp
+	@mkdir -p .deps
+	@echo -e "\033[1mCompiling $<...\033[0m"
+	@$(CC) -c $(CFLAGS) -MD $< -o $@
+	@cp $*.d $(df).P; \
+	sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
+	    -e '/^$$/ d' -e 's/$$/ :/' < $*.d >> $(df).P; \
+	rm -f $*.d;
+
+-include $(SOURCES:%.cpp=$(DEPDIR)/%.P)
+
+clean:
+	@echo -e "\033[1mCleaning up...\033[0m"
+	@rm -f $(OBJFILES)
+
+.PHONY: all build clean

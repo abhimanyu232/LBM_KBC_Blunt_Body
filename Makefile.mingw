@@ -1,0 +1,64 @@
+# Makefile
+#
+# Rules:
+# all		-> build
+# build		build the program
+# clean		clean built files
+
+# Project name
+NAME=LB2D
+SOURCES = main.cpp third_party/EasyBMP/EasyBMP.cpp
+
+# Dependency directory
+DEPDIR = .deps
+df = $(DEPDIR)/$(*F)
+
+# library settings
+MINGW_ROOT = /d/MinGW
+MINGW_INCLUDE_PATH = $(MINGW_ROOT)/include
+MINGW_LIBRARY_PATH = $(MINGW_ROOT)/lib
+
+GLEW_ROOT = third_party/windows/mingw/glew
+GLEW_INCLUDE_PATH = $(GLEW_ROOT)/include
+GLEW_LIBRARY_PATH = $(GLEW_ROOT)/lib
+
+GLUT_ROOT = third_party/windows/mingw/freeglut
+GLUT_INCLUDE_PATH = $(GLUT_ROOT)/include
+GLUT_LIBRARY_PATH = $(GLUT_ROOT)/lib/
+
+# Compiler flags settings
+CC = g++
+VISFLAG = -DUSE_OPENGL_VISUALIZATION
+CFLAGS = -O3 -std=gnu++11 -Wall -m32 -DWIN32 -fopenmp -I$(GLUT_INCLUDE_PATH) -I$(GLEW_INCLUDE_PATH) -I$(MINGW_INCLUDE_PATH)
+LDFLAGS = -L$(GLUT_LIBRARY_PATH) -L$(GLEW_LIBRARY_PATH) -L$(MINGW_LIBRARY_PATH) -lglew32 -lfreeglut -lwinmm -lgdi32 -lglu32 -lopengl32 -lgomp
+
+
+OBJFILES = $(SOURCES:.cpp=.o)
+
+all: build
+
+novis: $(OBJFILES) 
+	@echo -e "\033[1mLinking $(OBJFILES) to $(NAME)...\033[0m"
+	@$(CC) $(CFLAGS) $(OBJFILES) -o $(NAME) $(LDFLAGS)
+
+build: CFLAGS += $(VISFLAG)
+
+build: $(OBJFILES) 
+	@echo -e "\033[1mLinking $(OBJFILES) to $(NAME)...\033[0m"
+	@$(CC) $(CFLAGS) $(OBJFILES) -o $(NAME) $(LDFLAGS)
+
+%.o: %.cpp
+	@echo -e "\033[1mCompiling $<...\033[0m"
+	@$(CC) -c $(CFLAGS) -MD $< -o $@
+	@cp $*.d $(df).P; \
+	sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
+	    -e '/^$$/ d' -e 's/$$/ :/' < $*.d >> $(df).P; \
+	rm -f $*.d;
+
+-include $(SOURCES:%.cpp=$(DEPDIR)/%.P)
+
+clean:
+	@echo -e "\033[1mCleaning up...\033[0m"
+	@rm -f $(OBJFILES)
+
+.PHONY: all build clean
