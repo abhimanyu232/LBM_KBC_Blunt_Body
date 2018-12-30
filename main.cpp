@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 		std::cerr << "PLEASE PROVIDE LX LY RE AND VMAX AS COMMAND LINE ARGUEMENTS" << '\n';
 		return 0;
 	}
-	std::cout << "Length: " << Lx_ <<"x"<<Ly_<< "\nRe:"<<Re_<< "\nVmax:" << Vmax_ << '\n';
+	//std::cout << "Length: " << Lx_ <<"x"<<Ly_<< "\nRe:"<<Re_<< "\nVmax:" << Vmax_ << '\n';
 	lb::simulation* sim = new lb::simulation(Lx_,Ly_,Re_,Vmax_); // 100,100,20000,0.04
 	sim->initialize();
 	std::cout << *sim << std::endl;
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 
 		// how to print the lattice:
 		// -------------------------
-
+		/*
 		std::cout << sim->l << std::endl;
 
 		// how to access the lattice:
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 
 
 		std::cout << sim->l << std::endl;
-
+		*/
 
 
 		// use a loop like this to run the simulation

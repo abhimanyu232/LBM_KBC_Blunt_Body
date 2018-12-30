@@ -48,7 +48,7 @@ public:
 
 	const std::array<std::array<int, 9>, 2> c = {{{{       0,       1,       0,      -1,       0,       1,      -1,      -1,       1}},
 	                                              {{       0,       0,       1,       0,      -1,       1,       1,      -1,      -1}}}}; ///< Molecular velocities
-	const std::array<int, 9> opposite_c_index= {{0, 3, 4, 1, 2, 7, 8, 5, 6}};
+	const std::array<int, 9> rflct_latticeVelocity= 		{{			 0,				3,			 4,				1,			 2,				7,			 8,				5,			 6}};
 
 	const float_type cs = 1.0/std::sqrt(3.0);   ///< Speed of sound
 

@@ -498,8 +498,10 @@ void lattice::write_fields(std::string file_name)
 	std::ofstream ofs(file_name.c_str());
 	if (ofs.is_open())
 	{
-		// write header (comment that part if necessary)
-		ofs << "x y rho u v\n";
+		// write tecplot header (comment that part if necessary)
+		ofs << "TITLE=\"LB2D\"\n";
+    ofs << "VARIABLES = \"X\", \"Y\", \"RHO\", \"U\", \"V\"\n";
+    ofs << "ZONE T = \"BIG ZONE\", I=" << nx << ", J=" << ny << ", F=POINT" << std::endl;
 		// write body
 		for (unsigned int j=0; j<ny; ++j)
 		{
