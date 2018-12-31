@@ -222,7 +222,7 @@
 		/**  @brief apply wall boundary conditions */
 		void wall_bc(){
 					// bounce back bc by looping over all boundary cells
-			#pragma omp parallel for
+					//#pragma omp parallel for
 		  for (auto& bi : boundary_nodes){
 		      for (int i=1;i<9;++i){
 			        if (bi.distance[i] > 0)
@@ -263,66 +263,9 @@
 			}
 
 			// OVERWRITE BOUNDARY CONDITION AT EXIT - TAKE VALUE OF PREVIOUS CELL
-			// OVERWRITE BOUNDARY CONDITION AT ENTRY -
+			// OVERWRITE BOUNDARY CONDITION AT ENTRY - equilibrate to initial conditions
 		return ;
 		}
-
-		/** @brief collide the populations */
-
-	    /*
-		void collide()
-		{
-			// **************************
-			// * fill in your code here *
-			// **************************
-	#pragma omp parallel for
-	        for (int y = 0; y<(int)l.ny; ++y)
-	        {
-	            for (int x = 0; x<(int)l.nx; ++x)
-	            {
-	                auto n = l.get_node(x,y);
-
-
-	                float_type rho = 0.0;
-	                float_type u = 0.0;
-	                float_type v = 0.0;
-	                for (int i=0; i<9; ++i)
-	                {
-	                    rho += n.f(i);
-	                    u   += n.f(i)*velocity_set().c[0][i];
-	                    v   += n.f(i)*velocity_set().c[1][i]; //
-	                }
-	                u /= rho;
-	                v /= rho;
-
-	                n.rho() = rho;
-	                n.u() = u;
-	                n.v() = v;
-	                float_type eq[9];
-	                velocity_set().f_eq(eq, rho, u, v);
-
-	                for (int i=0; i<9; ++i)
-	                {
-	                //insert the equation with (1-beta) from lecture 1 that updates the population     after the collision
-	                n.f(i) = (1-beta)*n.f(i) + beta*(2*eq[i]-n.f(i));
-	                }
-
-
-	            }
-
-	        }
-	        //creates a dark space inside the cylinder, just to be able to visualize it better (also safety precaution)
-	        for (auto& wi : wall_nodes)
-	        {
-	            wi.n.rho() = 1;
-	            wi.n.u() = 0;
-	            wi.n.v() = 0;
-	            for (int i=0; i<9; ++i) wi.n.f(i) = 0;
-	        }
-
-		}
-	     */
-
 
 
 	  void collide(){
@@ -378,42 +321,43 @@
 		            dM_xyy=dM_xyy/rho;
 		            dM_xxyy=dM_xxyy/rho;
 
-		            float_type delta_s[9];
-		            float_type delta_h[9];
+		            float_type delS[9];
+		            float_type delH[9];
 
-		            delta_s[0] = 0.0;
-		            delta_s[1] = 0.5*rho*0.5*(dM_xx-dM_yy);
-		            delta_s[2] = 0.5*rho*0.5*-1.0*(dM_xx-dM_yy);
-		            delta_s[3] = 0.5*rho*0.5*(dM_xx-dM_yy);
-		            delta_s[4] = 0.5*rho*0.5*-1.0*(dM_xx-dM_yy);
-		            delta_s[5] = 0.25*rho*velocity_set().c[0][5]*velocity_set().c[1][5]*dM_xy;     //sigma= velocity_set.c[0][i] lambda=velocity_set.c[1][i];
-		            delta_s[6] = 0.25*rho*velocity_set().c[0][6]*velocity_set().c[1][6]*dM_xy;
-		            delta_s[7] = 0.25*rho*velocity_set().c[0][7]*velocity_set().c[1][7]*dM_xy;
-		            delta_s[8] = 0.25*rho*velocity_set().c[0][8]*velocity_set().c[1][8]*dM_xy;
+								//KBC minimalistic grouping // lecture 7 p.8)
+		            delS[0] = 0.0;
+		            delS[1] = 0.5*rho*0.5*(dM_xx-dM_yy);
+		            delS[2] = 0.5*rho*0.5*-1.0*(dM_xx-dM_yy);
+		            delS[3] = 0.5*rho*0.5*(dM_xx-dM_yy);
+		            delS[4] = 0.5*rho*0.5*-1.0*(dM_xx-dM_yy);
+		            delS[5] = 0.25*rho*velocity_set().c[0][5]*velocity_set().c[1][5]*dM_xy;
+		            delS[6] = 0.25*rho*velocity_set().c[0][6]*velocity_set().c[1][6]*dM_xy;
+		            delS[7] = 0.25*rho*velocity_set().c[0][7]*velocity_set().c[1][7]*dM_xy;
+		            delS[8] = 0.25*rho*velocity_set().c[0][8]*velocity_set().c[1][8]*dM_xy;
 
-		            for (int i=0; i<9; ++i){ //KBC colision (minimalistic lecture 7 p.8)
-		                //calculating deltah
-		                delta_h[i] = n.f(i)-eq[i]-delta_s[i];
+								//calculating deltah
+		            for (int i=0; i<9; ++i){
+		                delH[i] = n.f(i)-eq[i]-delS[i];
 		            }
 
-		            float_type delta_s_delta_h=0;
-		            float_type delta_h_delta_h=0;
+		            float_type entScalarProd_dSdH=0;
+		            float_type entScalarProd_dHdH=0;
 
 		            // Calculating gamma
 		            for (int l=0; l<9; ++l){
-		                    delta_s_delta_h=delta_s_delta_h+delta_s[l]*delta_h[l]/eq[l];
-		                    delta_h_delta_h=delta_h_delta_h+delta_h[l]*delta_h[l]/eq[l];
+		                    entScalarProd_dSdH=entScalarProd_dSdH+delS[l]*delH[l]/eq[l];
+		                    entScalarProd_dHdH=entScalarProd_dHdH+delH[l]*delH[l]/eq[l];
 		            }
 
-		            float_type gamma= 1.0/beta -(2.0-1.0/beta)*(delta_s_delta_h/delta_h_delta_h);
-		            if (delta_h_delta_h == 0) gamma = 2;		// LBGK
+		            float_type gamma= 1.0/beta -(2.0-1.0/beta)*(entScalarProd_dSdH/entScalarProd_dHdH);
+		            if (entScalarProd_dHdH == 0) gamma = 2;		// LBGK
 
 		            // Equilibrating
 		            //auto f_mirr=k+(2*Delta_s)+(1-gamma*beta)*Delta_h;
 		            //n.f(i)=(1-beta)*n.f(i)+beta*(f_mirr);
 
 		            for (int i=0; i<9; ++i) //KBC colision (minimalistic lecture 7 p.8)
-		            n.f(i)=eq[i]+(1-2.0*beta)*delta_s[i]+(1.0-gamma*beta)*delta_h[i];
+		            n.f(i)=eq[i]+(1-2.0*beta)*delS[i]+(1.0-gamma*beta)*delH[i];
 
 		        }
 		    }

@@ -1,4 +1,4 @@
-/** 
+/**
  *  @file
  *  @author Fabian Bösch
  *   @brief global typdefs etc
@@ -16,7 +16,7 @@
 namespace lb {
 
 /** Floating point type (single or double precision) */
-typedef float float_type;
+typedef double float_type;
 
 /**
  *  @brief Coordinate in 2D
@@ -27,21 +27,21 @@ struct coordinate
 {
 	/** @brief Default constructor */
 	coordinate(){}
-	
-	/** 
+
+	/**
 	 *  @brief Construct from x and y coordinates.
 	 *  @param[in] _i x coordinate
 	 *  @param[in] _j y coordinate
 	 */
 	coordinate(T _i, T _j): i(_i), j(_j) {}
-	
+
 	/** @brief Print to output stream */
 	friend std::ostream& operator<<(std::ostream& os, const coordinate& c)
 	{
 		os << "{" << c.i << ", " << c.j << "}";
 		return os;
 	}
-	
+
 	T i; ///< x coordinate
 	T j; ///< y coordinate
 };
