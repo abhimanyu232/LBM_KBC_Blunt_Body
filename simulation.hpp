@@ -47,19 +47,19 @@
 		 *  @param[in] _Re   Reynolds number
 		 *  @param[in] _Vmax mean flow velocity
 		 */
-		simulation(unsigned int nx, unsigned int ny, float_type _Re, float_type _Vmax)
+		simulation(unsigned int nx, unsigned int ny, float_type _Re, float_type _Vmax, unsigned int KBC_COLOR_)
 		: l(nx, ny),
 		  shift(velocity_set().size),
 		  Re(_Re),
-
+			kbc_coluring_scheme(KBC_COLOR_),
 		  Vmax(_Vmax),
-	      R(l.nx/10),
-	      visc(Vmax*R/Re),
+	    R(l.nx/10),
+	    visc(Vmax*R/Re),
 	      //visc( /*fill in your code here*/ 0.001),
 		  beta(1/(((2*visc)/pow(1/std::sqrt(3.0),2))+1.0)),
 	      //beta( /*fill in your code here*/ 0.9),
 		  time(0),
-		  file_output(true), // set to true if you want to write files
+		  file_output(false), // set to true if you want to write files
 		  output_freq(250),
 		  output_index(0)
 		{
@@ -86,7 +86,7 @@
 
 			for (int j=0; j<static_cast<int>(l.ny); ++j){
 				for (int i=0; i<static_cast<int>(l.nx); ++i){
-	        l.get_node(i,j).u()   = Vmax;
+	        l.get_node(i,j).u()   = 0;
 					l.get_node(i,j).v()   = 0;
           l.get_node(i,j).rho() 	=	rho;
           velocity_set().equilibrate(l.get_node(i,j));
@@ -189,19 +189,19 @@
 				}
 			}
 					// vertical faces faces
-			for (int iy=0;iy< static_cast<int>(l.ny);++iy){
+			for (int iy=0;iy < static_cast<int>(l.ny);++iy){
 				for (unsigned int m=0; m < velocity_set().size; ++m){
 					l.f[m][l.index(-1,iy)] = l.f[m][l.index(l.nx-1,iy)];
 					l.f[m][l.index(l.nx,iy)] = l.f[m][l.index(0,iy)];
 				}
 			}
-					// corners
+				/*	// corners
 			for (unsigned int m=0; m < velocity_set().size; ++m){
 				l.f[m][l.index(-1,-1)] = l.f[m][l.index(l.nx-1,l.ny-1)];
 				l.f[m][l.index(l.nx,l.ny)] = l.f[m][l.index(0,0)];
 				l.f[m][l.index(l.nx,-1)] = l.f[m][l.index(0,l.ny-1)];
 				l.f[m][l.index(-1,l.ny)] = l.f[m][l.index(l.nx-1,0)];
-			}
+			}*/
 	        //shift populations in the opposite directions to the velocities so that not the same population is copied across the whole lattice
 			for (unsigned int m=0; m<velocity_set().size; ++m){
 				if (shift[m] > 0){
@@ -262,6 +262,24 @@
 		      l.get_node(l.index(i,0)).f(4)=l.get_node(l.index(i,-1)).f(2);
 			}
 
+			for (int i=0; i<l.ny; ++i){
+					// INLET BOUNDARY - EQUILIBRIATE AT INITIAL/BOUNDARY VALUE
+				auto n_inlet = l.get_node(0,i);
+				n_inlet.u()   = Vmax;
+				n_inlet.v()   = 0;
+				n_inlet.rho() =	1;
+				velocity_set().equilibrate(n_inlet);
+
+					// OUTLET BOUNDARY - JUST TAKE VALUE OF PREVIOUS CELL
+				auto n_outlet    = l.get_node(l.nx-1,i);
+				auto n_outlet_m1 = l.get_node(l.nx-2,i);
+				n_outlet.u()   = n_outlet_m1.u();
+				n_outlet.v()   = n_outlet_m1.v();
+				n_outlet.rho() = n_outlet_m1.rho();
+				velocity_set().equilibrate(n_outlet);
+			}
+
+
 			// OVERWRITE BOUNDARY CONDITION AT EXIT - TAKE VALUE OF PREVIOUS CELL
 			// OVERWRITE BOUNDARY CONDITION AT ENTRY - equilibrate to initial conditions
 		return ;
@@ -289,8 +307,8 @@
 		            n.rho() = rho;
 		            n.u() = u;
 		            n.v() = v;
-		            float_type eq[9];
-		            velocity_set().f_eq(eq, rho, u, v);  //this finds the equilibrium at all physical nodes for all populations
+		            float_type feq[9];
+		            velocity_set().f_eq(feq, rho, u, v);  //this finds the equilibrium at all physical nodes for all populations
 
 		            //Finding the moments KBC
 		            float_type dM_xy=0.0;  // the difference in moments M-M_eq
@@ -306,12 +324,12 @@
 
 		            for (int i=0; i<9; ++i)
 		            {
-		                dM_xy +=velocity_set().c[0][i]*velocity_set().c[1][i]*(n.f(i)-eq[i]);
-		                dM_xx +=velocity_set().c[0][i]*velocity_set().c[0][i]*(n.f(i)-eq[i]);
-		                dM_yy +=velocity_set().c[1][i]*velocity_set().c[1][i]*(n.f(i)-eq[i]);
-		                dM_xyy +=velocity_set().c[0][i]*velocity_set().c[1][i]*velocity_set().c[1][i]*(n.f(i)-eq[i]);
-		                dM_xxy +=velocity_set().c[0][i]*velocity_set().c[0][i]*velocity_set().c[1][i]*(n.f(i)-eq[i]);
-		                dM_xxyy +=velocity_set().c[0][i]*velocity_set().c[0][i]*velocity_set().c[1][i]*velocity_set().c[1][i]*(n.f(i)-eq[i]);    //all these give M_...*rho not the actual moments
+		                dM_xy +=velocity_set().c[0][i]*velocity_set().c[1][i]*(n.f(i)-feq[i]);
+		                dM_xx +=velocity_set().c[0][i]*velocity_set().c[0][i]*(n.f(i)-feq[i]);
+		                dM_yy +=velocity_set().c[1][i]*velocity_set().c[1][i]*(n.f(i)-feq[i]);
+		                dM_xyy +=velocity_set().c[0][i]*velocity_set().c[1][i]*velocity_set().c[1][i]*(n.f(i)-feq[i]);
+		                dM_xxy +=velocity_set().c[0][i]*velocity_set().c[0][i]*velocity_set().c[1][i]*(n.f(i)-feq[i]);
+		                dM_xxyy +=velocity_set().c[0][i]*velocity_set().c[0][i]*velocity_set().c[1][i]*velocity_set().c[1][i]*(n.f(i)-feq[i]);    //all these give M_...*rho not the actual moments
 		            }
 
 		            dM_xy=dM_xy/rho;
@@ -324,40 +342,74 @@
 		            float_type delS[9];
 		            float_type delH[9];
 
-								//KBC minimalistic grouping // lecture 7 p.8)
-		            delS[0] = 0.0;
-		            delS[1] = 0.5*rho*0.5*(dM_xx-dM_yy);
-		            delS[2] = 0.5*rho*0.5*-1.0*(dM_xx-dM_yy);
-		            delS[3] = 0.5*rho*0.5*(dM_xx-dM_yy);
-		            delS[4] = 0.5*rho*0.5*-1.0*(dM_xx-dM_yy);
-		            delS[5] = 0.25*rho*velocity_set().c[0][5]*velocity_set().c[1][5]*dM_xy;
-		            delS[6] = 0.25*rho*velocity_set().c[0][6]*velocity_set().c[1][6]*dM_xy;
-		            delS[7] = 0.25*rho*velocity_set().c[0][7]*velocity_set().c[1][7]*dM_xy;
-		            delS[8] = 0.25*rho*velocity_set().c[0][8]*velocity_set().c[1][8]*dM_xy;
+								//unsigned int kbc_coluring_scheme=0;
+								//kbc_coluring_scheme=1;
+								switch (kbc_coluring_scheme) {
+									case 0:
+											//KBC minimalistic grouping // lecture 7 p.8)
+											delS[0] = 0.0;
+											delS[1] = 0.5*rho*0.5*(dM_xx-dM_yy);
+											delS[2] = 0.5*rho*0.5*-1.0*(dM_xx-dM_yy);
+											delS[3] = 0.5*rho*0.5*(dM_xx-dM_yy);
+											delS[4] = 0.5*rho*0.5*-1.0*(dM_xx-dM_yy);
+											delS[5] = 0.25*rho*velocity_set().c[0][5]*velocity_set().c[1][5]*dM_xy;
+											delS[6] = 0.25*rho*velocity_set().c[0][6]*velocity_set().c[1][6]*dM_xy;
+											delS[7] = 0.25*rho*velocity_set().c[0][7]*velocity_set().c[1][7]*dM_xy;
+											delS[8] = 0.25*rho*velocity_set().c[0][8]*velocity_set().c[1][8]*dM_xy;
+											break;
+
+									case 1:
+											// classical
+											delS[0] = -1.0*rho*(dM_xx+dM_yy);
+											delS[1] = 0.5*rho*0.5*(2*dM_xx);
+											delS[2] = 0.5*rho*0.5*(2*dM_yy);
+											delS[3] = 0.5*rho*0.5*(2*dM_xx);
+											delS[4] = 0.5*rho*0.5*(2*dM_yy);
+											delS[5] = 0.25*rho*velocity_set().c[0][5]*velocity_set().c[1][5]*dM_xy;
+											delS[6] = 0.25*rho*velocity_set().c[0][6]*velocity_set().c[1][6]*dM_xy;
+											delS[7] = 0.25*rho*velocity_set().c[0][7]*velocity_set().c[1][7]*dM_xy;
+											delS[8] = 0.25*rho*velocity_set().c[0][8]*velocity_set().c[1][8]*dM_xy;
+											break;
+
+									default :
+											std:std::cerr << "INVALID CHOICE OF COLORING SCHEME, CHOSING MINIMALISTIC" << '\n';
+											//KBC minimalistic grouping // lecture 7 p.8)
+											delS[0] = 0.0;
+											delS[1] = 0.5*rho*0.5*(dM_xx-dM_yy);
+											delS[2] = 0.5*rho*0.5*-1.0*(dM_xx-dM_yy);
+											delS[3] = 0.5*rho*0.5*(dM_xx-dM_yy);
+											delS[4] = 0.5*rho*0.5*-1.0*(dM_xx-dM_yy);
+											delS[5] = 0.25*rho*velocity_set().c[0][5]*velocity_set().c[1][5]*dM_xy;
+											delS[6] = 0.25*rho*velocity_set().c[0][6]*velocity_set().c[1][6]*dM_xy;
+											delS[7] = 0.25*rho*velocity_set().c[0][7]*velocity_set().c[1][7]*dM_xy;
+											delS[8] = 0.25*rho*velocity_set().c[0][8]*velocity_set().c[1][8]*dM_xy;
+											break;
+
+								}
 
 								//calculating deltah
 		            for (int i=0; i<9; ++i){
-		                delH[i] = n.f(i)-eq[i]-delS[i];
+		                delH[i] = n.f(i)-feq[i]-delS[i];
 		            }
 
 		            float_type entScalarProd_dSdH=0;
 		            float_type entScalarProd_dHdH=0;
 
 		            // Calculating gamma
-		            for (int l=0; l<9; ++l){
-		                    entScalarProd_dSdH=entScalarProd_dSdH+delS[l]*delH[l]/eq[l];
-		                    entScalarProd_dHdH=entScalarProd_dHdH+delH[l]*delH[l]/eq[l];
+		            for (int i=0; i<9; ++i){
+		                    entScalarProd_dSdH += delS[i]*delH[i]/feq[i];
+		                    entScalarProd_dHdH += delH[i]*delH[i]/feq[i];
 		            }
 
-		            float_type gamma= 1.0/beta -(2.0-1.0/beta)*(entScalarProd_dSdH/entScalarProd_dHdH);
-		            if (entScalarProd_dHdH == 0) gamma = 2;		// LBGK
+		            float_type gamma= (1.0/beta) - (2.0 - 1.0/beta)*(entScalarProd_dSdH/entScalarProd_dHdH);
+		            if (entScalarProd_dHdH == 0) gamma = 1/beta;		// LBGK
 
 		            // Equilibrating
 		            //auto f_mirr=k+(2*Delta_s)+(1-gamma*beta)*Delta_h;
 		            //n.f(i)=(1-beta)*n.f(i)+beta*(f_mirr);
 
 		            for (int i=0; i<9; ++i) //KBC colision (minimalistic lecture 7 p.8)
-		            n.f(i)=eq[i]+(1-2.0*beta)*delS[i]+(1.0-gamma*beta)*delH[i];
+		            n.f(i)=feq[i]+(1-2.0*beta)*delS[i]+(1.0-gamma*beta)*delH[i];
 
 		        }
 		    }
@@ -416,6 +468,7 @@
 			lattice l;                 ///< lattice
 			std::vector<int> shift;    ///< amount of nodes to shift each population in data structure during advection
 			const float_type Re;       ///< Reynolds number
+			unsigned int kbc_coluring_scheme;
 			const float_type Vmax;     ///< mean flow velocity
 		    const float_type R;
 			const float_type visc;     ///< viscosity

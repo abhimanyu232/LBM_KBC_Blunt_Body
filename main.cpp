@@ -12,19 +12,27 @@ int main(int argc, char *argv[])
 	omp_set_num_threads(std::max(omp_get_max_threads(),omp_get_num_procs()));
 
 	int Lx_,Ly_;
+	unsigned int KBC_COLOR_;
 	float Re_,Vmax_;
-	if (argc == 5 ){
+	if (argc == 6 ){
 	Lx_ = std::stoi(argv[1]);
 	Ly_ = std::stoi(argv[2]);
 	Re_ = std::stof(argv[3]);
 	Vmax_ = std::stof(argv[4]);
+	KBC_COLOR_ = std::stoi(argv[5]);
 	}
 	else {
 		std::cerr << "PLEASE PROVIDE LX LY RE AND VMAX AS COMMAND LINE ARGUEMENTS" << '\n';
 		return 0;
 	}
+
+	if (KBC_COLOR_ < 0 || KBC_COLOR_ > 1 ){
+			std::cout << "Invalid Choice for Coloring Scheme \t Please from Below \n"
+			"0: MINIMALISTIC GROUPING \n1: CLASSICAL GROUPING\n KBC_COLOR_= " ;
+			std::cin >> KBC_COLOR_;
+	}
 	//std::cout << "Length: " << Lx_ <<"x"<<Ly_<< "\nRe:"<<Re_<< "\nVmax:" << Vmax_ << '\n';
-	lb::simulation* sim = new lb::simulation(Lx_,Ly_,Re_,Vmax_); // 100,100,20000,0.04
+	lb::simulation* sim = new lb::simulation(Lx_,Ly_,Re_,Vmax_,KBC_COLOR_); // 100,100,20000,0.04
 	sim->initialize();
 	std::cout << *sim << std::endl;
 
