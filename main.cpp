@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 	int Lx_,Ly_;
 	unsigned int KBC_COLOR_;
 	float Re_,Vmax_;
+	int iter = 5000;
 	if (argc == 6 ){
 	Lx_ = std::stoi(argv[1]);
 	Ly_ = std::stoi(argv[2]);
@@ -41,11 +42,6 @@ int main(int argc, char *argv[])
 
 		lb::visualization::initialize(sim,argc,argv);
 		lb::visualization::get_instance().run();
-		for (unsigned int i=0; i<sim->l.nx/0.04; ++i)
-		{
-			sim->step();
-		}
-
 
 	#else
 
