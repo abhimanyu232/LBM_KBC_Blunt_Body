@@ -53,7 +53,7 @@
 		  Re(_Re),
 			kbc_coluring_scheme(KBC_COLOR_),
 		  Vmax(_Vmax),
-	    R(l.nx/10),
+	    R(l.ny/10),
 	    visc(Vmax*R/Re),
 	      //visc( /*fill in your code here*/ 0.001),
 		  beta(1/(((2*visc)/pow(1/std::sqrt(3.0),2))+1.0)),
@@ -98,16 +98,12 @@
 
 	        //define variables for position and radius of cylinder
 	        //const float_type R(l.nx/8);
-	        const float_type x_c(l.nx/2);
+	        const float_type x_c(l.nx/4);
 	        const float_type y_c(l.ny/2);
 					const float_type Lx(x_c + l.nx/10);
 	        node n_boundary;
 						// coefficients of a.dx^2 + b.dx + c = 0
-	        float_type a = 0;
-	        float_type b = 0;
-	        float_type c = 0;
-	        float_type dx= 0;
-	        float_type D=0;
+	        float_type a, b, c, dx, D;
 
 	        	//info_n_boundary.distance = {};                      //will be of type array
 
@@ -119,7 +115,7 @@
 
 											if ((float_type)x <= Lx) {
 												// DO THE REGULAR THING
-												if ((y-y_c)*(y-y_c) - (R*R)*(x-x_c)/(Lx - x_c) > 0  ){ //check if node is inside nosecone, if it is it cant be a boundary node
+												if ((y-y_c)*(y-y_c) - (R*R)*(x-x_c)/(Lx - x_c) > 0  ){ //check if node is outside nosecone, search for nearest boundary node
 													for (int i=1; i<9; ++i){        //9 directions
 														a = velocity_set().c[1][i]*velocity_set().c[1][i];
 														b = 2*velocity_set().c[1][i]*(y - y_c) - R*R*velocity_set().c[0][i]/(Lx - x_c);
@@ -133,14 +129,8 @@
 															if (dx1 > 0) dx = dx1;
 															if (dx2 > 0 && dx2 < dx1) dx = dx2;
 
+																	// ON LARGER STENCIL, WILL CHANGE AND INCLUDE dx>1 ALSO : depends on the lattice velocity i.e consider dx>1 when c[1,2][i] > 1
 															if (dx>0 && dx<=1){
-																// ON LARGER STENCIL, WILL CHANGE AND INCLUDE dx>1 ALSO : depends on the lattice velocity i.e consider dx>1 when c[1,2][i] > 1
-
-																//need to find a way to add the location of this node and its distance value to the array holding the boundary nodes (for each direction)
-																//info_n_boundary.distance.push_back(dx);
-																//info_n_boundary.n = (l,x,y);              //x refers to x0 and y refers to y0
-																//info_n_boundary.distance = {dx};
-
 																bi.distance[i] = dx;
 																found_intersection = true;
 															}
@@ -150,7 +140,7 @@
 													wall_info wi{l.get_node(x,y)};
 													wall_nodes.push_back(wi);
 												}
-											}	else if ((float_type)x >= Lx) { 									// LONGER THAN NOSECONE X >= LX
+											}	else if ((float_type)x >= Lx) { // LONGER THAN NOSECONE X>=LX
 													if ((y <= y_c + R) && (y >= y_c - R) ){
 															for (int i=1; i<9; ++i){
 																	dx = (Lx-x)/(velocity_set().c[0][i]);
@@ -181,11 +171,11 @@
 		void advect(){
 	        //first initialize buffers
 
-					// horizontal faces
+				// horizontal faces
 			for (int ix=0;ix< static_cast<int>(l.nx);++ix){
 				for (unsigned int m=0; m<velocity_set().size; ++m){
-					l.f[m][l.index(ix,-1)] = l.f[m][l.index(ix,l.ny-1)];
-					l.f[m][l.index(ix,l.ny)] = l.f[m][l.index(ix,0)];
+					l.f[m][l.index(ix,-1)] = l.f[m][l.index(ix,0)];
+					l.f[m][l.index(ix,l.ny)] = l.f[m][l.index(ix,l.ny-1)];
 				}
 			}
 					// vertical faces faces
@@ -229,38 +219,30 @@
 			          bi.n.f(velocity_set().rflct_latticeVelocity[i]) = bi.n.f(i);
 		      }
 		  }
-			    //channel flow
-	        //you can turn this into a free slip condition pretty easily, just switch the populations
-	        //no slip boundary condition on top and bottom wall
-			for (int i=0; i<l.nx; ++i){
-					  //l.get_node(i,l.ny-1).set_flag_property("wall");
-					  //l.get_node(i,0).set_flag_property("wall");
-					  //l.add_wall((global().c0,l.ny),(l.nx-1,l.ny));
-					  //for (unsigned int i=0; i<l.wall_nodes.size(); ++i)
-		      	//top wall
-					l.get_node(l.index(i,l.ny-1)).f(1)=l.get_node(l.index(i+1,l.ny-1)).f(3);
-		      l.get_node(l.index(i,l.ny-1)).f(5)=l.get_node(l.index(i+1,l.ny)).f(7);
-		      l.get_node(l.index(i,l.ny-1)).f(8)=l.get_node(l.index(i+1,l.ny-2)).f(6);
+					/*
+        // SLIP BOUNDARY CONDITION ON TOP AND BOTTOM
+			for (int i=0 ; i < l.nx ; ++i){
+					for (int m=0; m < velocity_set().size; ++m){
+							l.get_node(l.index(i,l.ny-1)).f(m)=l.get_node(l.index(i,l.ny-2)).f(m);
+							l.get_node(l.index(i,0)).f(m)=l.get_node(l.index(i,1)).f(m);
+					}
+			} 	*/
 
-		      l.get_node(l.index(i,l.ny-1)).f(3)=l.get_node(l.index(i-1,l.ny-1)).f(1);
-		      l.get_node(l.index(i,l.ny-1)).f(6)=l.get_node(l.index(i-1,l.ny)).f(8);
-		      l.get_node(l.index(i,l.ny-1)).f(7)=l.get_node(l.index(i-1,l.ny-2)).f(5);
+					// NO SLIP  BOUNDARY CONDITION ON TOP AND BOTTOM
+			for (int i=0 ; i < l.nx ; ++i){
+					auto n_topwall = l.get_node(i,l.ny-1);
+					n_topwall.u()   = 0;
+					n_topwall.v()   = 0;
+					n_topwall.rho() =	1;
+					velocity_set().equilibrate(n_topwall);
 
-		      l.get_node(l.index(i,l.ny-1)).f(2)=l.get_node(l.index(i,l.ny)).f(4);
-		      l.get_node(l.index(i,l.ny-1)).f(4)=l.get_node(l.index(i,l.ny-2)).f(2);
-
-		      	//bottom wall
-		      l.get_node(l.index(i,0)).f(1)=l.get_node(l.index(i+1,0)).f(3);
-		      l.get_node(l.index(i,0)).f(5)=l.get_node(l.index(i+1,1)).f(7);
-		      l.get_node(l.index(i,0)).f(8)=l.get_node(l.index(i+1,-1)).f(6);
-
-		      l.get_node(l.index(i,0)).f(3)=l.get_node(l.index(i-1,0)).f(1);
-		      l.get_node(l.index(i,0)).f(6)=l.get_node(l.index(i-1,1)).f(8);
-		      l.get_node(l.index(i,0)).f(7)=l.get_node(l.index(i-1,-1)).f(5);
-
-		      l.get_node(l.index(i,0)).f(2)=l.get_node(l.index(i,1)).f(4);
-		      l.get_node(l.index(i,0)).f(4)=l.get_node(l.index(i,-1)).f(2);
+					auto n_botwall = l.get_node(i,0);
+					n_botwall.u()   = 0;
+					n_botwall.v()   = 0;
+					n_botwall.rho() =	1;
+					velocity_set().equilibrate(n_botwall);
 			}
+
 
 			for (int i=0; i<l.ny; ++i){
 					// INLET BOUNDARY - EQUILIBRIATE AT INITIAL/BOUNDARY VALUE
@@ -279,9 +261,6 @@
 				velocity_set().equilibrate(n_outlet);
 			}
 
-
-			// OVERWRITE BOUNDARY CONDITION AT EXIT - TAKE VALUE OF PREVIOUS CELL
-			// OVERWRITE BOUNDARY CONDITION AT ENTRY - equilibrate to initial conditions
 		return ;
 		}
 
@@ -318,10 +297,6 @@
 		            float_type dM_xxy=0.0;
 		            float_type dM_xxyy=0.0;
 
-		            //float_type dM_x0=u;    Lower order moments not used
-		            //float_type dM_0y=v;
-		            //int dM_00=1;
-
 		            for (int i=0; i<9; ++i)
 		            {
 		                dM_xy +=velocity_set().c[0][i]*velocity_set().c[1][i]*(n.f(i)-feq[i]);
@@ -329,7 +304,7 @@
 		                dM_yy +=velocity_set().c[1][i]*velocity_set().c[1][i]*(n.f(i)-feq[i]);
 		                dM_xyy +=velocity_set().c[0][i]*velocity_set().c[1][i]*velocity_set().c[1][i]*(n.f(i)-feq[i]);
 		                dM_xxy +=velocity_set().c[0][i]*velocity_set().c[0][i]*velocity_set().c[1][i]*(n.f(i)-feq[i]);
-		                dM_xxyy +=velocity_set().c[0][i]*velocity_set().c[0][i]*velocity_set().c[1][i]*velocity_set().c[1][i]*(n.f(i)-feq[i]);    //all these give M_...*rho not the actual moments
+		                dM_xxyy +=velocity_set().c[0][i]*velocity_set().c[0][i]*velocity_set().c[1][i]*velocity_set().c[1][i]*(n.f(i)-feq[i]);
 		            }
 
 		            dM_xy=dM_xy/rho;
@@ -386,8 +361,8 @@
 											break;
 
 								}
-
-								//calculating deltah
+								// fi = ki + si + hi
+								//calculating delH = fi - fi_eq - delS
 		            for (int i=0; i<9; ++i){
 		                delH[i] = n.f(i)-feq[i]-delS[i];
 		            }
@@ -402,13 +377,10 @@
 		            }
 
 		            float_type gamma= (1.0/beta) - (2.0 - 1.0/beta)*(entScalarProd_dSdH/entScalarProd_dHdH);
-		            if (entScalarProd_dHdH == 0) gamma = 1/beta;		// LBGK
+		            // gamma = 1/beta; ->	regularised 	// gamma = 2 -> LBGK
 
-		            // Equilibrating
-		            //auto f_mirr=k+(2*Delta_s)+(1-gamma*beta)*Delta_h;
-		            //n.f(i)=(1-beta)*n.f(i)+beta*(f_mirr);
 
-		            for (int i=0; i<9; ++i) //KBC colision (minimalistic lecture 7 p.8)
+		            for (int i=0; i<9; ++i)
 		            n.f(i)=feq[i]+(1-2.0*beta)*delS[i]+(1.0-gamma*beta)*delH[i];
 
 		        }
