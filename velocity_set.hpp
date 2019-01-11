@@ -114,6 +114,44 @@ public:
 		n.f(8) = feq[8];
 	}
 
+	void interpolation_node(const int i, const int j, const int m; int& i_interp, int & j_interp){
+		switch (m) {
+			case 1:
+				i_interp = i-1;
+				j_interp = j;
+				break;
+			case 2:
+				i_interp = i;
+				j_interp = j-1;
+				break;
+			case 3:
+				i_interp = i+1;
+				j_interp = j;
+				break;
+			case 4:
+				i_interp = i;
+				j_interp = j +1;
+				break;
+			case 5:
+				i_interp = i-1;
+				j_interp = j-1;
+				break;
+			case 6:
+				i_interp = i+1;
+				j_interp = j-1;
+				break;
+			case 7:
+				i_interp = i+1;
+				j_interp = j+1;
+				break;
+			case 8:
+				i_interp = i-1;
+				j_interp = j+1;
+				break;
+			return;
+		}
+	}
+
 	/**
 	 *  @brief Equilibrate a node.
 	 *

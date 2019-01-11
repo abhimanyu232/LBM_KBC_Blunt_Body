@@ -18,7 +18,10 @@
 		struct boundary_info
 	    {
 	        node n;
+					int i;
+					int j;
 	        std::array<float_type,9> distance = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+					std::array<float_type,9> population_prev = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 	    };
 
 		struct wall_info{
@@ -154,6 +157,8 @@
 
 											if (found_intersection){
 													bi.n = l.get_node(x,y);
+													bi.i = x;
+													bi.j = y;
 													boundary_nodes.push_back(bi);
 											}
 									}
@@ -212,19 +217,59 @@
 		/**  @brief apply wall boundary conditions */
 		void wall_bc(){
 					// bounce back bc by looping over all boundary cells
-					//#pragma omp parallel for
+					/*
 		  for (auto& bi : boundary_nodes){
 		      for (int i=1;i<9;++i){
 			        if (bi.distance[i] > 0)
 			          bi.n.f(velocity_set().rflct_latticeVelocity[i]) = bi.n.f(i);
 		      }
-		  }
+
+		  } 	*/ 	// GRAD BOUNDARY CONDITIONS
+			for (auto& bi : boundary_nodes){
+					int count = 0;
+					float_type vx_temp=0.0;
+					float_type vy_temp=0.0;
+					for (int m=1;m<9;++m){
+							if (bi.distance[m] > 0){
+								bi.n.f(velocity_set().rflct_latticeVelocity[m]) = bi.n.f(m);
+								int i_interp,j_interp;
+								const int i = bi.i;
+								const int j = bi.j;
+								interpolation_node(i,j,m,i_interp,j_interp);
+								auto n_interp = l.get_node(i_interp,j_interp);
+													// get velocity via interpolation and get density after bounce back
+								vx_temp +=  bi.distance[m]*n_interp.u()/( velocity_set().c[0][m]+bi.distance[m] );
+								vy_temp +=  bi.distance[m]*n_interp.v()/( velocity_set().c[1][m]+bi.distance[m] );
+								count++;
+							}
+							bi.n.rho += b.n.f();
+					}
+					bi.n.u = vx_temp/count;
+					bi.n.v = vy_temp/count;
+
+						// calculate central differences duxdx duxdy duydx duydy
+					float_type dudx,dudy,dvdx,dvdy;
+
+					for (int m=1;m<9;++m){
+							float_type EqPressure,nonEqPressure,Pxx,Pyy,Pxy;
+							// only for nodes with missing data i.e if bi.distance[m]>0 ==>
+							// pop. to be replaced is bi.n.f(velocity_set().rflct_latticeVelocity[m])
+							if (bi.distance>0){
+
+							}
+						// calculate equilibrium using grad scheme formula.
+					}
+
+
+
+			}
+
 					/*
         // SLIP BOUNDARY CONDITION ON TOP AND BOTTOM
 			for (int i=0 ; i < l.nx ; ++i){
 					for (int m=0; m < velocity_set().size; ++m){
-							l.get_node(l.index(i,l.ny-1)).f(m)=l.get_node(l.index(i,l.ny-2)).f(m);
-							l.get_node(l.index(i,0)).f(m)=l.get_node(l.index(i,1)).f(m);
+							l.get_node(i,l.ny-1).f(m)=l.get_node(i,l.ny-2).f(m);
+							l.get_node(i,0).f(m)=l.get_node(i,1).f(m);
 					}
 			} 	*/
 
@@ -399,9 +444,12 @@
 
 		/** @brief LB step */
 		void step(){
-				advect();
-				wall_bc();
-				collide();
+					advect();
+					wall_bc();
+					collide();
+
+				// WRITE INSTANTANEOUS DATA FOR VORTEX SHEDDING FREQUENCY
+				l.write_Useries();
 
 				// file io
 				if ( file_output && ( ((time+1) % output_freq) == 0 || time == 0 ) ){
@@ -442,15 +490,16 @@
 			const float_type Re;       ///< Reynolds number
 			unsigned int kbc_coluring_scheme;
 			const float_type Vmax;     ///< mean flow velocity
-		    const float_type R;
+		  const float_type R;
+			// DECLARE XC YC P1 P2 HERE;
 			const float_type visc;     ///< viscosity
 			const float_type beta;     ///< LB parameter beta
 			unsigned int time;         ///< simulation time
 			bool file_output;          ///< flag whether to write files
 			unsigned int output_freq;  ///< file output frequency
 			unsigned int output_index; ///< index for file naming
-		    std::vector<boundary_info> boundary_nodes;
-		    std::vector<wall_info> wall_nodes;
+		  std::vector<boundary_info> boundary_nodes;
+		  std::vector<wall_info> wall_nodes;
 		};
 
 	} // lb

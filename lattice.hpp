@@ -323,6 +323,15 @@ public: // file dump
 	 */
 	void write_fields(std::string file_name);
 
+	/**
+	 *  @brief Write Ux at specified probes to file
+	 *
+	 *  Write macroscopic variables to simple ascii file.
+	 *
+	 */
+
+	void write_Useries();
+
 public: // print
 
 	/** @brief print to output stream, useful for debugging only */
@@ -503,10 +512,8 @@ void lattice::write_fields(std::string file_name)
     ofs << "VARIABLES = \"X\", \"Y\", \"RHO\", \"U\", \"V\"\n";
     ofs << "ZONE T = \"BIG ZONE\", I=" << nx << ", J=" << ny << ", F=POINT" << std::endl;
 		// write body
-		for (unsigned int j=0; j<ny; ++j)
-		{
-			for (unsigned int i=0; i<nx; ++i)
-			{
+		for (unsigned int j=0; j<ny; ++j){
+			for (unsigned int i=0; i<nx; ++i){
 				ofs << i << " " << j << " "
 				    << std::scientific << nodes[(j+buffer_size)*real_nx + i + buffer_size].rho() << " "
 				    << std::scientific << nodes[(j+buffer_size)*real_nx + i + buffer_size].u() << " "
@@ -515,6 +522,21 @@ void lattice::write_fields(std::string file_name)
 		}
 	}
 	else throw std::runtime_error("could not write to file");
+}
+
+/** WRITE INSTANTANEOUS TIME DATA FOR VELOCITY AT PROBE LOCATION**/
+void lattice::write_Useries(){
+		std::ofstream ofile("U_T.txt", std::ios::out | std::ios::app);
+		float_type X,Y1,Y2;
+		// PROBE LOCATIONS, CAN EDIT LATER
+		X  = nx/4 + 2*nx/10;
+		Y1 = ny/2. + ny/10;
+		Y2 = ny/2. - ny/10;
+		if (ofile.is_open()){
+			ofile << std::scientific << l.get_node(X,Y1).u() << '\t' << l.get_node(X,Y2).u() << "\n" ;
+		}
+		else throw std::runtime_error("could not write to file");
+		return;
 }
 
 } // lb
