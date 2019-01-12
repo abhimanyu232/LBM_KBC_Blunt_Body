@@ -13,17 +13,21 @@ int main(int argc, char *argv[])
 
 	int Lx_,Ly_;
 	unsigned int KBC_COLOR_;
+	unsigned int BC_topbottom;
 	float Re_,Vmax_;
+	bool WRITE_FILE_;
 	int iter = 5000;
-	if (argc == 6 ){
+	if (argc == 8 ){
 	Lx_ = std::stoi(argv[1]);
 	Ly_ = std::stoi(argv[2]);
 	Re_ = std::stof(argv[3]);
 	Vmax_ = std::stof(argv[4]);
-	KBC_COLOR_ = std::stoi(argv[5]);
+	KBC_COLOR_ = std::stoi(argv[5]);	 // 0 : MINIMALISTIC  // 1 : CLASSICAL
+	BC_topbottom = std::stoi(argv[6]); // 0 : No Slip 			// 1 : Slip
+	WRITE_FILE_ = std::stoi(argv[7]);	 // 0 : NO WRITE 			// 1 : WRITE
 	}
 	else {
-		std::cerr << "PLEASE PROVIDE LX LY RE AND VMAX AS COMMAND LINE ARGUEMENTS" << '\n';
+		std::cerr << "PLEASE PROVIDE LX LY RE VMAX KBC_COLOR_SCHEME(0:MINIMALISTIC ; 1:CLASSICAL) TOP_BOTTOM_BC(0:NO SLIP ; 1:SLIP) AND WHETHER TO WRITE DATA TO FILE(0:NO WRITE ; 1:WRITE) AS COMMAND LINE ARGUEMENTS" << '\n';
 		return 0;
 	}
 
@@ -32,8 +36,15 @@ int main(int argc, char *argv[])
 			"0: MINIMALISTIC GROUPING \n1: CLASSICAL GROUPING\n KBC_COLOR_= " ;
 			std::cin >> KBC_COLOR_;
 	}
-	//std::cout << "Length: " << Lx_ <<"x"<<Ly_<< "\nRe:"<<Re_<< "\nVmax:" << Vmax_ << '\n';
-	lb::simulation* sim = new lb::simulation(Lx_,Ly_,Re_,Vmax_,KBC_COLOR_); // 100,100,20000,0.04
+
+	// Initialize Time Series Output Needed to Calculate Vortex Shedding Frequency
+	std::ofstream ofile("output/St_U.txt", std::ios::out  );
+	if (ofile.is_open()){
+		ofile << "P_+R" << '\t' << "P_-R" << '\t' << "P_0" << "\n" ;
+	}
+	else throw std::runtime_error("could not write to file");
+
+	lb::simulation* sim = new lb::simulation(Lx_,Ly_,Re_,Vmax_,KBC_COLOR_,BC_topbottom,WRITE_FILE_); // 100,100,20000,0.04
 	sim->initialize();
 	std::cout << *sim << std::endl;
 

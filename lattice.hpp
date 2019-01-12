@@ -106,6 +106,19 @@ public: // access populations and macroscopic quantities
 	 */
 	inline float_type& v();
 
+	/**
+	 *  @brief Get overRelaxation.
+	 *  @return local overRelaxation
+	 */
+	inline float_type gamma() const;
+
+	/**
+	 *  @brief Get/set overRelaxation.
+	 *  @return Reference to local overRelaxation
+	 */
+	inline float_type& gamma();
+
+
 public: // query and access properties
 
 	/**
@@ -351,6 +364,7 @@ public: // members
 	std::vector<float_type> rho;              ///< density data
 	std::vector<float_type> u;                ///< flow x-velocity data
 	std::vector<float_type> v;                ///< flow y-velocity data
+	std::vector<float_type> gamma;            ///< flow y-velocity data
 	std::vector<node> nodes;                  ///< array holding all node objects
 	std::vector<node> wall_nodes;             ///< array holding node objects belonging to a solid wall
 	property_array properties;                ///< properties datastructure (can hold many different properties per node)
@@ -358,11 +372,8 @@ public: // members
 	const bool periodic_y;                    ///< flag whether to use periodicity in y direction
 };
 
-
-
 // implementation
 // --------------
-
 
 // node
 
@@ -385,6 +396,8 @@ inline float_type node::u() const { return l->u[index]; }
 inline float_type& node::u() { return l->u[index]; }
 inline float_type node::v() const { return l->v[index]; }
 inline float_type& node::v() { return l->v[index]; }
+inline float_type node::gamma() const { return l->gamma[index]; }
+inline float_type& node::gamma() { return l->gamma[index]; }
 
 inline bool node::has_flag_property(std::string name) const { return l->properties.has_flag_property(name, index); }
 inline bool node::set_flag_property(std::string name) { return l->properties.set_flag_property(name, index); }
@@ -406,7 +419,7 @@ lattice::lattice(unsigned int _nx, unsigned int _ny)
 : nx(_nx), ny(_ny), size(nx*ny), buffer_size(1), real_nx(nx+2*buffer_size), real_ny(ny+2*buffer_size),
   real_size(real_nx*real_ny), n_populations(velocity_set().size),
   f( n_populations, std::vector<float_type>(real_size, 0) ),
-  rho(real_size, 0), u(real_size, 0), v(real_size, 0), nodes(real_size),
+  rho(real_size, 0), u(real_size, 0), v(real_size, 0), gamma(real_size,0), nodes(real_size),
   properties(real_size), periodic_x(true), periodic_y(true)
 {
 	// register some properties
@@ -509,7 +522,7 @@ void lattice::write_fields(std::string file_name)
 	{
 		// write tecplot header (comment that part if necessary)
 		ofs << "TITLE=\"LB2D\"\n";
-    ofs << "VARIABLES = \"X\", \"Y\", \"RHO\", \"U\", \"V\"\n";
+    ofs << "VARIABLES = \"X\", \"Y\", \"RHO\", \"U\", \"V\",\"GAMMA\" \n";
     ofs << "ZONE T = \"BIG ZONE\", I=" << nx << ", J=" << ny << ", F=POINT" << std::endl;
 		// write body
 		for (unsigned int j=0; j<ny; ++j){
@@ -517,7 +530,8 @@ void lattice::write_fields(std::string file_name)
 				ofs << i << " " << j << " "
 				    << std::scientific << nodes[(j+buffer_size)*real_nx + i + buffer_size].rho() << " "
 				    << std::scientific << nodes[(j+buffer_size)*real_nx + i + buffer_size].u() << " "
-				    << std::scientific << nodes[(j+buffer_size)*real_nx + i + buffer_size].v() << "\n";
+				    << std::scientific << nodes[(j+buffer_size)*real_nx + i + buffer_size].v() << " "
+				    << std::scientific << nodes[(j+buffer_size)*real_nx + i + buffer_size].gamma() << "\n";
 			}
 		}
 	}
@@ -526,14 +540,15 @@ void lattice::write_fields(std::string file_name)
 
 /** WRITE INSTANTANEOUS TIME DATA FOR VELOCITY AT PROBE LOCATION**/
 void lattice::write_Useries(){
-		std::ofstream ofile("U_T.txt", std::ios::out | std::ios::app);
-		float_type X,Y1,Y2;
+		std::ofstream ofile("output/St_U.txt", std::ios::out | std::ios::app);
+		float_type X,Y1,Y2,Y3;
 		// PROBE LOCATIONS, CAN EDIT LATER
 		X  = nx/4 + 2*nx/10;
 		Y1 = ny/2. + ny/10;
 		Y2 = ny/2. - ny/10;
+		Y3 = ny/2.;
 		if (ofile.is_open()){
-			ofile << std::scientific << l.get_node(X,Y1).u() << '\t' << l.get_node(X,Y2).u() << "\n" ;
+			ofile << std::scientific << get_node(X,Y1).u() <<'\t'<< get_node(X,Y2).u() <<'\t'<< get_node(X,Y3).u() <<"\n";
 		}
 		else throw std::runtime_error("could not write to file");
 		return;

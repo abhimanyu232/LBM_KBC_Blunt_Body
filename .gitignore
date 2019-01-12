@@ -1,4 +1,9 @@
 *o
 /output/*txt
+/output/*out
+/output/*tec
 *log
+*txt
+*out
+*tec
 .LB2D

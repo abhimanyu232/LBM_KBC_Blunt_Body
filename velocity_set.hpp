@@ -48,7 +48,7 @@ public:
 
 	const std::array<std::array<int, 9>, 2> c = {{{{       0,       1,       0,      -1,       0,       1,      -1,      -1,       1}},
 	                                              {{       0,       0,       1,       0,      -1,       1,       1,      -1,      -1}}}}; ///< Molecular velocities
-	const std::array<int, 9> rflct_latticeVelocity= 		{{			 0,				3,			 4,				1,			 2,				7,			 8,				5,			 6}};
+	const std::array<int, 9> rflct_latticeVelocity = 		{{			 0,				3,			 4,				1,			 2,				7,			 8,				5,			 6}};
 
 	const float_type cs = 1.0/std::sqrt(3.0);   ///< Speed of sound
 
@@ -114,7 +114,7 @@ public:
 		n.f(8) = feq[8];
 	}
 
-	void interpolation_node(const int i, const int j, const int m; int& i_interp, int & j_interp){
+	void interpolation_node(int i, int j, int m, int& i_interp, int& j_interp) const {
 		switch (m) {
 			case 1:
 				i_interp = i-1;

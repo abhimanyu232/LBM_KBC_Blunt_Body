@@ -50,19 +50,22 @@
 		 *  @param[in] _Re   Reynolds number
 		 *  @param[in] _Vmax mean flow velocity
 		 */
-		simulation(unsigned int nx, unsigned int ny, float_type _Re, float_type _Vmax, unsigned int KBC_COLOR_)
+		simulation(unsigned int nx, unsigned int ny, float_type _Re, float_type _Vmax, unsigned int KBC_COLOR_, unsigned int BC_topbottom,bool WRITE_FILE_)
 		: l(nx, ny),
 		  shift(velocity_set().size),
 		  Re(_Re),
 			kbc_coluring_scheme(KBC_COLOR_),
+			TopBotBC(BC_topbottom),
 		  Vmax(_Vmax),
 	    R(l.ny/10),
+			x_c(l.nx/4),
+			y_c(l.ny/2),
+			Lx(x_c + l.nx/10),
 	    visc(Vmax*R/Re),
-	      //visc( /*fill in your code here*/ 0.001),
-		  beta(1/(((2*visc)/pow(1/std::sqrt(3.0),2))+1.0)),
-	      //beta( /*fill in your code here*/ 0.9),
+	    beta(1/(((2*visc)/pow(1/std::sqrt(3.0),2))+1.0)),
+			cs(1/std::sqrt(3.0)),
 		  time(0),
-		  file_output(false), // set to true if you want to write files
+		  file_output(WRITE_FILE_), // set to true if you want to write files
 		  output_freq(250),
 		  output_index(0)
 		{
@@ -91,7 +94,8 @@
 				for (int i=0; i<static_cast<int>(l.nx); ++i){
 	        l.get_node(i,j).u()   = 0;
 					l.get_node(i,j).v()   = 0;
-          l.get_node(i,j).rho() 	=	rho;
+          l.get_node(i,j).rho() =	rho;
+					l.get_node(i,j).gamma() = 2. ;
           velocity_set().equilibrate(l.get_node(i,j));
 				}
 			}
@@ -99,11 +103,6 @@
 
 	        //we make our way through every node in the lattice from left to right and bottom to top. For every node we iterate over each direction and calculate the distance from that node to the circle in the specific direction. We solve for dx after substituting x=x0 +ci*dx into the equation for the circle. If dx is between 0 and 1 then we know that the node is close to the circle. We then figure out whether it is inside the circle or on the outside. We want the nodes that are on the outside of the circle. Once we have these we can want arrays containing the location of these nodes and their distance from the circle for each direction.
 
-	        //define variables for position and radius of cylinder
-	        //const float_type R(l.nx/8);
-	        const float_type x_c(l.nx/4);
-	        const float_type y_c(l.ny/2);
-					const float_type Lx(x_c + l.nx/10);
 	        node n_boundary;
 						// coefficients of a.dx^2 + b.dx + c = 0
 	        float_type a, b, c, dx, D;
@@ -217,77 +216,113 @@
 		/**  @brief apply wall boundary conditions */
 		void wall_bc(){
 					// bounce back bc by looping over all boundary cells
-					/*
+
 		  for (auto& bi : boundary_nodes){
 		      for (int i=1;i<9;++i){
 			        if (bi.distance[i] > 0)
 			          bi.n.f(velocity_set().rflct_latticeVelocity[i]) = bi.n.f(i);
 		      }
 
-		  } 	*/ 	// GRAD BOUNDARY CONDITIONS
+		  } 	 /*	// GRAD BOUNDARY CONDITIONS
 			for (auto& bi : boundary_nodes){
 					int count = 0;
 					float_type vx_temp=0.0;
 					float_type vy_temp=0.0;
+					const int i = bi.i;
+					const int j = bi.j;
 					for (int m=1;m<9;++m){
 							if (bi.distance[m] > 0){
 								bi.n.f(velocity_set().rflct_latticeVelocity[m]) = bi.n.f(m);
 								int i_interp,j_interp;
-								const int i = bi.i;
-								const int j = bi.j;
-								interpolation_node(i,j,m,i_interp,j_interp);
+								velocity_set().interpolation_node(i,j,m,i_interp,j_interp);
 								auto n_interp = l.get_node(i_interp,j_interp);
 													// get velocity via interpolation and get density after bounce back
 								vx_temp +=  bi.distance[m]*n_interp.u()/( velocity_set().c[0][m]+bi.distance[m] );
 								vy_temp +=  bi.distance[m]*n_interp.v()/( velocity_set().c[1][m]+bi.distance[m] );
 								count++;
 							}
-							bi.n.rho += b.n.f();
+							bi.n.rho() += bi.n.f(m);
 					}
-					bi.n.u = vx_temp/count;
-					bi.n.v = vy_temp/count;
+					bi.n.u() = vx_temp/count;
+					bi.n.v() = vy_temp/count;
 
-						// calculate central differences duxdx duxdy duydx duydy
 					float_type dudx,dudy,dvdx,dvdy;
+					int ip,ip2,jp,jp2;
+					ip = i + 1 ; ip2 = i + 2 ; jp = j + 1; jp2 = j + 2;
+						// One Sided Second Order Approx of dUdX //
+					dudx = (-3*l.get_node(i,j).u() + 4*l.get_node(ip,j).u() - l.get_node(ip2,j).u() )/2;
+					dvdx = (-3*l.get_node(i,j).v() + 4*l.get_node(ip,j).v() - l.get_node(ip2,j).v() )/2;
+					dudy = (-3*l.get_node(i,j).u() + 4*l.get_node(i,jp).u() - l.get_node(i,jp2).u() )/2;
+					dvdy = (-3*l.get_node(i,j).v() + 4*l.get_node(i,jp).v() - l.get_node(i,jp2).v() )/2;
+
+					float_type Pxx,Pyy,Pxy;
+					Pxx = bi.n.rho()*( cs*cs + bi.n.u()*bi.n.u() - (cs*cs*(2*dudx)/(2*beta)) );
+					Pyy = bi.n.rho()*( cs*cs + bi.n.v()*bi.n.v() - (cs*cs*(2*dvdy)/(2*beta)) );
+					Pxy = bi.n.rho()*( bi.n.u()*bi.n.v() - (cs*cs*(dudy + dvdx)/(2*beta) ) );
 
 					for (int m=1;m<9;++m){
-							float_type EqPressure,nonEqPressure,Pxx,Pyy,Pxy;
 							// only for nodes with missing data i.e if bi.distance[m]>0 ==>
 							// pop. to be replaced is bi.n.f(velocity_set().rflct_latticeVelocity[m])
-							if (bi.distance>0){
-
+							if (bi.distance[m]>0){
+								bi.n.f(velocity_set().rflct_latticeVelocity[m]) = velocity_set().W[m]*(
+								bi.n.rho()*(1 + (bi.n.u()*velocity_set().c[0][m]+bi.n.v()*velocity_set().c[1][m])/(cs*cs) ) +
+								(1/2*std::pow(cs,2))*( (Pxx-bi.n.rho()*cs*cs)*(velocity_set().c[0][m]*velocity_set().c[0][m]-cs*cs) +
+								(Pyy-bi.n.rho()*cs*cs)*(velocity_set().c[1][m]*velocity_set().c[1][m]-cs*cs) +
+								(Pxy*velocity_set().c[0][m]*velocity_set().c[1][m])*(2) )	);
 							}
-						// calculate equilibrium using grad scheme formula.
 					}
+			}*/
 
 
+			switch (TopBotBC) { 	// user input
+				case 0: // no slip
+					for (int i=1 ; i < l.nx-1 ; ++i){
+							auto n_topwall = l.get_node(i,l.ny-1);
+							n_topwall.u()   = 0;
+							n_topwall.v()   = 0;
+							n_topwall.rho() =	1;
+							velocity_set().equilibrate(n_topwall);
 
-			}
+							auto n_botwall = l.get_node(i,0);
+							n_botwall.u()   = 0;
+							n_botwall.v()   = 0;
+							n_botwall.rho() =	1;
+							velocity_set().equilibrate(n_botwall);
+					}					// ADD BC HERE WHEN DONE
+					break;
 
-					/*
-        // SLIP BOUNDARY CONDITION ON TOP AND BOTTOM
-			for (int i=0 ; i < l.nx ; ++i){
-					for (int m=0; m < velocity_set().size; ++m){
-							l.get_node(i,l.ny-1).f(m)=l.get_node(i,l.ny-2).f(m);
-							l.get_node(i,0).f(m)=l.get_node(i,1).f(m);
+				case 1: // slip // FIX THIS IF NEEDED ACC TO FABIAN
+					for (int i=1 ; i < l.nx-1 ; ++i){
+						l.get_node(l.index(i,l.ny-1)).f(8)=l.get_node(l.index(i-1,l.ny-2)).f(5);
+						l.get_node(l.index(i,l.ny-1)).f(7)=l.get_node(l.index(i+1,l.ny-2)).f(6);
+						l.get_node(l.index(i,l.ny-1)).f(4)=l.get_node(l.index(i,l.ny-2)).f(2);
+
+						l.get_node(l.index(i,l.ny-1)).f(1)=l.get_node(l.index(i-1,l.ny-1)).f(1);
+						l.get_node(l.index(i,l.ny-1)).f(3)=l.get_node(l.index(i+1,l.ny-1)).f(3);
+
+						l.get_node(l.index(i,l.ny-1)).f(5)=l.get_node(l.index(i-1,l.ny)).f(8);
+			      l.get_node(l.index(i,l.ny-1)).f(6)=l.get_node(l.index(i+1,l.ny)).f(7);
+			      l.get_node(l.index(i,l.ny-1)).f(2)=l.get_node(l.index(i,l.ny)).f(4);
+
+			      //bottom wall
+						l.get_node(l.index(i,0)).f(5)=l.get_node(l.index(i-1,1)).f(8);
+						l.get_node(l.index(i,0)).f(6)=l.get_node(l.index(i+1,1)).f(7);
+						l.get_node(l.index(i,0)).f(2)=l.get_node(l.index(i,1)).f(4);
+
+						l.get_node(l.index(i,0)).f(1)=l.get_node(l.index(i-1,0)).f(1);
+						l.get_node(l.index(i,0)).f(3)=l.get_node(l.index(i+1,0)).f(3);
+
+						l.get_node(l.index(i,0)).f(8)=l.get_node(l.index(i-1,-1)).f(5);
+						l.get_node(l.index(i,0)).f(7)=l.get_node(l.index(i+1,-1)).f(6);
+						l.get_node(l.index(i,0)).f(4)=l.get_node(l.index(i,-1)).f(2);
+
+						/*	for (int m=0; m < velocity_set().size; ++m){
+									l.get_node(i,l.ny-1).f(m)=l.get_node(i,l.ny-2).f(m);
+									l.get_node(i,0).f(m)=l.get_node(i,1).f(m);
+							}*/
 					}
-			} 	*/
-
-					// NO SLIP  BOUNDARY CONDITION ON TOP AND BOTTOM
-			for (int i=0 ; i < l.nx ; ++i){
-					auto n_topwall = l.get_node(i,l.ny-1);
-					n_topwall.u()   = 0;
-					n_topwall.v()   = 0;
-					n_topwall.rho() =	1;
-					velocity_set().equilibrate(n_topwall);
-
-					auto n_botwall = l.get_node(i,0);
-					n_botwall.u()   = 0;
-					n_botwall.v()   = 0;
-					n_botwall.rho() =	1;
-					velocity_set().equilibrate(n_botwall);
+					break;
 			}
-
 
 			for (int i=0; i<l.ny; ++i){
 					// INLET BOUNDARY - EQUILIBRIATE AT INITIAL/BOUNDARY VALUE
@@ -421,9 +456,9 @@
 		                    entScalarProd_dHdH += delH[i]*delH[i]/feq[i];
 		            }
 
-		            float_type gamma= (1.0/beta) - (2.0 - 1.0/beta)*(entScalarProd_dSdH/entScalarProd_dHdH);
-		            // gamma = 1/beta; ->	regularised 	// gamma = 2 -> LBGK
-
+		            float_type gamma = (1.0/beta) - (2.0 - 1.0/beta)*(entScalarProd_dSdH/entScalarProd_dHdH);
+		            if (entScalarProd_dHdH == 0)  gamma = 2; // gamma = 1/beta; ->	regularised 	// gamma = 2 -> LBGK
+								n.gamma() = gamma;
 
 		            for (int i=0; i<9; ++i)
 		            n.f(i)=feq[i]+(1-2.0*beta)*delS[i]+(1.0-gamma*beta)*delH[i];
@@ -465,7 +500,7 @@
 			/** write macroscopic variables to ascii file */
 			void write_fields(){
 				std::stringstream fns;
-				fns << "output/data_" << std::setfill('0') << std::setw(4) << output_index << ".txt";
+				fns << "output/data_" << std::setfill('0') << std::setw(4) << output_index << ".tec";
 				l.write_fields(fns.str());
 			}
 
@@ -489,11 +524,16 @@
 			std::vector<int> shift;    ///< amount of nodes to shift each population in data structure during advection
 			const float_type Re;       ///< Reynolds number
 			unsigned int kbc_coluring_scheme;
+			unsigned int TopBotBC;
 			const float_type Vmax;     ///< mean flow velocity
-		  const float_type R;
+		  const float_type R; 			 /// Radius of Nosecone/Geometry
+			const float_type x_c; 		 /// X coord of centre of Nosecone/Geometry
+			const float_type y_c;			 /// Y coord of centre of Nosecone/Geometry
+			const float_type Lx;			 /// Length of Nosecone
 			// DECLARE XC YC P1 P2 HERE;
 			const float_type visc;     ///< viscosity
 			const float_type beta;     ///< LB parameter beta
+			const float_type cs; 			 /// speed of sound
 			unsigned int time;         ///< simulation time
 			bool file_output;          ///< flag whether to write files
 			unsigned int output_freq;  ///< file output frequency
