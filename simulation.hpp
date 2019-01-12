@@ -505,7 +505,7 @@
 					collide();
 
 				// write instantaneous data like Body Forces, Velocity at Probe Locations etc.
-				l.write_TimeMonitors(Force_X,Force_Y);
+				l.write_TimeMonitors(time,Force_X,Force_Y);
 
 				// write entire field data
 				if ( file_output && ( ((time+1) % output_freq) == 0 || time == 0 ) ){
