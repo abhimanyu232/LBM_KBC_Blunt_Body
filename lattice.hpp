@@ -343,7 +343,7 @@ public: // file dump
 	 *
 	 */
 
-	void write_Useries();
+	void write_TimeMonitors(float_type Fx, float_type Fy);
 
 public: // print
 
@@ -538,17 +538,22 @@ void lattice::write_fields(std::string file_name)
 	else throw std::runtime_error("could not write to file");
 }
 
-/** WRITE INSTANTANEOUS TIME DATA FOR VELOCITY AT PROBE LOCATION**/
-void lattice::write_Useries(){
-		std::ofstream ofile("output/St_U.txt", std::ios::out | std::ios::app);
+/** WRITE INSTANTANEOUS TIME DATA FOR ANY VARIABLE AT PROBE LOCATION, WRITE FORCE DATA etc**/
+void lattice::write_TimeMonitors(float_type Fx, float_type Fy){
+		std::ofstream ofile("output/monitors.txt", std::ios::out | std::ios::app);
 		float_type X,Y1,Y2,Y3;
 		// PROBE LOCATIONS, CAN EDIT LATER
 		X  = nx/4 + 2*nx/10;
-		Y1 = ny/2. + ny/10;
-		Y2 = ny/2. - ny/10;
-		Y3 = ny/2.;
+		Y1 = ny/2. + ny/10;			// P+R
+		Y2 = ny/2. - ny/10;			// P-R
+		Y3 = ny/2.; 						// P0
+
 		if (ofile.is_open()){
-			ofile << std::scientific << get_node(X,Y1).u() <<'\t'<< get_node(X,Y2).u() <<'\t'<< get_node(X,Y3).u() <<"\n";
+				if (time == 0 ) {
+						ofile << "U_P+R" << '\t' << "U_P-R" << '\t' << "U_P0" << '\t' << "X_Force" << '\t' << "Y_Force" << "\n" ;
+				}
+
+				ofile << std::scientific << get_node(X,Y1).u() <<'\t'<< get_node(X,Y2).u() <<'\t'<< get_node(X,Y3).u() << '\t' << Fx << '\t' << Fy << "\n";
 		}
 		else throw std::runtime_error("could not write to file");
 		return;

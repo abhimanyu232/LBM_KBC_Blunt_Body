@@ -38,11 +38,8 @@ int main(int argc, char *argv[])
 	}
 
 	// Initialize Time Series Output Needed to Calculate Vortex Shedding Frequency
-	std::ofstream ofile("output/St_U.txt", std::ios::out  );
-	if (ofile.is_open()){
-		ofile << "P_+R" << '\t' << "P_-R" << '\t' << "P_0" << "\n" ;
-	}
-	else throw std::runtime_error("could not write to file");
+	std::ofstream ofile("output/monitors.txt", std::ios::out );
+	if (!ofile.is_open()){ throw std::runtime_error("could not write to file");	}
 
 	lb::simulation* sim = new lb::simulation(Lx_,Ly_,Re_,Vmax_,KBC_COLOR_,BC_topbottom,WRITE_FILE_); // 100,100,20000,0.04
 	sim->initialize();

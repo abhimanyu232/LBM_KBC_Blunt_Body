@@ -64,6 +64,8 @@
 	    visc(Vmax*R/Re),
 	    beta(1/(((2*visc)/pow(1/std::sqrt(3.0),2))+1.0)),
 			cs(1/std::sqrt(3.0)),
+			Force_X(0),
+			Force_Y(0),
 		  time(0),
 		  file_output(WRITE_FILE_), // set to true if you want to write files
 		  output_freq(250),
@@ -479,14 +481,33 @@
 
 		/** @brief LB step */
 		void step(){
+
+						// store populations at previous time step for force calculations //
+					for (auto& bi : boundary_nodes){
+							for (int m=1;m<velocity_set().size;++m){
+									if (bi.distance[m]>0)
+											bi.population_prev[m] = bi.n.f(m);
+							}
+					}
 					advect();
 					wall_bc();
+						// calculate forces using momentum exchange method
+					for (auto& bi : boundary_nodes){
+							for (int m=1;m<velocity_set().size;++m){
+									if (bi.distance[m]>0){
+											int rflct = velocity_set().rflct_latticeVelocity[m];
+											Force_X += velocity_set().c[0][rflct]*( bi.n.f(rflct) + bi.population_prev[m]);
+											Force_Y += velocity_set().c[1][rflct]*( bi.n.f(rflct) + bi.population_prev[m]);
+									}
+							}
+					}
+
 					collide();
 
-				// WRITE INSTANTANEOUS DATA FOR VORTEX SHEDDING FREQUENCY
-				l.write_Useries();
+				// write instantaneous data like Body Forces, Velocity at Probe Locations etc.
+				l.write_TimeMonitors(Force_X,Force_Y);
 
-				// file io
+				// write entire field data
 				if ( file_output && ( ((time+1) % output_freq) == 0 || time == 0 ) ){
 						write_fields();
 						++output_index;
@@ -534,6 +555,8 @@
 			const float_type visc;     ///< viscosity
 			const float_type beta;     ///< LB parameter beta
 			const float_type cs; 			 /// speed of sound
+			float_type Force_X;				 /// Drag Force
+			float_type Force_Y;				 /// Lift Force
 			unsigned int time;         ///< simulation time
 			bool file_output;          ///< flag whether to write files
 			unsigned int output_freq;  ///< file output frequency
