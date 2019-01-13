@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 	unsigned int KBC_COLOR_;
 	unsigned int BC_topbottom;
 	float Re_,Vmax_;
+	float _Slope;
 	bool WRITE_FILE_;
 	int iter = 5000;
 	if (argc == 8 ){
@@ -37,11 +38,17 @@ int main(int argc, char *argv[])
 			std::cin >> KBC_COLOR_;
 	}
 
+	do {
+		std::cout << "Please Enter Slope for the Boattail Section -> 0 < m < 1 \nSharp Trailing edge for m>0.8" << '\n';
+		std::cin >> _Slope;
+	} while(std::fabs(_Slope) > 1);
+
+
 	// Initialize Time Series Output Needed to Calculate Vortex Shedding Frequency
 	std::ofstream ofile("output/monitors.txt", std::ios::out );
 	if (!ofile.is_open()){ throw std::runtime_error("could not write to file");	}
 
-	lb::simulation* sim = new lb::simulation(Lx_,Ly_,Re_,Vmax_,KBC_COLOR_,BC_topbottom,WRITE_FILE_); // 100,100,20000,0.04
+	lb::simulation* sim = new lb::simulation(Lx_,Ly_,Re_,Vmax_,KBC_COLOR_,BC_topbottom,WRITE_FILE_,std::fabs(_Slope)); // 100,100,20000,0.04
 	sim->initialize();
 	std::cout << *sim << std::endl;
 

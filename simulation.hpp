@@ -48,7 +48,7 @@
 		 *  @param[in] _Re   Reynolds number
 		 *  @param[in] _Vmax mean flow velocity
 		 */
-		simulation(unsigned int nx, unsigned int ny, float_type _Re, float_type _Vmax, unsigned int KBC_COLOR_, unsigned int BC_topbottom,bool WRITE_FILE_)
+		simulation(unsigned int nx, unsigned int ny, float_type _Re, float_type _Vmax, unsigned int KBC_COLOR_, unsigned int BC_topbottom,bool WRITE_FILE_, float_type _Slope)
 		: l(nx, ny),
 		  shift(velocity_set().size),
 		  Re(_Re),
@@ -62,6 +62,7 @@
 	    visc(Vmax*R/Re),
 	    beta(1/(((2*visc)/pow(1/std::sqrt(3.0),2))+1.0)),
 			cs(1/std::sqrt(3.0)),
+			slope(_Slope),
 			Force_X(0),
 			Force_Y(0),
 		  time(0),
@@ -172,7 +173,7 @@
 		void set_BoattailNoseconeBoundary(){
 			// coefficients of a.dx^2 + b.dx + c = 0
 			float_type a, b, c, dx, D;
-			float_type m = 0.5; // slope of the Boattail Section
+			float_type m = slope; // slope of the Boattail Section
 			float_type H = R*(1-m);
 			for (int y=0; y<l.ny+1; ++y){            //direction y , y is y_0
 					for (int x=0; x<l.nx+1; ++x){        //direction x , x is x_0
@@ -644,6 +645,7 @@
 			const float_type visc;     ///< viscosity
 			const float_type beta;     ///< LB parameter beta
 			const float_type cs; 			 /// speed of sound
+			const float_type slope;		 /// slope of boattail section
 			float_type Force_X;				 /// Drag Force
 			float_type Force_Y;				 /// Lift Force
 			unsigned int time;         ///< simulation time
