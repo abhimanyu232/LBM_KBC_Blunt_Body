@@ -28,8 +28,6 @@
 		    node n;
 		};
 
-	  boundary_info info_n_boundary;
-
 		/**
 		 *  @brief Simulation class implementing LB
 		 *
@@ -68,7 +66,7 @@
 			Force_Y(0),
 		  time(0),
 		  file_output(WRITE_FILE_), // set to true if you want to write files
-		  output_freq(250),
+		  output_freq(200),
 		  output_index(0)
 		{
 			// define amount to shift populations for advection
@@ -102,71 +100,157 @@
 				}
 			}
 
-
-	        //we make our way through every node in the lattice from left to right and bottom to top. For every node we iterate over each direction and calculate the distance from that node to the circle in the specific direction. We solve for dx after substituting x=x0 +ci*dx into the equation for the circle. If dx is between 0 and 1 then we know that the node is close to the circle. We then figure out whether it is inside the circle or on the outside. We want the nodes that are on the outside of the circle. Once we have these we can want arrays containing the location of these nodes and their distance from the circle for each direction.
-
-	        node n_boundary;
-						// coefficients of a.dx^2 + b.dx + c = 0
-	        float_type a, b, c, dx, D;
-
-	        	//info_n_boundary.distance = {};                      //will be of type array
-
-	        for (int y=0; y<l.ny+1; ++y){            //direction y , y is y_0
-	            for (int x=0; x<l.nx+1; ++x){        //direction x , x is x_0
-									if ( x >= (x_c - 5) && x <= (Lx+5)  &&  (y >= y_c - R - 5)  && y <= (y_c + R + 5) ){
-											boundary_info bi;
-											bool found_intersection = false;
-
-											if ((float_type)x <= Lx) {
-												// DO THE REGULAR THING
-												if ((y-y_c)*(y-y_c) - (R*R)*(x-x_c)/(Lx - x_c) > 0  ){ //check if node is outside nosecone, search for nearest boundary node
-													for (int i=1; i<9; ++i){        //9 directions
-														a = velocity_set().c[1][i]*velocity_set().c[1][i];
-														b = 2*velocity_set().c[1][i]*(y - y_c) - R*R*velocity_set().c[0][i]/(Lx - x_c);
-														c =  (y-y_c)*(y-y_c) - R*R*(x-x_c)/(Lx - x_c);
-														D = b*b-4*a*c;
-
-														if (D>=0){
-															const auto dx1 =(-b + std::sqrt(b*b-4*a*c))/(2*a);
-															const auto dx2 =(-b - std::sqrt(b*b-4*a*c))/(2*a);
-															dx = 0;
-															if (dx1 > 0) dx = dx1;
-															if (dx2 > 0 && dx2 < dx1) dx = dx2;
-
-																	// ON LARGER STENCIL, WILL CHANGE AND INCLUDE dx>1 ALSO : depends on the lattice velocity i.e consider dx>1 when c[1,2][i] > 1
-															if (dx>0 && dx<=1){
-																bi.distance[i] = dx;
-																found_intersection = true;
-															}
-														}
-													}
-												}		else	{
-													wall_info wi{l.get_node(x,y)};
-													wall_nodes.push_back(wi);
-												}
-											}	else if ((float_type)x >= Lx) { // LONGER THAN NOSECONE X>=LX
-													if ((y <= y_c + R) && (y >= y_c - R) ){
-															for (int i=1; i<9; ++i){
-																	dx = (Lx-x)/(velocity_set().c[0][i]);
-																	if (dx>0 && dx<=1){
-																			bi.distance[i] = dx;
-																			found_intersection = true;
-																	}
-															}
-													}
-											}
-
-											if (found_intersection){
-													bi.n = l.get_node(x,y);
-													bi.i = x;
-													bi.j = y;
-													boundary_nodes.push_back(bi);
-											}
-									}
-	            }
-	        }
+					//set_SimpleNoseconeBoundary();
+					set_BoattailNoseconeBoundary();
+					//set_FinNoseconeBoundary();
 	        std::cout << "found " << boundary_nodes.size() << " boundary nodes" << std::endl;
 		return ;
+		}
+
+		/**
+		 * Set nodes inside SIMPLE NOZZLE geometry as wall, and populate the boundary_nodes vector
+		 * with boundary nodes and distances
+		**/
+		void set_SimpleNoseconeBoundary(){
+				// coefficients of a.dx^2 + b.dx + c = 0
+      float_type a, b, c, dx, D;
+      for (int y=0; y<l.ny+1; ++y){            //direction y , y is y_0
+          for (int x=0; x<l.nx+1; ++x){        //direction x , x is x_0
+							if ( x >= (x_c - 5) && x <= (Lx+5)  &&  (y >= y_c - R - 5)  && y <= (y_c + R + 5) ){
+									boundary_info bi;
+									bool found_intersection = false;
+
+									if ((float_type)x <= Lx) {
+										// DO THE REGULAR THING
+										if ((y-y_c)*(y-y_c) - (R*R)*(x-x_c)/(Lx - x_c) > 0  ){ //check if node is outside nosecone, search for nearest boundary node
+											for (int i=1; i<9; ++i){        //9 directions
+												a = velocity_set().c[1][i]*velocity_set().c[1][i];
+												b = 2*velocity_set().c[1][i]*(y - y_c) - R*R*velocity_set().c[0][i]/(Lx - x_c);
+												c =  (y-y_c)*(y-y_c) - R*R*(x-x_c)/(Lx - x_c);
+												D = b*b-4*a*c;
+
+												if (D>=0){
+													const auto dx1 =(-b + std::sqrt(b*b-4*a*c))/(2*a);
+													const auto dx2 =(-b - std::sqrt(b*b-4*a*c))/(2*a);
+													dx = 0;
+													if (dx1 > 0) dx = dx1;
+													if (dx2 > 0 && dx2 < dx1) dx = dx2;
+
+													if (dx>0 && dx<=1){
+														bi.distance[i] = dx;
+														found_intersection = true;
+													}
+												}
+											}
+										}		else	{
+											wall_info wi{l.get_node(x,y)};
+											wall_nodes.push_back(wi);
+										}
+									}	else if ((float_type)x >= Lx) { // LONGER THAN NOSECONE X>=LX
+											if ((y <= y_c + R) && (y >= y_c - R) ){
+													for (int i=1; i<9; ++i){
+															dx = (Lx-x)/(velocity_set().c[0][i]);
+															if (dx>0 && dx<=1){
+																	bi.distance[i] = dx;
+																	found_intersection = true;
+															}
+													}
+											}
+									}
+
+									if (found_intersection){
+											bi.n = l.get_node(x,y);
+											bi.i = x;
+											bi.j = y;
+											boundary_nodes.push_back(bi);
+									}
+							}
+          }
+      }
+		}
+
+		void set_BoattailNoseconeBoundary(){
+			// coefficients of a.dx^2 + b.dx + c = 0
+			float_type a, b, c, dx, D;
+			float_type m = 0.5; // slope of the Boattail Section
+			float_type H = R*(1-m);
+			for (int y=0; y<l.ny+1; ++y){            //direction y , y is y_0
+					for (int x=0; x<l.nx+1; ++x){        //direction x , x is x_0
+							if ( x >= (x_c - 5) && x <= (Lx+R+5)  &&  (y >= y_c - R - 5)  && y <= (y_c + R + 5) ){
+									boundary_info bi;
+									bool found_intersection = false;
+
+									if ((float_type)x <= Lx) {
+										// DO THE REGULAR THING
+										if ((y-y_c)*(y-y_c) - (R*R)*(x-x_c)/(Lx - x_c) > 0  ){ //check if node is outside nosecone, search for nearest boundary node
+											for (int i=1; i<9; ++i){        //9 directions
+												a = velocity_set().c[1][i]*velocity_set().c[1][i];
+												b = 2*velocity_set().c[1][i]*(y - y_c) - R*R*velocity_set().c[0][i]/(Lx - x_c);
+												c =  (y-y_c)*(y-y_c) - R*R*(x-x_c)/(Lx - x_c);
+												D = b*b-4*a*c;
+
+												if (D>=0){
+													const auto dx1 =(-b + std::sqrt(b*b-4*a*c))/(2*a);
+													const auto dx2 =(-b - std::sqrt(b*b-4*a*c))/(2*a);
+													dx = 0;
+													if (dx1 > 0) dx = dx1;
+													if (dx2 > 0 && dx2 < dx1) dx = dx2;
+
+													if (dx>0 && dx<=1){
+														bi.distance[i] = dx;
+														found_intersection = true;
+													}
+												}
+											}
+										}		else	{
+											wall_info wi{l.get_node(x,y)};
+											wall_nodes.push_back(wi);
+										}	 		// CHANGES HERE ONWARDS
+									}	else if ((float_type)x >= Lx && (float_type)x <= Lx + R) {
+											// Boattail section y = +-m*x + R
+											if ((y >= y_c - m*(x-Lx) + R) || (y <= y_c + m*(x-Lx) - R) ){
+													for (int i=1; i<9; ++i){
+														float_type dx = 0;
+														if ((y >= y_c - m*(x-Lx) + R)) {
+															dx = (-m*(x-Lx)+R-(y-y_c))/(velocity_set().c[1][i] + m*velocity_set().c[0][i]);
+														} else if ((y <= y_c + m*(x-Lx) - R) ){
+															dx = ( m*(x-Lx)-R-(y-y_c))/(velocity_set().c[1][i] - m*velocity_set().c[0][i]);
+														} else {std::cerr<<"ERROR CALCULATING DISTANCE TO WALL IN BOATTAL SECTION"<<'\n';}
+
+														if (dx>0 && dx<=1){
+																bi.distance[i] = dx;
+																found_intersection = true;
+														}
+													}
+											} 	else	{
+												wall_info wi{l.get_node(x,y)};
+												wall_nodes.push_back(wi);
+											}
+										} else if ( (float_type)x >= Lx + R ){
+											// after Boattail | wall | change y limits -> (yc+H,yc-H)
+											if ((y <= y_c + H ) && (y >= y_c-H) ){
+													for (int i=1; i<9; ++i){
+															dx = (Lx+R-x)/(velocity_set().c[0][i]);
+															if (dx>0 && dx<=1){
+																	bi.distance[i] = dx;
+																	found_intersection = true;
+															}
+													}
+											}
+									}
+									if (found_intersection){
+											bi.n = l.get_node(x,y);
+											bi.i = x;
+											bi.j = y;
+											boundary_nodes.push_back(bi);
+									}
+							}
+					}
+			}
+		}
+
+		void set_FinNoseconeBoundary(){
+
 		}
 
 		/**
@@ -239,8 +323,13 @@
 								velocity_set().interpolation_node(i,j,m,i_interp,j_interp);
 								auto n_interp = l.get_node(i_interp,j_interp);
 													// get velocity via interpolation and get density after bounce back
-								vx_temp +=  bi.distance[m]*n_interp.u()/( velocity_set().c[0][m]+bi.distance[m] );
-								vy_temp +=  bi.distance[m]*n_interp.v()/( velocity_set().c[1][m]+bi.distance[m] );
+								if ( m==1 || m==2 || m==3 || m==4){
+										vx_temp +=  bi.distance[m]*n_interp.u()/( 1 + bi.distance[m] );
+										vy_temp +=  bi.distance[m]*n_interp.v()/( 1 + bi.distance[m] );
+								} else {
+										vx_temp +=  bi.distance[m]*n_interp.u()/( sqrt(2.) + bi.distance[m] );
+										vy_temp +=  bi.distance[m]*n_interp.v()/( sqrt(2.) + bi.distance[m] );
+								}
 								count++;
 							}
 							bi.n.rho() += bi.n.f(m);
@@ -260,21 +349,20 @@
 					float_type Pxx,Pyy,Pxy;
 					Pxx = bi.n.rho()*( cs*cs + bi.n.u()*bi.n.u() - (cs*cs*(2*dudx)/(2*beta)) );
 					Pyy = bi.n.rho()*( cs*cs + bi.n.v()*bi.n.v() - (cs*cs*(2*dvdy)/(2*beta)) );
-					Pxy = bi.n.rho()*( bi.n.u()*bi.n.v() - (cs*cs*(dudy + dvdx)/(2*beta) ) );
+					Pxy = bi.n.rho()*( bi.n.u()*bi.n.v() - (cs*cs*(dudy + dvdx)/(2*beta)) );
 
 					for (int m=1;m<9;++m){
 							// only for nodes with missing data i.e if bi.distance[m]>0 ==>
 							// pop. to be replaced is bi.n.f(velocity_set().rflct_latticeVelocity[m])
 							if (bi.distance[m]>0){
 								bi.n.f(velocity_set().rflct_latticeVelocity[m]) = velocity_set().W[m]*(
-								bi.n.rho()*(1 + (bi.n.u()*velocity_set().c[0][m]+bi.n.v()*velocity_set().c[1][m])/(cs*cs) ) +
-								(1/2*std::pow(cs,2))*( (Pxx-bi.n.rho()*cs*cs)*(velocity_set().c[0][m]*velocity_set().c[0][m]-cs*cs) +
-								(Pyy-bi.n.rho()*cs*cs)*(velocity_set().c[1][m]*velocity_set().c[1][m]-cs*cs) +
-								(Pxy*velocity_set().c[0][m]*velocity_set().c[1][m])*(2) )	);
+								bi.n.rho()*( 1+(bi.n.u()*velocity_set().c[0][m]+bi.n.v()*velocity_set().c[1][m])/(cs*cs) ) +
+								( ( (Pxx-bi.n.rho()*cs*cs)*(velocity_set().c[0][m]*velocity_set().c[0][m]-cs*cs) ) +
+								  ( (Pyy-bi.n.rho()*cs*cs)*(velocity_set().c[1][m]*velocity_set().c[1][m]-cs*cs) ) +
+								  (2*(Pxy*velocity_set().c[0][m]*velocity_set().c[1][m]) ) )/(2*std::pow(cs,4))	);
 							}
 					}
 			}*/
-
 
 			switch (TopBotBC) { 	// user input
 				case 0: // no slip
@@ -429,7 +517,7 @@
 											break;
 
 									default :
-											std:std::cerr << "INVALID CHOICE OF COLORING SCHEME, CHOSING MINIMALISTIC" << '\n';
+											std::cerr << "INVALID CHOICE OF COLORING SCHEME, CHOSING MINIMALISTIC" << '\n';
 											//KBC minimalistic grouping // lecture 7 p.8)
 											delS[0] = 0.0;
 											delS[1] = 0.5*rho*0.5*(dM_xx-dM_yy);
@@ -509,6 +597,7 @@
 
 				// write entire field data
 				if ( file_output && ( ((time+1) % output_freq) == 0 || time == 0 ) ){
+						std::cout << "T = "<<time<<"\tWriting File ... " << '\n';
 						write_fields();
 						++output_index;
 				}

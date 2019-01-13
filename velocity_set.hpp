@@ -114,7 +114,7 @@ public:
 		n.f(8) = feq[8];
 	}
 
-	void interpolation_node(int i, int j, int m, int& i_interp, int& j_interp) const {
+	void interpolation_node(int i, int j, int m, int& i_interp, int& j_interp) const{
 		switch (m) {
 			case 1:
 				i_interp = i-1;
