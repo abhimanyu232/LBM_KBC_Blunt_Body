@@ -252,6 +252,102 @@
 
 		void set_FinNoseconeBoundary(){
 
+			// coefficients of a.dx^2 + b.dx + c = 0
+			float_type a, b, c, dx, D;
+			float_type H = R/5;
+			float_type L_fin = 2*R;
+			for (int y=0; y<l.ny+1; ++y){            //direction y , y is y_0
+					for (int x=0; x<l.nx+1; ++x){        //direction x , x is x_0
+							if ( x >= (x_c - 5) && x <= (Lx+L_fin+5)  &&  (y >= y_c - R - 5)  && y <= (y_c + R + 5) ){
+									boundary_info bi;
+									bool found_intersection = false;
+
+									if ((float_type)x <= Lx) {
+										// DO THE REGULAR THING
+										if ((y-y_c)*(y-y_c) - (R*R)*(x-x_c)/(Lx - x_c) > 0  ){ //check if node is outside nosecone, search for nearest boundary node
+											for (int i=1; i<9; ++i){        //9 directions
+												a = velocity_set().c[1][i]*velocity_set().c[1][i];
+												b = 2*velocity_set().c[1][i]*(y - y_c) - R*R*velocity_set().c[0][i]/(Lx - x_c);
+												c =  (y-y_c)*(y-y_c) - R*R*(x-x_c)/(Lx - x_c);
+												D = b*b-4*a*c;
+
+												if (D>=0){
+													const auto dx1 =(-b + std::sqrt(b*b-4*a*c))/(2*a);
+													const auto dx2 =(-b - std::sqrt(b*b-4*a*c))/(2*a);
+													dx = 0;
+													if (dx1 > 0) dx = dx1;
+													if (dx2 > 0 && dx2 < dx1) dx = dx2;
+
+													if (dx>0 && dx<=1){
+														bi.distance[i] = dx;
+														found_intersection = true;
+													}
+												}
+											}
+										}		else	{
+											wall_info wi{l.get_node(x,y)};
+											wall_nodes.push_back(wi);
+										}	 		// CHANGES HERE ONWARDS
+									}	else if ( (float_type)x >= Lx && (float_type)x <= Lx + L_fin) {
+											// Boattail section y = +-m*x + R
+											if ((y >= y_c + H)  ){
+													for (int i=1; i<9; ++i){
+														float_type dx=0;
+														float_type dx_H=0;
+														float_type dx_V=0;
+															dx_H = (H - y + y_c)/(velocity_set().c[1][i]);
+															if (y <= y_c + R) dx_V = (Lx - x)/(velocity_set().c[0][i]);
+
+															if (dx_H > 0) dx = dx_H;
+															if (dx_V > 0 && dx_V < dx_H) dx = dx_V;
+
+															if (dx>0 && dx<=1){
+																	bi.distance[i] = dx;
+																	found_intersection = true;
+															}
+													}
+												} else if ((y <= y_c - H) ){
+														for (int i=1; i<9; ++i){
+															float_type dx=0;
+															float_type dx_H=0;
+															float_type dx_V=0;
+															dx_H = (-H - y + y_c)/(velocity_set().c[1][i]);
+															if (y >= y_c - R) dx_V = (Lx - x)/(velocity_set().c[0][i]);
+
+															if (dx_H > 0) dx = dx_H;
+															if (dx_V > 0 && dx_V < dx_H) dx = dx_V;
+
+															if (dx>0 && dx<=1){
+																	bi.distance[i] = dx;
+																	found_intersection = true;
+															}
+														}
+												}	else	{
+													wall_info wi{l.get_node(x,y)};
+													wall_nodes.push_back(wi);
+												}
+									} else if ( (float_type)x >= Lx + L_fin ){
+											// after Boattail | wall | change y limits -> (yc+H,yc-H)
+											if ((y <= y_c + H ) && (y >= y_c - H) ){
+													for (int i=1; i<9; ++i){
+															dx = (Lx+L_fin-x)/(velocity_set().c[0][i]);
+															if (dx>0 && dx<=1){
+																	bi.distance[i] = dx;
+																	found_intersection = true;
+															}
+													}
+											}
+									}
+									if (found_intersection){
+											bi.n = l.get_node(x,y);
+											bi.i = x;
+											bi.j = y;
+											boundary_nodes.push_back(bi);
+									}
+							}
+					}
+			}
+
 		}
 
 		/**
