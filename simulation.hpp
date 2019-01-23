@@ -101,8 +101,8 @@
 				}
 			}
 
-					//set_SimpleNoseconeBoundary();
-					set_BoattailNoseconeBoundary();
+					set_SimpleNoseconeBoundary();
+					//set_BoattailNoseconeBoundary();
 					//set_FinNoseconeBoundary();
 	        std::cout << "found " << boundary_nodes.size() << " boundary nodes" << std::endl;
 		return ;
@@ -148,7 +148,7 @@
 											wall_nodes.push_back(wi);
 										}
 									}	else if ((float_type)x >= Lx) { // LONGER THAN NOSECONE X>=LX
-											if ((y <= y_c + R) && (y >= y_c - R) ){
+											if ((y < y_c + R) && (y > y_c - R) ){
 													for (int i=1; i<9; ++i){
 															dx = (Lx-x)/(velocity_set().c[0][i]);
 															if (dx>0 && dx<=1){
@@ -209,12 +209,12 @@
 										}	 		// CHANGES HERE ONWARDS
 									}	else if ((float_type)x >= Lx && (float_type)x <= Lx + R) {
 											// Boattail section y = +-m*x + R
-											if ((y >= y_c - m*(x-Lx) + R) || (y <= y_c + m*(x-Lx) - R) ){
+											if ((y > y_c - m*(x-Lx) + R) || (y < y_c + m*(x-Lx) - R) ){
 													for (int i=1; i<9; ++i){
 														float_type dx = 0;
-														if ((y >= y_c - m*(x-Lx) + R)) {
+														if ((y > y_c - m*(x-Lx) + R)) {
 															dx = (-m*(x-Lx)+R-(y-y_c))/(velocity_set().c[1][i] + m*velocity_set().c[0][i]);
-														} else if ((y <= y_c + m*(x-Lx) - R) ){
+														} else if ((y < y_c + m*(x-Lx) - R) ){
 															dx = ( m*(x-Lx)-R-(y-y_c))/(velocity_set().c[1][i] - m*velocity_set().c[0][i]);
 														} else {std::cerr<<"ERROR CALCULATING DISTANCE TO WALL IN BOATTAL SECTION"<<'\n';}
 
@@ -229,7 +229,7 @@
 											}
 										} else if ( (float_type)x >= Lx + R ){
 											// after Boattail | wall | change y limits -> (yc+H,yc-H)
-											if ((y <= y_c + H ) && (y >= y_c-H) ){
+											if ((y < y_c + H ) && (y > y_c-H) ){
 													for (int i=1; i<9; ++i){
 															dx = (Lx+R-x)/(velocity_set().c[0][i]);
 															if (dx>0 && dx<=1){
@@ -290,7 +290,7 @@
 										}	 		// CHANGES HERE ONWARDS
 									}	else if ( (float_type)x >= Lx && (float_type)x <= Lx + L_fin) {
 											// Boattail section y = +-m*x + R
-											if ((y >= y_c + H)  ){
+											if ((y > y_c + H)  ){
 													for (int i=1; i<9; ++i){
 														float_type dx=0;
 														float_type dx_H=0;
@@ -306,7 +306,7 @@
 																	found_intersection = true;
 															}
 													}
-												} else if ((y <= y_c - H) ){
+												} else if ((y < y_c - H) ){
 														for (int i=1; i<9; ++i){
 															float_type dx=0;
 															float_type dx_H=0;
@@ -328,7 +328,7 @@
 												}
 									} else if ( (float_type)x >= Lx + L_fin ){
 											// after Boattail | wall | change y limits -> (yc+H,yc-H)
-											if ((y <= y_c + H ) && (y >= y_c - H) ){
+											if ((y < y_c + H ) && (y > y_c - H) ){
 													for (int i=1; i<9; ++i){
 															dx = (Lx+L_fin-x)/(velocity_set().c[0][i]);
 															if (dx>0 && dx<=1){
@@ -405,8 +405,10 @@
 			        if (bi.distance[i] > 0)
 			          bi.n.f(velocity_set().rflct_latticeVelocity[i]) = bi.n.f(i);
 		      }
+		  }
 
-		  } 	 /*	// GRAD BOUNDARY CONDITIONS
+			/*
+					// GRAD BOUNDARY CONDITIONS
 			for (auto& bi : boundary_nodes){
 					int count = 0;
 					float_type vx_temp=0.0;
@@ -434,15 +436,127 @@
 					bi.n.u() = vx_temp/count;
 					bi.n.v() = vy_temp/count;
 
+					float_type f_tgt[9];
+					velocity_set().f_eq(f_tgt,bi.n.rho(),bi.n.u(),bi.n.v());
+					for (int m=1;m<9;++m){
+							if (bi.distance[m] > 0){
+								bi.n.f(velocity_set().rflct_latticeVelocity[m]) = f_tgt[velocity_set().rflct_latticeVelocity[m]];
+							}
+							bi.n.rho() += bi.n.f(m);
+							bi.n.u() += bi.n.f(m)*velocity_set().c[0][m];
+							bi.n.v() += bi.n.f(m)*velocity_set().c[1][m];
+					}
+					float_type f_loc[9];
+					velocity_set().f_eq(f_loc,bi.n.rho(),bi.n.u(),bi.n.v());
+					for (int m=1;m<9;++m){
+							if (bi.distance[m] > 0){
+									bi.n.f(velocity_set().rflct_latticeVelocity[m]) += f_tgt[velocity_set().rflct_latticeVelocity[m]]  - f_loc[velocity_set().rflct_latticeVelocity[m]] ;
+							}
+					}*/
+					/*
 					float_type dudx,dudy,dvdx,dvdy;
-					int ip,ip2,jp,jp2;
-					ip = i + 1 ; ip2 = i + 2 ; jp = j + 1; jp2 = j + 2;
-						// One Sided Second Order Approx of dUdX //
-					dudx = (-3*l.get_node(i,j).u() + 4*l.get_node(ip,j).u() - l.get_node(ip2,j).u() )/2;
-					dvdx = (-3*l.get_node(i,j).v() + 4*l.get_node(ip,j).v() - l.get_node(ip2,j).v() )/2;
-					dudy = (-3*l.get_node(i,j).u() + 4*l.get_node(i,jp).u() - l.get_node(i,jp2).u() )/2;
-					dvdy = (-3*l.get_node(i,j).v() + 4*l.get_node(i,jp).v() - l.get_node(i,jp2).v() )/2;
 
+					if ( bi.distance[5]>0 ){
+							dudx = (- l.get_node(i-1,j).u() )/(1+bi.distance[5]);
+							dvdx = (- l.get_node(i-1,j).v() )/(1+bi.distance[5]);
+							if ( l.get_node(i-1,j).u() == 10 || l.get_node(i-1,j).v() == 10)
+									printf("error proper dist 5\n" );
+							dudy = (- l.get_node(i,j-1).u() )/(1+bi.distance[5]);
+							dvdy = (- l.get_node(i,j-1).v() )/(1+bi.distance[5]);
+							if (  l.get_node(i,j-1).u() == 10 || l.get_node(i,j-1).v() == 10)
+									printf("error proper dist 5\n" );
+					}
+
+					if ( bi.distance[6]>0 ) {
+							dudx = ( l.get_node(i+1,j).u() )/(1+bi.distance[6]);
+							dvdx = ( l.get_node(i+1,j).v() )/(1+bi.distance[6]);
+							if (  l.get_node(i+1,j).u() == 10 || l.get_node(i+1,j).v() == 10)
+									printf("error proper dist 6\n" );
+							dudy = (- l.get_node(i,j-1).u() )/(1+bi.distance[6]);
+							dvdy = (- l.get_node(i,j-1).v() )/(1+bi.distance[6]);
+							if (  l.get_node(i,j-1).u() == 10 || l.get_node(i,j-1).v() == 10)
+									printf("error proper dist 6\n" );
+					}
+
+					if (bi.distance[7]>0) {
+						dudx = ( l.get_node(i+1,j).u() )/(1+bi.distance[7]);
+						dvdx = ( l.get_node(i+1,j).v() )/(1+bi.distance[7]);
+						if (  l.get_node(i+1,j).u() == 10 || l.get_node(i+1,j).v() == 10)
+								printf("error proper dist 7\n" );
+						dudy = (  l.get_node(i,j+1).u() )/(1+bi.distance[7]);
+						dvdy = (  l.get_node(i,j+1).v() )/(1+bi.distance[7]);
+						if (  l.get_node(i,j+1).u()  == 10 || l.get_node(i,j+1).v() == 10)
+								printf("error proper dist 7\n" );
+					}
+
+					if (bi.distance[8]>0) {
+						dudx = (- l.get_node(i-1,j).u() )/(1+bi.distance[8]);
+						dvdx = (- l.get_node(i-1,j).v() )/(1+bi.distance[8]);
+						if ( l.get_node(i-1,j).u() == 10 || l.get_node(i-1,j).v() == 10)
+							printf("error proper dist 8\n" );
+						dudy = (  l.get_node(i,j+1).u() )/(1+bi.distance[8]);
+						dvdy = (  l.get_node(i,j+1).v() )/(1+bi.distance[8]);
+						if (  l.get_node(i,j+1).u()  == 10 || l.get_node(i,j+1).v() == 10)
+								printf("error proper dist 8\n" );
+					}
+
+					if (bi.distance[1] > 0){
+						dudx = (- l.get_node(i-1,j).u() )/(1+bi.distance[1]);
+						dvdx = (- l.get_node(i-1,j).v() )/(1+bi.distance[1]);
+						if ( l.get_node(i-1,j).u() == 10 || l.get_node(i-1,j).v() == 10)
+							printf("error proper dist 1\n" );
+					} else if (bi.distance[3] > 0){
+						dudx = ( l.get_node(i+1,j).u() )/(1+bi.distance[3]);
+						dvdx = ( l.get_node(i+1,j).v() )/(1+bi.distance[3]);
+						if (  l.get_node(i+1,j).u() == 10 || l.get_node(i+1,j).v() == 10)
+							printf("error proper dist 3\n" );
+					}
+					if (bi.distance[2] > 0){
+						dudy = (- l.get_node(i,j-1).u() )/(1+bi.distance[2]);
+						dvdy = (- l.get_node(i,j-1).v() )/(1+bi.distance[2]);
+						if (  l.get_node(i,j-1).u() == 10 || l.get_node(i,j-1).v() == 10)
+							printf("error proper dist 2\n" );
+					}  else if (bi.distance[4] > 0){
+						dudy = (  l.get_node(i,j+1).u() )/(1+bi.distance[4]);
+						dvdy = (  l.get_node(i,j+1).v() )/(1+bi.distance[4]);
+						if (  l.get_node(i,j+1).u()  == 10 || l.get_node(i,j+1).v() == 10)
+							printf("error proper dist 4\n" );
+					}
+					/*
+					int ip,ip2,jp,jp2,im,im2,jm,jm2;
+
+						ip = i + 1 ; ip2 = i + 2;
+						im = i - 1 ; im2 = i - 2;
+						jp = j + 1; jp2 = j + 2;
+						jm = j - 1; jm2 = j - 2;
+						// One Sided Second Order Approx of dUdX //
+
+					if (bi.distance[1] > 0){
+						//backwards
+						dudx = ( 3*l.get_node(i,j).u() - 4*l.get_node(im,j).u() + l.get_node(im2,j).u() )/2;
+						dvdx = ( 3*l.get_node(i,j).v() - 4*l.get_node(im,j).v() + l.get_node(im2,j).v() )/2;
+					} else if (bi.distance[3] > 0){
+						//forwards
+						dudx = (-3*l.get_node(i,j).u() + 4*l.get_node(ip,j).u() - l.get_node(ip2,j).u() )/2;
+						dvdx = (-3*l.get_node(i,j).v() + 4*l.get_node(ip,j).v() - l.get_node(ip2,j).v() )/2;
+					} else {
+						dudx = ( 3*l.get_node(i,j).u() - 4*l.get_node(im,j).u() + l.get_node(im2,j).u() )/2;
+						dvdx = ( 3*l.get_node(i,j).v() - 4*l.get_node(im,j).v() + l.get_node(im2,j).v() )/2;
+					}
+
+					if (bi.distance[2] > 0){
+						//backwards
+						dudy = (+3*l.get_node(i,j).u() - 4*l.get_node(i,jm).u() + l.get_node(i,jm2).u() )/2;
+						dvdy = (+3*l.get_node(i,j).v() - 4*l.get_node(i,jm).v() + l.get_node(i,jm2).v() )/2;
+					} else if (bi.distance[4] > 0) {
+						//forward
+						dudy = (-3*l.get_node(i,j).u() + 4*l.get_node(i,jp).u() - l.get_node(i,jp2).u() )/2;
+						dvdy = (-3*l.get_node(i,j).v() + 4*l.get_node(i,jp).v() - l.get_node(i,jp2).v() )/2;
+					} else {
+						dudy = (+3*l.get_node(i,j).u() - 4*l.get_node(i,jm).u() + l.get_node(i,jm2).u() )/2;
+						dvdy = (+3*l.get_node(i,j).v() - 4*l.get_node(i,jm).v() + l.get_node(i,jm2).v() )/2;
+					}
+					*//*
 					float_type Pxx,Pyy,Pxy;
 					Pxx = bi.n.rho()*( cs*cs + bi.n.u()*bi.n.u() - (cs*cs*(2*dudx)/(2*beta)) );
 					Pyy = bi.n.rho()*( cs*cs + bi.n.v()*bi.n.v() - (cs*cs*(2*dvdy)/(2*beta)) );
@@ -458,8 +572,8 @@
 								  ( (Pyy-bi.n.rho()*cs*cs)*(velocity_set().c[1][m]*velocity_set().c[1][m]-cs*cs) ) +
 								  (2*(Pxy*velocity_set().c[0][m]*velocity_set().c[1][m]) ) )/(2*std::pow(cs,4))	);
 							}
-					}
-			}*/
+					}*/
+			//}
 
 			switch (TopBotBC) { 	// user input
 				case 0: // no slip
@@ -654,9 +768,9 @@
 		    }
 
 		    for (auto& wi : wall_nodes){
-		        wi.n.rho() = 1;
-		        wi.n.u() = 0;
-		        wi.n.v() = 0;
+		        wi.n.rho() = 10;
+		        wi.n.u() = 10;
+		        wi.n.v() = 10;
 		        for (int i=0; i<9; ++i) wi.n.f(i) = 0;
 		    }
 
@@ -676,6 +790,8 @@
 					}
 					advect();
 					wall_bc();
+					Force_X = 0 ;
+					Force_Y = 0;
 						// calculate forces using momentum exchange method
 					for (auto& bi : boundary_nodes){
 							for (int m=1;m<velocity_set().size;++m){
