@@ -115,8 +115,8 @@
 		void set_SimpleNoseconeBoundary(){
 				// coefficients of a.dx^2 + b.dx + c = 0
       float_type a, b, c, dx, D;
-      for (int y=0; y<l.ny+1; ++y){            //direction y , y is y_0
-          for (int x=0; x<l.nx+1; ++x){        //direction x , x is x_0
+      for (unsigned int y=0; y<l.ny+1; ++y){            //direction y , y is y_0
+          for (unsigned int x=0; x<l.nx+1; ++x){        //direction x , x is x_0
 							if ( x >= (x_c - 5) && x <= (Lx+5)  &&  (y >= y_c - R - 5)  && y <= (y_c + R + 5) ){
 									boundary_info bi;
 									bool found_intersection = false;
@@ -147,8 +147,8 @@
 											wall_info wi{l.get_node(x,y)};
 											wall_nodes.push_back(wi);
 										}
-									}	else if ((float_type)x >= Lx) { // LONGER THAN NOSECONE X>=LX
-											if ((y < y_c + R) && (y > y_c - R) ){
+									}	else if ((float_type)x > Lx) { // LONGER THAN NOSECONE X>=LX
+											if ((y <= y_c + R) && (y >= y_c - R) ){
 													for (int i=1; i<9; ++i){
 															dx = (Lx-x)/(velocity_set().c[0][i]);
 															if (dx>0 && dx<=1){
@@ -175,8 +175,8 @@
 			float_type a, b, c, dx, D;
 			float_type m = slope; // slope of the Boattail Section
 			float_type H = R*(1-m);
-			for (int y=0; y<l.ny+1; ++y){            //direction y , y is y_0
-					for (int x=0; x<l.nx+1; ++x){        //direction x , x is x_0
+			for (unsigned int y=0; y<l.ny+1; ++y){            //direction y , y is y_0
+					for (unsigned int x=0; x<l.nx+1; ++x){        //direction x , x is x_0
 							if ( x >= (x_c - 5) && x <= (Lx+R+5)  &&  (y >= y_c - R - 5)  && y <= (y_c + R + 5) ){
 									boundary_info bi;
 									bool found_intersection = false;
@@ -229,7 +229,7 @@
 											}
 										} else if ( (float_type)x >= Lx + R ){
 											// after Boattail | wall | change y limits -> (yc+H,yc-H)
-											if ((y < y_c + H ) && (y > y_c-H) ){
+											if ((y <= y_c + H ) && (y >= y_c-H) ){
 													for (int i=1; i<9; ++i){
 															dx = (Lx+R-x)/(velocity_set().c[0][i]);
 															if (dx>0 && dx<=1){
@@ -256,8 +256,8 @@
 			float_type a, b, c, dx, D;
 			float_type H = R/5;
 			float_type L_fin = 2*R;
-			for (int y=0; y<l.ny+1; ++y){            //direction y , y is y_0
-					for (int x=0; x<l.nx+1; ++x){        //direction x , x is x_0
+			for (unsigned int y=0; y<l.ny+1; ++y){            //direction y , y is y_0
+					for (unsigned int x=0; x<l.nx+1; ++x){        //direction x , x is x_0
 							if ( x >= (x_c - 5) && x <= (Lx+L_fin+5)  &&  (y >= y_c - R - 5)  && y <= (y_c + R + 5) ){
 									boundary_info bi;
 									bool found_intersection = false;
@@ -382,12 +382,12 @@
 	        //shift populations in the opposite directions to the velocities so that not the same population is copied across the whole lattice
 			for (unsigned int m=0; m<velocity_set().size; ++m){
 				if (shift[m] > 0){
-					for (int n = l.index(l.nx-1,l.ny-1); n>=l.index(0,0);--n){
+					for (unsigned int n = l.index(l.nx-1,l.ny-1); n>=l.index(0,0);--n){
 						l.f[m][n] = l.f[m][n-shift[m]];
 					}
 				}
 				else if (shift[m] < 0){
-					for (int n = l.index(0,0);n<=l.index(l.nx-1,l.ny-1);++n){
+					for (unsigned int n = l.index(0,0);n<=l.index(l.nx-1,l.ny-1);++n){
 						l.f[m][n] = l.f[m][n-shift[m]];
 					}
 				}
@@ -452,7 +452,8 @@
 							if (bi.distance[m] > 0){
 									bi.n.f(velocity_set().rflct_latticeVelocity[m]) += f_tgt[velocity_set().rflct_latticeVelocity[m]]  - f_loc[velocity_set().rflct_latticeVelocity[m]] ;
 							}
-					}*/
+					}
+				} */
 					/*
 					float_type dudx,dudy,dvdx,dvdy;
 
@@ -577,7 +578,7 @@
 
 			switch (TopBotBC) { 	// user input
 				case 0: // no slip
-					for (int i=1 ; i < l.nx-1 ; ++i){
+					for (unsigned int i=1 ; i < l.nx-1 ; ++i){
 							auto n_topwall = l.get_node(i,l.ny-1);
 							n_topwall.u()   = 0;
 							n_topwall.v()   = 0;
@@ -593,7 +594,7 @@
 					break;
 
 				case 1: // slip // FIX THIS IF NEEDED ACC TO FABIAN
-					for (int i=1 ; i < l.nx-1 ; ++i){
+					for (unsigned int i=1 ; i < l.nx-1 ; ++i){
 						l.get_node(l.index(i,l.ny-1)).f(8)=l.get_node(l.index(i-1,l.ny-2)).f(5);
 						l.get_node(l.index(i,l.ny-1)).f(7)=l.get_node(l.index(i+1,l.ny-2)).f(6);
 						l.get_node(l.index(i,l.ny-1)).f(4)=l.get_node(l.index(i,l.ny-2)).f(2);
@@ -625,7 +626,7 @@
 					break;
 			}
 
-			for (int i=0; i<l.ny; ++i){
+			for (unsigned int i=0; i<l.ny; ++i){
 					// INLET BOUNDARY - EQUILIBRIATE AT INITIAL/BOUNDARY VALUE
 				auto n_inlet = l.get_node(0,i);
 				n_inlet.u()   = Vmax;
@@ -768,10 +769,10 @@
 		    }
 
 		    for (auto& wi : wall_nodes){
-		        wi.n.rho() = 10;
-		        wi.n.u() = 10;
-		        wi.n.v() = 10;
-		        for (int i=0; i<9; ++i) wi.n.f(i) = 0;
+		        wi.n.rho() = 1000;
+		        wi.n.u() = 1000;
+		        wi.n.v() = 01000;
+		        for (int i=0; i<9; ++i) wi.n.f(i) = 1;
 		    }
 
 		return ;
@@ -783,7 +784,7 @@
 
 						// store populations at previous time step for force calculations //
 					for (auto& bi : boundary_nodes){
-							for (int m=1;m<velocity_set().size;++m){
+							for (unsigned int m=1;m<velocity_set().size;++m){
 									if (bi.distance[m]>0)
 											bi.population_prev[m] = bi.n.f(m);
 							}
@@ -794,7 +795,7 @@
 					Force_Y = 0;
 						// calculate forces using momentum exchange method
 					for (auto& bi : boundary_nodes){
-							for (int m=1;m<velocity_set().size;++m){
+							for (unsigned int m=1;m<velocity_set().size;++m){
 									if (bi.distance[m]>0){
 											int rflct = velocity_set().rflct_latticeVelocity[m];
 											Force_X += velocity_set().c[0][rflct]*( bi.n.f(rflct) + bi.population_prev[m]);
