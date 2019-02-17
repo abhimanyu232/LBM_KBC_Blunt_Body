@@ -1,7 +1,5 @@
 *o
-/output/*txt
-/output/*out
-/output/*tec
+/output/**
 *log
 *txt
 *out
