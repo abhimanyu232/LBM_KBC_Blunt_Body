@@ -64,10 +64,10 @@
 			kbc_coluring_scheme(KBC_COLOR_),
 			TopBotBC(BC_topbottom),
 		  Vmax(_Vmax),
-	    R(l.ny/10),
+	    R(40), // l.ny/10
 			x_c(l.nx/4),
 			y_c(l.ny/2),
-			Lx(x_c + l.nx/10),
+			Lx(x_c + 120), // l.nx/10
 	    visc(Vmax*R/Re),
 	    beta(1/(((2*visc)/pow(1/std::sqrt(3.0),2))+1.0)),
 			cs(1/std::sqrt(3.0)),
@@ -103,7 +103,7 @@
 
 			for (int j=0; j<static_cast<int>(l.ny); ++j){
 				for (int i=0; i<static_cast<int>(l.nx); ++i){
-	        l.get_node(i,j).u()   = Vmax;
+	        l.get_node(i,j).u()   = 0;
 					l.get_node(i,j).v()   = 0;
           l.get_node(i,j).rho() =	rho;
 					l.get_node(i,j).gamma() = 2. ;
@@ -111,9 +111,9 @@
 				}
 			}
 
-					//set_SimpleNoseconeBoundary();
+					set_SimpleNoseconeBoundary();
 					//set_BoattailNoseconeBoundary();
-					//set_FinNoseconeBoundary();
+					//rev_FinNoseconeBoundary();
 	        std::cout << "found " << boundary_nodes.size() << " boundary nodes" << std::endl;
 		return ;
 		}
@@ -304,7 +304,144 @@
 					}
 			}
 		}
+		/*
+		void rev_FinNoseconeBoundary(){
+			// coefficients of a.dx^2 + b.dx + c = 0
+			float_type tol = 0;
+			float_type a, b, c, dx, D;
+			float_type H = R/5;
+			float_type L_fin = 2*R;
+			for (unsigned int y=0; y<l.ny+1; ++y){            //direction y , y is y_0
+					for (unsigned int x=0; x<l.nx+1; ++x){        //direction x , x is x_0
+							if ( x >= (x_c - 5) && x <= (Lx+L_fin+5)  &&  (y >= y_c - R - 5)  && y <= (y_c + R + 5) ){
+									wall_info wi;
+									if ((float_type)x <= Lx) {
+											if ((y-y_c)*(y-y_c) - (R*R)*(x-x_c)/(Lx - x_c) < tol  ){
+													wi.IS_WALL = true;
+													wi.n = l.get_node(x,y);
+													wi.i = x;
+													wi.j = y;
+													wall_nodes.push_back(wi);
+											} else {
+													wi.IS_WALL = false;
+													wi.n = l.get_node(x,y);
+													wi.i = x;
+													wi.j = y;
+													wall_nodes.push_back(wi);
+										}
+									} else if ((float_type)x > Lx && (float_type)x <= Lx + L_fin) {
+											if ( y < y_c + H && y > y_c - H ) {
+													wi.IS_WALL = true;
+													wi.n = l.get_node(x,y);
+													wi.i = x;
+													wi.j = y;
+													wall_nodes.push_back(wi);
+											} else {
+													wi.IS_WALL = false;
+													wi.n = l.get_node(x,y);
+													wi.i = x;
+													wi.j = y;
+													wall_nodes.push_back(wi);
+											}
+									} else if ((float_type)x > Lx + L_fin ){
+											wi.IS_WALL = false;
+											wi.n = l.get_node(x,y);
+											wi.i = x;
+											wi.j = y;
+											wall_nodes.push_back(wi);
+									}
+							}
+					}
+			}
+			for (auto wi : wall_nodes){
+					int x = wi.i; int y = wi.j; //node n = wi.n;
+					if (!wi.IS_WALL){
+							boundary_info bi;
+							bool found_intersection = false;
+							if ((float_type)x <= Lx){
+									for (int i=1; i<9; ++i){        //9 directions
+											a = velocity_set().c[1][i]*velocity_set().c[1][i];
+											b = 2*velocity_set().c[1][i]*(y - y_c) - R*R*velocity_set().c[0][i]/(Lx - x_c);
+											c =  (y-y_c)*(y-y_c) - R*R*(x-x_c)/(Lx - x_c);
+											D = b*b-4*a*c;
+											if (D>=0){
+													const auto dx1 =(-b + std::sqrt(b*b-4*a*c))/(2*a);
+													const auto dx2 =(-b - std::sqrt(b*b-4*a*c))/(2*a);
+													dx = 0;
+													if (dx1 > 0) dx = dx1;
+													if (dx2 > 0 && dx2 < dx1) dx = dx2;
 
+													if (dx>0 && dx<=1){
+														bi.distance[i] = dx;
+														found_intersection = true;
+													}
+											}
+									}
+							} else if ((float_type)x > Lx && (float_type)x <= Lx + L_fin){
+								if ( y >= y_c + H ){
+										for (int i=1; i<9; ++i){
+												float_type dx=0;
+												float_type dx_H=0;
+												float_type dx_V=0;
+												if (velocity_set().c[1][i] !=0) {
+													dx_H = (H - y + y_c)/(velocity_set().c[1][i]);
+												}
+												if (velocity_set().c[0][i] !=0) {
+													dx_V = (Lx - x)/(velocity_set().c[0][i]);
+												}
+
+												if (dx_H > 0) dx = dx_H;
+												if (dx_V > 0 && dx_V < dx_H) dx = dx_V;
+
+												if (dx>0 && dx<=1){
+														bi.distance[i] = dx;
+														found_intersection = true;
+												}
+										}
+									} else if (y <= y_c - H) {
+										for (int i=1; i<9; ++i){
+												float_type dx=0;
+												float_type dx_H=0;
+												float_type dx_V=0;
+												if (velocity_set().c[1][i] !=0) {
+												 dx_H = (-H - y + y_c)/(velocity_set().c[1][i]);
+											 	}
+												if (velocity_set().c[0][i] !=0) {
+													dx_V = (Lx - x)/(velocity_set().c[0][i]);
+												}
+
+												if (dx_H > 0) dx = dx_H;
+												if (dx_V > 0 && dx_V < dx_H) dx = dx_V;
+
+												if (dx>0 && dx<=1){
+														bi.distance[i] = dx;
+														found_intersection = true;
+												}
+										}
+									}
+							} else if ( (float_type)x >= Lx + L_fin ){
+									if ((y <= y_c + H ) && (y >= y_c - H) ){
+											for (int i=1; i<9; ++i){
+													dx = (Lx+L_fin-x)/(velocity_set().c[0][i]);
+													if (dx>0 && dx<=1){
+															bi.distance[i] = dx;
+															found_intersection = true;
+													}
+											}
+									}
+							}
+							if (found_intersection){
+									bi.n = l.get_node(x,y);
+									bi.i = x;
+									bi.j = y;
+									bi.IS_BOUNDARY = true;
+									boundary_nodes.push_back(bi);
+							}
+					}
+			}
+
+		}
+		*/
 		/*
 		void set_FinNoseconeBoundary(){
 
@@ -516,64 +653,64 @@
 					if ( bi.distance[5]>0 ){
 							dudx = (- l.get_node(i-1,j).u() )/(1+bi.distance[5]);
 							dvdx = (- l.get_node(i-1,j).v() )/(1+bi.distance[5]);
-							if ( l.get_node(i-1,j).u() == wall_dummy || l.get_node(i-1,j).v() == wall_dummy)
-									printf("error proper dist 5\n" );
+						//	if ( l.get_node(i-1,j).u() == wall_dummy || l.get_node(i-1,j).v() == wall_dummy)
+								//	printf("error proper dist 5\n" );
 							dudy = (- l.get_node(i,j-1).u() )/(1+bi.distance[5]);
 							dvdy = (- l.get_node(i,j-1).v() )/(1+bi.distance[5]);
-							if (  l.get_node(i,j-1).u() == wall_dummy || l.get_node(i,j-1).v() == wall_dummy)
-									printf("error proper dist 5\n" );
+						//	if (  l.get_node(i,j-1).u() == wall_dummy || l.get_node(i,j-1).v() == wall_dummy)
+								//	printf("error proper dist 5\n" );
 					} else if (bi.distance[7]>0) {
 							dudx = ( l.get_node(i,j).u() )/(1+bi.distance[7]);
 							dvdx = ( l.get_node(i,j).v() )/(1+bi.distance[7]);
-							if (  l.get_node(i,j).u() == wall_dummy || l.get_node(i,j).v() == wall_dummy)
-									printf("error proper dist 7a\n" );
+						//	if (  l.get_node(i,j).u() == wall_dummy || l.get_node(i,j).v() == wall_dummy)
+								//	printf("error proper dist 7a\n" );
 							dudy = (  l.get_node(i,j+1).u() )/(1+bi.distance[7]);
 							dvdy = (  l.get_node(i,j+1).v() )/(1+bi.distance[7]);
-							if (  l.get_node(i,j+1).u()  == wall_dummy || l.get_node(i,j+1).v() == wall_dummy)
-									printf("error proper dist 7b\n" );
+						//	if (  l.get_node(i,j+1).u()  == wall_dummy || l.get_node(i,j+1).v() == wall_dummy)
+								//	printf("error proper dist 7b\n" );
 					}
 
 					if ( bi.distance[6]>0 ) {
 							dudx = ( l.get_node(i,j).u() )/(1+bi.distance[6]);
 							dvdx = ( l.get_node(i,j).v() )/(1+bi.distance[6]);
-							if (  l.get_node(i,j).u() == wall_dummy || l.get_node(i,j).v() == wall_dummy)
-								printf("error proper dist 6a\n" );
+						//	if (  l.get_node(i,j).u() == wall_dummy || l.get_node(i,j).v() == wall_dummy)
+							//	printf("error proper dist 6a\n" );
 							dudy = (- l.get_node(i,j-1).u() )/(1+bi.distance[6]);
 							dvdy = (- l.get_node(i,j-1).v() )/(1+bi.distance[6]);
-							if (  l.get_node(i,j-1).u() == wall_dummy || l.get_node(i,j-1).v() == wall_dummy)
-								printf("error proper dist 6b\n" );
+						//	if (  l.get_node(i,j-1).u() == wall_dummy || l.get_node(i,j-1).v() == wall_dummy)
+							//	printf("error proper dist 6b\n" );
 					} else if (bi.distance[8]>0) {
 							dudx = (- l.get_node(i-1,j).u() )/(1+bi.distance[8]);
 							dvdx = (- l.get_node(i-1,j).v() )/(1+bi.distance[8]);
-							if ( l.get_node(i-1,j).u() == wall_dummy || l.get_node(i-1,j).v() == wall_dummy)
-								printf("error proper dist 8\n" );
+						//	if ( l.get_node(i-1,j).u() == wall_dummy || l.get_node(i-1,j).v() == wall_dummy)
+							//	printf("error proper dist 8\n" );
 							dudy = (  l.get_node(i,j+1).u() )/(1+bi.distance[8]);
 							dvdy = (  l.get_node(i,j+1).v() )/(1+bi.distance[8]);
-							if (  l.get_node(i,j+1).u()  == wall_dummy || l.get_node(i,j+1).v() == wall_dummy)
-									printf("error proper dist 8\n" );
+							//if (  l.get_node(i,j+1).u()  == wall_dummy || l.get_node(i,j+1).v() == wall_dummy)
+								//	printf("error proper dist 8\n" );
 					}
 
 					if (bi.distance[1] > 0){
 						dudx = (- l.get_node(i-1,j).u() )/(1+bi.distance[1]);
 						dvdx = (- l.get_node(i-1,j).v() )/(1+bi.distance[1]);
-						if ( l.get_node(i-1,j).u() == wall_dummy || l.get_node(i-1,j).v() == wall_dummy)
-							printf("error proper dist 1\n" );
+						//if ( l.get_node(i-1,j).u() == wall_dummy || l.get_node(i-1,j).v() == wall_dummy)
+						//	printf("error proper dist 1\n" );
 					} else if (bi.distance[3] > 0){
 						dudx = ( l.get_node(i+1,j).u() )/(1+bi.distance[3]);
 						dvdx = ( l.get_node(i+1,j).v() )/(1+bi.distance[3]);
-						if (  l.get_node(i+1,j).u() == wall_dummy || l.get_node(i+1,j).v() == wall_dummy)
-							printf("error proper dist 3\n" );
+						//if (  l.get_node(i+1,j).u() == wall_dummy || l.get_node(i+1,j).v() == wall_dummy)
+						//	printf("error proper dist 3\n" );
 					}
 					if (bi.distance[2] > 0){
 						dudy = (- l.get_node(i,j-1).u() )/(1+bi.distance[2]);
 						dvdy = (- l.get_node(i,j-1).v() )/(1+bi.distance[2]);
-						if (  l.get_node(i,j-1).u() == wall_dummy || l.get_node(i,j-1).v() == wall_dummy)
-							printf("error proper dist 2\n" );
+						//if (  l.get_node(i,j-1).u() == wall_dummy || l.get_node(i,j-1).v() == wall_dummy)
+						//	printf("error proper dist 2\n" );
 					}  else if (bi.distance[4] > 0){
 						dudy = (  l.get_node(i,j+1).u() )/(1+bi.distance[4]);
 						dvdy = (  l.get_node(i,j+1).v() )/(1+bi.distance[4]);
-						if (  l.get_node(i,j+1).u()  == wall_dummy || l.get_node(i,j+1).v() == wall_dummy)
-							printf("error proper dist 4\n" );
+						//if (  l.get_node(i,j+1).u()  == wall_dummy || l.get_node(i,j+1).v() == wall_dummy)
+						//	printf("error proper dist 4\n" );
 					}
 					/*
 					int ip,ip2,jp,jp2,im,im2,jm,jm2;
@@ -811,7 +948,7 @@
 		            }
 
 		            float_type gamma = (1.0/beta) - (2.0 - 1.0/beta)*(entScalarProd_dSdH/entScalarProd_dHdH);
-		            if (entScalarProd_dHdH == 0)  gamma = 2; // gamma = 1/beta; ->	regularised 	// gamma = 2 -> LBGK
+		            if (gamma  <= 1 || entScalarProd_dHdH == 0)  gamma = 2; // gamma = 1/beta; ->	regularised 	// gamma = 2 -> LBGK
 								n.gamma() = gamma;
 
 		            for (int i=0; i<9; ++i)
@@ -861,7 +998,7 @@
 					collide();
 
 				// write instantaneous data like Body Forces, Velocity at Probe Locations etc.
-				l.write_TimeMonitors(time,Force_X,Force_Y);
+				l.write_TimeMonitors(time,Force_X,Force_Y,Lx,R);
 
 				// write entire field data
 				if ( file_output && ( ((time+1) % output_freq) == 0 || time == 0 ) ){

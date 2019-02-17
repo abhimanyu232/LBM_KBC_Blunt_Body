@@ -342,7 +342,7 @@ public: // file dump
 	 *  Write macroscopic variables to simple ascii file.
 	 *
 	 */
-	void write_TimeMonitors(unsigned int time,float_type Fx, float_type Fy);
+	void write_TimeMonitors(unsigned int time,float_type Fx, float_type Fy, float_type lx,  float_type r);
 
 public: // print
 
@@ -538,14 +538,14 @@ void lattice::write_fields(std::string file_name)
 }
 
 /** WRITE INSTANTANEOUS TIME DATA FOR ANY VARIABLE AT PROBE LOCATION, WRITE FORCE DATA etc**/
-void lattice::write_TimeMonitors(unsigned int time,float_type Fx, float_type Fy){
+void lattice::write_TimeMonitors(unsigned int time,float_type Fx, float_type Fy, float_type lx,  float_type r){
 		std::ofstream ofile("output/monitors.txt", std::ios::app);
 		float_type X,Y1,Y2,Y3;
 		// PROBE LOCATIONS, CAN EDIT LATER
-		X  = nx/4 + 2*nx/10;
-		Y1 = ny/2. + ny/10;			// P+R
-		Y2 = ny/2. - ny/10;			// P-R
-		Y3 = ny/2.; 						// P0
+		X  = lx + 60 ; // lx dist behind
+		Y1 = ny/2. + r;			// P+R
+		Y2 = ny/2. - r;			// P-R
+		Y3 = ny/2.; 				// P0
 
 		if (ofile.is_open()){
 				if (time == 0 ) {
